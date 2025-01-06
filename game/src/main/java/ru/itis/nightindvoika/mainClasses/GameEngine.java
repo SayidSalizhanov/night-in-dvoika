@@ -1,6 +1,5 @@
 package ru.itis.nightindvoika.mainClasses;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.entites.Camera;
@@ -12,11 +11,13 @@ import ru.itis.nightindvoika.entites.defaultAttackEntities.Zombie;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class GameEngine {
+
+    private static GameEngine gameEngine;
 
     private Attacker attacker;
     private Defender defender;
@@ -38,7 +39,14 @@ public class GameEngine {
     private int paralysisCooldownInSeconds; // кулдаун: обездвижить охранника
     private int paralysisInSeconds; // время, на которое охранник обездвижен
 
-    public GameEngine() {
+    public static GameEngine getInstance() {
+        if (gameEngine == null) {
+            gameEngine = new GameEngine();
+        }
+        return gameEngine;
+    }
+
+    private GameEngine() {
         oneGameHourInSeconds = 90;
 
         soundBreakByAttackerCooldownInSeconds = 240;
@@ -58,7 +66,8 @@ public class GameEngine {
         // todo
         office = new Office(
                 "/static/office",
-                15
+                15,
+                attackEntities
         );
 
         attacker = new Attacker(
@@ -102,6 +111,8 @@ public class GameEngine {
     }
 
     private void loadDefaultEntities() {
+        attackEntities = new ArrayList<>();
+
         attackEntities.add(new WitherSkeleton());
         attackEntities.add(new Skeleton());
         attackEntities.add(new Zombie());

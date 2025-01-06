@@ -20,7 +20,7 @@ public class Defender {
     }
 
     public void displayOffice() {
-        engine.getOffice().display();
+        // todo
     }
 
     /*

@@ -5,27 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.itis.nightindvoika.controllers.OfficeController;
+import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.players.Attacker;
-import ru.itis.nightindvoika.players.Defender;
 
 import java.io.IOException;
+import java.util.List;
 
-public class HelloApplication extends Application {
+public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/main_menu.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.show();
-
-        GameEngine engine = new GameEngine();
-        Attacker attacker = engine.getAttacker();
-        Defender defender = engine.getDefender();
-
-        defender.displayOffice();
     }
 
     public static void main(String[] args) {

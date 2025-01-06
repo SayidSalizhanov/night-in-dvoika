@@ -68,7 +68,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ru.itis.nightindvoika/ru.itis.nightindvoika.HelloApplication</mainClass>
+                            <mainClass>ru.itis.nightindvoika/ru.itis.nightindvoika.App</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

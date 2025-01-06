@@ -5,11 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="pane" prefHeight="1200.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.entites.Office">
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.OfficeController">
    <children>
-      <ImageView fitHeight="1200.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="putOnMaskButton" layoutX="1693.0" layoutY="1120.0" mnemonicParsing="false" onAction="#putOnMask" text="Надеть маску">
+      <ImageView fx:id="backgroundImageView" fitHeight="720.0" fitWidth="1152.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="putOnMaskButton" layoutX="963.0" layoutY="653.0" mnemonicParsing="false" onAction="#switchMaskMode" text="Надеть маску">
          <font>
             <Font size="20.0" />
          </font>

@@ -8,5 +8,7 @@ module ru.itis.firstjavafxproject {
 
 
     opens ru.itis.nightindvoika to javafx.fxml;
+    opens ru.itis.nightindvoika.controllers to javafx.fxml;
     exports ru.itis.nightindvoika;
+    exports ru.itis.nightindvoika.controllers;
 }
