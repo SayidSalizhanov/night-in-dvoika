@@ -26,10 +26,6 @@ public class Camera {
         darknessStatus = false;
     }
 
-    public void display() {
-        // todo
-    }
-
     public void playSound() {
         // todo
     }

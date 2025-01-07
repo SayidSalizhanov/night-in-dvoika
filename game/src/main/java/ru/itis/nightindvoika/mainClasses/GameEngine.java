@@ -71,7 +71,7 @@ public class GameEngine {
         );
 
         attacker = new Attacker(
-                this,
+                gameEngine,
                 soundBreakByAttackerCooldownInSeconds,
                 soundBreakByAttackerInSeconds,
                 breakAllCamerasCooldownInSeconds,
@@ -82,7 +82,7 @@ public class GameEngine {
 
         // todo
         defender = new Defender(
-                this
+                gameEngine
         );
     }
 
@@ -111,7 +111,7 @@ public class GameEngine {
     }
 
     private void loadDefaultEntities() {
-        attackEntities = new ArrayList<>();
+        attackEntities = new ArrayList<>(4);
 
         attackEntities.add(new WitherSkeleton());
         attackEntities.add(new Skeleton());
@@ -120,6 +120,17 @@ public class GameEngine {
     }
 
     private void loadDefaultCameras() {
-        // todo
+        cameras = new ArrayList<>(14);
+
+        for (int i = 1; i <= 14; i++) {
+            cameras.add(
+                    new Camera(
+                            gameEngine,
+                            "/static/cameras/camera%d".formatted(i),
+                            i,
+                            soundBreakDefaultOneCameraCooldownInSeconds
+                    )
+            );
+        }
     }
 }

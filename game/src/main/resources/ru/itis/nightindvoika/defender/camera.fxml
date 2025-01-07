@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.CameraController">
+   <children>
+      <ImageView fx:id="cameraImageView" fitHeight="720.0" fitWidth="1152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../static/Main_menu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="912.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../static/1этаж.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="908.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../static/2этаж.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="camera1" layoutX="1085.0" layoutY="446.0" mnemonicParsing="false" text="C1">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera2" layoutX="1043.0" layoutY="635.0" mnemonicParsing="false" text="C2">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera3" layoutX="1080.0" layoutY="607.0" mnemonicParsing="false" text="C3">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera4" layoutX="1072.0" layoutY="538.0" mnemonicParsing="false" text="C4">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera5" layoutX="1089.0" layoutY="514.0" mnemonicParsing="false" text="C5">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera6" layoutX="1049.0" layoutY="438.0" mnemonicParsing="false" text="C6">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera7" layoutX="1018.0" layoutY="539.0" mnemonicParsing="false" text="C7">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera8" layoutX="908.0" layoutY="544.0" mnemonicParsing="false" text="C8">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera9" layoutX="930.0" layoutY="566.0" mnemonicParsing="false" text="C9">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera10" layoutX="1024.0" layoutY="566.0" mnemonicParsing="false" text="C10">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera11" layoutX="1042.0" layoutY="74.0" mnemonicParsing="false" text="C11">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera14" layoutX="1013.0" layoutY="74.0" mnemonicParsing="false" text="C14">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera12" layoutX="1085.0" layoutY="75.0" mnemonicParsing="false" text="C12">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+      <Button fx:id="camera13" layoutX="903.0" layoutY="67.0" mnemonicParsing="false" text="C13">
+         <font>
+            <Font size="7.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

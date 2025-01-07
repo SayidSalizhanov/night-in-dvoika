@@ -2,15 +2,21 @@ package ru.itis.nightindvoika.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import lombok.Data;
 import ru.itis.nightindvoika.entites.Office;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.util.StringCreator;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -19,16 +25,15 @@ import java.util.ResourceBundle;
 public class OfficeController implements Initializable {
 
     private Office office;
-    private boolean holdMaskStatus;
 
     @FXML
     ImageView backgroundImageView;
     @FXML
-    Button putOnMaskButton;
+    Button putOnMaskButton, camerasButton;
 
-    public OfficeController() {
-        holdMaskStatus = false;
-    }
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,12 +45,15 @@ public class OfficeController implements Initializable {
 
         String fileName = StringCreator.createPathImage(office.getAttackEntities(), office.getPosition());
 
-        if (holdMaskStatus) {
+        if (office.isHoldMaskStatus()) {
             backgroundImageView.setImage(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(getOffice().getSourcePath(), fileName)))
             ));
 
             putOnMaskButton.setText("Снять маску");
+
+            camerasButton.setVisible(false);
+            camerasButton.setManaged(false);
         }
         else {
             backgroundImageView.setImage(new Image(
@@ -53,11 +61,23 @@ public class OfficeController implements Initializable {
             ));
 
             putOnMaskButton.setText("Надеть маску");
+
+            camerasButton.setVisible(true);
+            camerasButton.setManaged(true);
         }
     }
 
     public void switchMaskMode(ActionEvent event) {
-        holdMaskStatus = !holdMaskStatus;
+        office.switchMaskMode();
         display();
+    }
+
+    public void openCameras(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/ru/itis/nightindvoika/defender/camera.fxml"));
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

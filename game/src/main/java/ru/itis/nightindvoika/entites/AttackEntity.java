@@ -24,6 +24,7 @@ public abstract class AttackEntity {
         this.endPosition = path[path.length-1];
         this.path = path;
         this.currentPathIndex = 0;
+        this.currentPosition = startPosition;
         this.moveCooldownInSeconds = moveCooldownInSeconds;
         this.maskDeception = maskDeception;
         this.soundLiker = soundLiker;
