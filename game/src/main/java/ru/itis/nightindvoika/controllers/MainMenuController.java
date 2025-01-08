@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import lombok.Data;
 import ru.itis.nightindvoika.App;
+import ru.itis.nightindvoika.util.LoadersUtil;
 
 import java.io.IOException;
 
@@ -23,11 +24,6 @@ public class MainMenuController {
     private Parent root;
 
     public void startFromOfficeByDefender(ActionEvent event) throws IOException {
-        root = App.roots.get("office");
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        LoadersUtil.loadOffice(event);
     }
 }

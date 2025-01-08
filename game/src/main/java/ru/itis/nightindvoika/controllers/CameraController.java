@@ -1,6 +1,7 @@
 package ru.itis.nightindvoika.controllers;
 
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import ru.itis.nightindvoika.entites.Camera;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.RandomSingleton;
 import ru.itis.nightindvoika.util.StringCreator;
 
@@ -26,15 +28,14 @@ public class CameraController implements Initializable {
 
     @FXML
     ImageView cameraImageView;
-
     @FXML
     Button camera1, camera2, camera3, camera4, camera5, camera6, camera7, camera8, camera9, camera10, camera11, camera12, camera13, camera14;
-
     @FXML
     Button soundButton;
+    @FXML
+    Button officeButton;
 
     private final Media cameraSwapSound = new Media(getClass().getResource("/static/sounds/cameras/camera/cameraSwap.mp3").toExternalForm());
-    private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/cameras/camerasOpenV2.mp3").toExternalForm());
     private final Media camerasCloseSound = new Media(getClass().getResource("/static/sounds/cameras/camerasClose.mp3").toExternalForm());
 
     private final Media cameraHelloSound = new Media(getClass().getResource("/static/sounds/cameras/camera/hello.mp3").toExternalForm());
@@ -77,6 +78,12 @@ public class CameraController implements Initializable {
         currentViewPosition = position;
     }
 
+    public void closeCameras(ActionEvent event) {
+        playMediaCloseCameras();
+
+        LoadersUtil.loadOffice(event);
+    }
+
     public void playSound() {
         Camera currentCamera = cameras.get(currentViewPosition-1);
 
@@ -87,7 +94,7 @@ public class CameraController implements Initializable {
         soundButton.setDisable(true);
     }
 
-    public void playMediaSoundOnCamera() {
+    private void playMediaSoundOnCamera() {
         int num = random.nextInt(3);
 
         Task<Void> soundTask = new Task<>() {
@@ -115,7 +122,7 @@ public class CameraController implements Initializable {
         new Thread(soundTask).start();
     }
 
-    public void playMediaSwapCamera() {
+    private void playMediaSwapCamera() {
         Task<Void> soundTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -128,20 +135,7 @@ public class CameraController implements Initializable {
         new Thread(soundTask).start();
     }
 
-    public void playMediaOpenCameras() {
-        Task<Void> soundTask = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                MediaPlayer mediaPlayer = new MediaPlayer(camerasOpenSound);
-                mediaPlayer.play();
-                return null;
-            }
-        };
-
-        new Thread(soundTask).start();
-    }
-
-    public void playMediaCloseCameras() {
+    private void playMediaCloseCameras() {
         Task<Void> soundTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
