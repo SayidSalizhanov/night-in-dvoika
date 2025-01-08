@@ -11,17 +11,17 @@
    <children>
       <ImageView fx:id="cameraImageView" fitHeight="720.0" fitWidth="1152.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../static/Main_menu.png" />
+            <Image url="@../../../../static/images/Main_menu.png" />
          </image>
       </ImageView>
       <ImageView fx:id="firstFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="912.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../static/1этаж.png" />
+            <Image url="@../../../../static/images/1этаж.png" />
          </image>
       </ImageView>
       <ImageView fx:id="secondFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="908.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../static/2этаж.png" />
+            <Image url="@../../../../static/images/2этаж.png" />
          </image>
       </ImageView>
       <Button fx:id="camera1" layoutX="1085.0" layoutY="446.0" mnemonicParsing="false" text="C1">

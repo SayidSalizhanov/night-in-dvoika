@@ -10,14 +10,20 @@ import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class App extends Application {
+    public static final Map<String, FXMLLoader> loaders = new HashMap<>();
+    public static final Map<String, Parent> roots = new HashMap<>();
+
     @Override
     public void start(Stage stage) throws IOException {
+        loadFxmlLoaders();
+        GameEngine.getInstance();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/main_menu.fxml"));
-        Parent root = fxmlLoader.load();
+        Parent root = roots.get("mainMenu");
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -26,5 +32,19 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void loadFxmlLoaders() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/main_menu.fxml"));
+        loaders.put("mainMenu", loader);
+        roots.put("mainMenu", loader.load());
+
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/defender/office.fxml"));
+        loaders.put("office", loader);
+        roots.put("office", loader.load());
+
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/defender/camera.fxml"));
+        loaders.put("camera", loader);
+        roots.put("camera", loader.load());
     }
 }

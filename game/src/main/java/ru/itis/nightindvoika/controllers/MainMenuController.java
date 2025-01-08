@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import lombok.Data;
+import ru.itis.nightindvoika.App;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public class MainMenuController {
     private Parent root;
 
     public void startFromOfficeByDefender(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/ru/itis/nightindvoika/defender/office.fxml"));
+        root = App.roots.get("office");
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

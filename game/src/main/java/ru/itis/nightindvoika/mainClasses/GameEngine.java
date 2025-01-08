@@ -12,6 +12,7 @@ import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Data
@@ -65,7 +66,7 @@ public class GameEngine {
 
         // todo
         office = new Office(
-                "/static/office",
+                "/static/images/office",
                 15,
                 attackEntities
         );
@@ -126,11 +127,13 @@ public class GameEngine {
             cameras.add(
                     new Camera(
                             gameEngine,
-                            "/static/cameras/camera%d".formatted(i),
+                            "/static/images/cameras/camera%d".formatted(i),
                             i,
                             soundBreakDefaultOneCameraCooldownInSeconds
                     )
             );
         }
+
+        cameras.sort(Comparator.comparingInt(Camera::getPosition));
     }
 }
