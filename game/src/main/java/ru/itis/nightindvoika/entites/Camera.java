@@ -1,12 +1,10 @@
 package ru.itis.nightindvoika.entites;
 
 import lombok.Data;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
 @Data
 public class Camera {
-
-    private GameEngine engine;
 
     private String sourcePath;
     private int position;
@@ -16,8 +14,7 @@ public class Camera {
 
     private boolean darknessStatus; // затемнение камеры в данный момент
 
-    public Camera(GameEngine engine, String sourcePath, int position, int playSoundCooldownInSeconds) {
-        this.engine = engine;
+    public Camera(String sourcePath, int position, int playSoundCooldownInSeconds) {
         this.sourcePath = sourcePath;
         this.position = position;
         this.playSoundCooldownInSeconds = playSoundCooldownInSeconds;
@@ -27,7 +24,8 @@ public class Camera {
     }
 
     public void playSound() {
-        // todo
+        GameEngineInstance.getGameEngine().soundOnCamera(position);
+        soundBreak(playSoundCooldownInSeconds);
     }
 
     // кулдаун для звука

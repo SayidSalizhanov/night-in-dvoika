@@ -5,13 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.itis.nightindvoika.controllers.OfficeController;
-import ru.itis.nightindvoika.entites.AttackEntity;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class App extends Application {
@@ -21,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         loadFxmlLoaders();
-        GameEngine.getInstance();
+        GameEngineInstance.getGameEngine();
 
         Parent root = roots.get("mainMenu");
         Scene scene = new Scene(root);

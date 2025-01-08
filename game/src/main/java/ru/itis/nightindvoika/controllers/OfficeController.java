@@ -15,14 +15,13 @@ import javafx.stage.Stage;
 import lombok.Data;
 import ru.itis.nightindvoika.App;
 import ru.itis.nightindvoika.entites.Office;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.StringCreator;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Data
 public class OfficeController implements Initializable {
@@ -42,7 +41,7 @@ public class OfficeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        office = GameEngine.getInstance().getOffice();
+        office = GameEngineInstance.getGameEngine().getOffice();
         display();
     }
 
@@ -58,7 +57,7 @@ public class OfficeController implements Initializable {
             putOnMaskButton.setText("Снять маску");
 
             camerasButton.setVisible(false);
-            camerasButton.setManaged(false);
+            camerasButton.setDisable(true);
         }
         else {
             backgroundImageView.setImage(new Image(
@@ -68,7 +67,7 @@ public class OfficeController implements Initializable {
             putOnMaskButton.setText("Надеть маску");
 
             camerasButton.setVisible(true);
-            camerasButton.setManaged(true);
+            camerasButton.setDisable(false);
         }
     }
 

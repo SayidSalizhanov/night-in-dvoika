@@ -18,8 +18,6 @@ import java.util.List;
 @Data
 public class GameEngine {
 
-    private static GameEngine gameEngine;
-
     private Attacker attacker;
     private Defender defender;
 
@@ -40,14 +38,7 @@ public class GameEngine {
     private int paralysisCooldownInSeconds; // кулдаун: обездвижить охранника
     private int paralysisInSeconds; // время, на которое охранник обездвижен
 
-    public static GameEngine getInstance() {
-        if (gameEngine == null) {
-            gameEngine = new GameEngine();
-        }
-        return gameEngine;
-    }
-
-    private GameEngine() {
+    public GameEngine() {
         oneGameHourInSeconds = 90;
 
         soundBreakByAttackerCooldownInSeconds = 240;
@@ -71,20 +62,20 @@ public class GameEngine {
                 attackEntities
         );
 
-        attacker = new Attacker(
-                gameEngine,
-                soundBreakByAttackerCooldownInSeconds,
-                soundBreakByAttackerInSeconds,
-                breakAllCamerasCooldownInSeconds,
-                breakAllCamerasInSeconds,
-                paralysisCooldownInSeconds,
-                paralysisInSeconds
-        );
+//        attacker = new Attacker(
+//                gameEngine,
+//                soundBreakByAttackerCooldownInSeconds,
+//                soundBreakByAttackerInSeconds,
+//                breakAllCamerasCooldownInSeconds,
+//                breakAllCamerasInSeconds,
+//                paralysisCooldownInSeconds,
+//                paralysisInSeconds
+//        );
 
         // todo
-        defender = new Defender(
-                gameEngine
-        );
+//        defender = new Defender(
+//                gameEngine
+//        );
     }
 
     public void startGame() {
@@ -111,6 +102,44 @@ public class GameEngine {
         // todo
     }
 
+    // метод меняют позиции сущностей если был проигран звук
+    public void soundOnCamera(int position) {
+        for (AttackEntity entity : attackEntities) {
+
+            int pathIndexOfPosition = -1;
+            for (int i = 0; i < entity.getPath().length; i++) {
+                if (entity.getPath()[i] == position) {
+                    pathIndexOfPosition = i;
+                    break;
+                }
+            }
+
+            if (pathIndexOfPosition == -1) continue;
+
+            switch (entity.getCurrentPathIndex() - pathIndexOfPosition) {
+                case 1:
+                    if (entity.isSoundLiker()) { // если сущность идет на звук
+                        entity.moveBack();
+                    } else {
+                        entity.moveForward();
+                    }
+                    break;
+                case 0:
+                    if (!entity.isSoundLiker()) {
+                        entity.moveBack();
+                    }
+                    break;
+                case -1:
+                    if (entity.isSoundLiker()) {
+                        entity.moveForward();
+                    } else {
+                        entity.moveBack();
+                    }
+                    break;
+            }
+        }
+    }
+
     private void loadDefaultEntities() {
         attackEntities = new ArrayList<>(4);
 
@@ -126,7 +155,6 @@ public class GameEngine {
         for (int i = 1; i <= 14; i++) {
             cameras.add(
                     new Camera(
-                            gameEngine,
                             "/static/images/cameras/camera%d".formatted(i),
                             i,
                             soundBreakDefaultOneCameraCooldownInSeconds
