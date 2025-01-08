@@ -32,6 +32,7 @@ public class LoadersUtil {
 
     public static void loadOffice(ActionEvent event) {
         OfficeController officeController = loaders.get("office").getController();
+        officeController.setNextCameraViewPosition(1);
         officeController.display();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -40,9 +41,20 @@ public class LoadersUtil {
         stage.show();
     }
 
-    public static void loadCamera(ActionEvent event) {
+    public static void loadOffice(ActionEvent event, int nextCameraViewPosition) {
+        OfficeController officeController = loaders.get("office").getController();
+        officeController.setNextCameraViewPosition(nextCameraViewPosition);
+        officeController.display();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = scenes.get("office");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void loadCamera(ActionEvent event, int nextCameraViewPosition) {
         CameraController cameraController = loaders.get("camera").getController();
-        cameraController.display(1);
+        cameraController.display(nextCameraViewPosition);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = scenes.get("camera");

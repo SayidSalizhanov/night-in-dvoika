@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import lombok.Data;
+import lombok.Setter;
 import ru.itis.nightindvoika.entites.Office;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.LoadersUtil;
@@ -21,10 +21,11 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-@Data
 public class OfficeController implements Initializable {
 
     private Office office;
+    @Setter
+    private int nextCameraViewPosition;
 
     @FXML
     ImageView backgroundImageView;
@@ -40,7 +41,6 @@ public class OfficeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         office = GameEngineInstance.getGameEngine().getOffice();
-        display();
     }
 
     public void display() {
@@ -49,7 +49,7 @@ public class OfficeController implements Initializable {
 
         if (office.isHoldMaskStatus()) {
             backgroundImageView.setImage(new Image(
-                    Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(getOffice().getSourcePath(), fileName)))
+                    Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(office.getSourcePath(), fileName)))
             ));
 
             putOnMaskButton.setText("Снять маску");
@@ -59,7 +59,7 @@ public class OfficeController implements Initializable {
         }
         else {
             backgroundImageView.setImage(new Image(
-                    Objects.requireNonNull(getClass().getResourceAsStream("%s/nomask/%s.png".formatted(getOffice().getSourcePath(), fileName)))
+                    Objects.requireNonNull(getClass().getResourceAsStream("%s/nomask/%s.png".formatted(office.getSourcePath(), fileName)))
             ));
 
             putOnMaskButton.setText("Надеть маску");
@@ -79,7 +79,7 @@ public class OfficeController implements Initializable {
 
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {
         playMediaOpenCameras();
-        LoadersUtil.loadCamera(event);
+        LoadersUtil.loadCamera(event, nextCameraViewPosition);
     }
 
     private void playMediaOpenCameras() {

@@ -60,8 +60,6 @@ public class CameraController implements Initializable {
         camera12.setOnAction(event -> display(12));
         camera13.setOnAction(event -> display(13));
         camera14.setOnAction(event -> display(14));
-
-        currentViewPosition = 1;
     }
 
     public void display(int position) {
@@ -81,7 +79,7 @@ public class CameraController implements Initializable {
     public void closeCameras(ActionEvent event) {
         playMediaCloseCameras();
 
-        LoadersUtil.loadOffice(event);
+        LoadersUtil.loadOffice(event, currentViewPosition);
     }
 
     public void playSound() {
