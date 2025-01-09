@@ -15,6 +15,15 @@ import java.util.ResourceBundle;
 
 public class RadarController implements Initializable {
 
+    /*
+    Данный контроллер будет основан на конкретных сущностях, а не на мапе сущностей,
+    потому что изначально в этом нет смысла, так как кнопки созданы только для этих 4-ёх сущностей.
+    Попытка реализации через мапу заставит использовать рефлексию, что гораздо муторнее,
+    чем написать логика отдельно для каждой сущности из известных 4-ёх.
+
+    SOLID, goodbye...
+    */
+
     private AttackEntity witherSkeleton;
     private AttackEntity skeleton;
     private AttackEntity zombie;
@@ -53,20 +62,21 @@ public class RadarController implements Initializable {
     }
 
     public void moveForward(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
-        System.out.println(attackEntity.isMoveAbilityStatus());
-
         attackEntity.moveForward();
-
-        System.out.println(attackEntity.isMoveAbilityStatus());
 
         moveForwardButton.setDisable(true);
         moveBackButton.setDisable(true);
+
+        display();
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
         attackEntity.moveBack();
+
         moveForwardButton.setDisable(true);
         moveBackButton.setDisable(true);
+
+        display();
     }
 
     private void setButtonDisableOrAllowAll() {

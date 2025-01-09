@@ -42,7 +42,7 @@ public class GameEngine {
         soundBreakByAttackerCooldownInSeconds = 240;
         soundBreakByAttackerInSeconds = 30;
 
-        soundBreakDefaultOneCameraCooldownInSeconds = 60;
+        soundBreakDefaultOneCameraCooldownInSeconds = 45;
 
         breakAllCamerasCooldownInSeconds = 180;
         breakAllCamerasInSeconds = 10;

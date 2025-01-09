@@ -15,6 +15,7 @@ import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.RandomSingleton;
 import ru.itis.nightindvoika.util.StringCreator;
 
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
@@ -46,20 +47,20 @@ public class CameraController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cameras = GameEngineInstance.getGameEngine().getCameras();
 
-        camera1.setOnAction(event -> display(1));
-        camera2.setOnAction(event -> display(2));
-        camera3.setOnAction(event -> display(3));
-        camera4.setOnAction(event -> display(4));
-        camera5.setOnAction(event -> display(5));
-        camera6.setOnAction(event -> display(6));
-        camera7.setOnAction(event -> display(7));
-        camera8.setOnAction(event -> display(8));
-        camera9.setOnAction(event -> display(9));
-        camera10.setOnAction(event -> display(10));
-        camera11.setOnAction(event -> display(11));
-        camera12.setOnAction(event -> display(12));
-        camera13.setOnAction(event -> display(13));
-        camera14.setOnAction(event -> display(14));
+        // setOnAction для каждой камеры с помощью рефлексии
+        for (int i = 1; i <= 14; i++) {
+            try {
+                Field field = this.getClass().getDeclaredField("camera%d".formatted(i));
+                field.setAccessible(true);
+
+                Button button = (Button) field.get(this);
+
+                int position = i;
+                button.setOnAction(event -> display(position));
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void display(int position) {
