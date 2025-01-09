@@ -34,6 +34,7 @@ public abstract class AttackEntity {
         this.soundLiker = soundLiker;
         this.radarVisible = radarVisible;
         this.electricShockDependence = electricShockDependence;
+        this.moveAbilityStatus = true;
     }
 
     public void moveForward() {

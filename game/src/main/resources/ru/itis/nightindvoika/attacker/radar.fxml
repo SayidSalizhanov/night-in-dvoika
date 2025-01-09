@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1152.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.RadarController">
    <children>
@@ -19,13 +20,73 @@
             <Image url="@../../../../static/images/2этаж.png" />
          </image>
       </ImageView>
-      <Circle fx:id="witherSkeletonMark" fill="RED" layoutX="346.0" layoutY="613.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fx:id="skeletonMark" fill="RED" layoutX="480.0" layoutY="50.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fx:id="creeperMark" fill="RED" layoutX="348.0" layoutY="586.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fx:id="zombieMark" fill="RED" layoutX="494.0" layoutY="148.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Button fx:id="refreshRadar" layoutX="517.0" layoutY="652.0" mnemonicParsing="false" onAction="#refreshRadar" text="Обновить" textAlignment="CENTER">
+      <Circle fx:id="witherSkeletonMark" fill="#666666" layoutX="346.0" layoutY="613.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
+      <Circle fx:id="skeletonMark" fill="#c4c4c4" layoutX="480.0" layoutY="50.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
+      <Circle fx:id="creeperMark" fill="#0fff00" layoutX="348.0" layoutY="586.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
+      <Circle fx:id="zombieMark" fill="#137922" layoutX="494.0" layoutY="148.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
+      <Button fx:id="refreshRadar" layoutX="972.0" layoutY="658.0" mnemonicParsing="false" onAction="#refreshRadar" text="Обновить" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="58.0" layoutY="681.0" stroke="#666666" strokeType="OUTSIDE" text="WS" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="witherSkeletonMoveForwardButton" layoutX="63.0" layoutY="641.0" mnemonicParsing="false" rotate="270.0" text="&gt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="witherSkeletonMoveBackButton" layoutX="63.0" layoutY="685.0" mnemonicParsing="false" rotate="270.0" text="&lt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="155.0" layoutY="681.0" stroke="#b6b6b6" strokeType="OUTSIDE" strokeWidth="0.0" text="S" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="skeletonMoveForwardButton" layoutX="150.0" layoutY="641.0" mnemonicParsing="false" rotate="270.0" text="&gt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="skeletonMoveBackButton" layoutX="150.0" layoutY="685.0" mnemonicParsing="false" rotate="270.0" text="&lt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Text fx:id="zombie" fill="WHITE" layoutX="244.0" layoutY="681.0" stroke="#137922" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="zombieMoveForwardButton" layoutX="240.0" layoutY="641.0" mnemonicParsing="false" rotate="270.0" text="&gt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="zombieMoveBackButton" layoutX="240.0" layoutY="685.0" mnemonicParsing="false" rotate="270.0" text="&lt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="332.0" layoutY="681.0" stroke="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="creeperMoveForwardButton" layoutX="328.0" layoutY="641.0" mnemonicParsing="false" rotate="270.0" text="&gt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="creeperMoveBackButton" layoutX="328.0" layoutY="685.0" mnemonicParsing="false" rotate="270.0" text="&lt;">
+         <font>
+            <Font size="10.0" />
          </font>
       </Button>
    </children>

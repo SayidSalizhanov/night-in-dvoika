@@ -18,11 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         LoadersUtil.loadFxmlLoaders();
-        GameEngine engine = GameEngineInstance.getGameEngine();
-        engine.getAttackEntities().get("witherSkeleton").moveForward();
-        engine.getAttackEntities().get("witherSkeleton").moveForward();
-        engine.getAttackEntities().get("witherSkeleton").moveForward();
-        engine.getAttackEntities().get("witherSkeleton").moveForward();
+        GameEngineInstance.getGameEngine();
 
         Scene scene = LoadersUtil.scenes.get("mainMenu");
 
