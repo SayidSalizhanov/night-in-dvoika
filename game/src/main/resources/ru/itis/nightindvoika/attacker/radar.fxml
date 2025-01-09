@@ -89,5 +89,15 @@
             <Font size="10.0" />
          </font>
       </Button>
+      <Button fx:id="menuButton" layoutX="822.0" layoutY="658.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="muteAllCamerasButton" layoutX="576.0" layoutY="658.0" mnemonicParsing="false" onAction="#muteAllCameras" text="🔇">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -19,6 +19,11 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button fx:id="menuButton" layoutX="41.0" layoutY="19.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
       <Text fx:id="text" fill="WHITE" layoutX="576.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="1.0">
          <font>
             <Font name="Arial" size="20.0" />

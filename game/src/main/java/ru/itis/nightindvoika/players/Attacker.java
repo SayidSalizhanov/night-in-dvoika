@@ -1,13 +1,10 @@
 package ru.itis.nightindvoika.players;
 
 import lombok.Data;
-import ru.itis.nightindvoika.entites.AttackEntity;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
 @Data
 public class Attacker {
-
-    private GameEngine engine;
 
     private int soundBreakCooldownInSeconds; // кулдаун: у охранника отключится возможность звука
     private int soundBreakInSeconds; // время, на которое у охранника отключится возможность звука
@@ -21,8 +18,7 @@ public class Attacker {
     private int settingParalysisStatusInSeconds; // время, на которое можно парализовать охранника
     private boolean settingParalysisAbilityStatus; // возможность парализовать охранника
 
-    public Attacker(GameEngine engine, int soundBreakCooldownInSeconds, int soundBreakInSeconds, int settingDarknessStatusCooldownInSeconds, int settingDarknessStatusInSeconds, int settingParalysisStatusCooldownInSeconds, int settingParalysisStatusInSeconds) {
-        this.engine = engine;
+    public Attacker(int soundBreakCooldownInSeconds, int soundBreakInSeconds, int settingDarknessStatusCooldownInSeconds, int settingDarknessStatusInSeconds, int settingParalysisStatusCooldownInSeconds, int settingParalysisStatusInSeconds) {
         this.soundBreakCooldownInSeconds = soundBreakCooldownInSeconds;
         this.soundBreakInSeconds = soundBreakInSeconds;
         this.settingDarknessStatusCooldownInSeconds = settingDarknessStatusCooldownInSeconds;
@@ -35,28 +31,8 @@ public class Attacker {
         settingParalysisAbilityStatus = true;
     }
 
-    public void display() {
-        //todo
-    }
-
-    /*
-    метод использует основной класс игры, когда атакующий игрок совершает действие,
-    которое может теоретически изменить изображение на радаре (ход сущностью)
-    */
-    public void refresh() {
-        // todo
-    }
-
-    public void moveForward(AttackEntity entity) {
-        entity.moveForward();
-    }
-
-    public void moveBack(AttackEntity entity) {
-        entity.moveBack();
-    }
-
     public void soundBreakAllCameras() {
-        engine.soundBreakAllCameras(soundBreakInSeconds);
+        GameEngineInstance.getGameEngine().soundBreakAllCameras(soundBreakInSeconds);
         soundBreakAbilityStatus = false;
 
         new Thread(() -> {
@@ -71,7 +47,7 @@ public class Attacker {
     }
 
     public void setDarknessStatusOnCameras() {
-        engine.breakAllCameras(settingDarknessStatusInSeconds);
+        GameEngineInstance.getGameEngine().breakAllCameras(settingDarknessStatusInSeconds);
         settingDarknessAbilityStatus = false;
 
         new Thread(() -> {
@@ -86,7 +62,7 @@ public class Attacker {
     }
 
     public void paralyzeDefender() {
-        engine.paralyzeDefender(settingParalysisStatusInSeconds);
+        GameEngineInstance.getGameEngine().paralyzeDefender(settingParalysisStatusInSeconds);
         settingParalysisAbilityStatus = false;
 
         new Thread(() -> {

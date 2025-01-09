@@ -28,7 +28,7 @@ public class GameEngine {
     private int soundBreakByAttackerCooldownInSeconds; // кулдаун: атакующий может отключить звук на всех камерах
     private int soundBreakByAttackerInSeconds; // время, на которое атакующий может отключить звук на всех камерах
 
-    private int soundBreakDefaultOneCameraCooldownInSeconds; // время, на которое отключается щвук на одной камере у охранника
+    private int soundBreakDefaultOneCameraCooldownInSeconds; // время, на которое отключается звук на одной камере у охранника
 
     private int breakAllCamerasCooldownInSeconds; // кулдаун на отключение всех камер
     private int breakAllCamerasInSeconds; // время, на которое происходит отключение на все камеры
@@ -60,15 +60,14 @@ public class GameEngine {
                 attackEntities
         );
 
-//        attacker = new Attacker(
-//                gameEngine,
-//                soundBreakByAttackerCooldownInSeconds,
-//                soundBreakByAttackerInSeconds,
-//                breakAllCamerasCooldownInSeconds,
-//                breakAllCamerasInSeconds,
-//                paralysisCooldownInSeconds,
-//                paralysisInSeconds
-//        );
+        attacker = new Attacker(
+                soundBreakByAttackerCooldownInSeconds,
+                soundBreakByAttackerInSeconds,
+                breakAllCamerasCooldownInSeconds,
+                breakAllCamerasInSeconds,
+                paralysisCooldownInSeconds,
+                paralysisInSeconds
+        );
 
         // todo
 //        defender = new Defender(

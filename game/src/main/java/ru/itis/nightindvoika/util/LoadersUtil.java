@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.controllers.CameraController;
+import ru.itis.nightindvoika.controllers.MainMenuController;
 import ru.itis.nightindvoika.controllers.OfficeController;
 import ru.itis.nightindvoika.controllers.RadarController;
 
@@ -33,6 +34,13 @@ public class LoadersUtil {
         loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/attacker/radar.fxml"));
         loaders.put("radar", loader);
         scenes.put("radar", new Scene(loader.load()));
+    }
+
+    public static void loadMainMenu(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = scenes.get("mainMenu");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void loadOffice(ActionEvent event) {

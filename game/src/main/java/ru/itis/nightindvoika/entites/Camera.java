@@ -30,6 +30,8 @@ public class Camera {
 
     // кулдаун для звука
     public void soundBreak(int seconds) {
+        if (!soundPlayAbilityStatus) return; // если у камеры уже нет возможности вопроизводить звук, то новый поток не запускается
+
         soundPlayAbilityStatus = false;
 
         new Thread(() -> {

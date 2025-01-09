@@ -33,6 +33,8 @@ public class OfficeController implements Initializable {
     Button putOnMaskButton, camerasButton;
     @FXML
     Text text;
+    @FXML
+    Button menuButton;
 
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
@@ -80,6 +82,10 @@ public class OfficeController implements Initializable {
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {
         playMediaOpenCameras();
         LoadersUtil.loadCamera(event, nextCameraViewPosition);
+    }
+
+    public void backToMenu(ActionEvent event) {
+        LoadersUtil.loadMainMenu(event);
     }
 
     private void playMediaOpenCameras() {

@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.players.Attacker;
+import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
 
 import java.net.URL;
@@ -29,6 +31,8 @@ public class RadarController implements Initializable {
     private AttackEntity zombie;
     private AttackEntity creeper;
 
+    private Attacker attacker;
+
     @FXML
     Circle witherSkeletonMark, skeletonMark, zombieMark, creeperMark;
     @FXML
@@ -37,6 +41,10 @@ public class RadarController implements Initializable {
     Button witherSkeletonMoveForwardButton, skeletonMoveForwardButton, zombieMoveForwardButton, creeperMoveForwardButton;
     @FXML
     Button witherSkeletonMoveBackButton, skeletonMoveBackButton, zombieMoveBackButton, creeperMoveBackButton;
+    @FXML
+    Button menuButton;
+    @FXML
+    Button muteAllCamerasButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,6 +54,8 @@ public class RadarController implements Initializable {
         zombie = attackEntities.get("zombie");
         creeper = attackEntities.get("creeper");
 
+        attacker = GameEngineInstance.getGameEngine().getAttacker();
+
         setOnActionMoveButtons(witherSkeleton, witherSkeletonMoveForwardButton, witherSkeletonMoveBackButton);
         setOnActionMoveButtons(skeleton, skeletonMoveForwardButton, skeletonMoveBackButton);
         setOnActionMoveButtons(zombie, zombieMoveForwardButton, zombieMoveBackButton);
@@ -54,6 +64,7 @@ public class RadarController implements Initializable {
 
     public void display() {
         setButtonDisableOrAllowAll();
+        setMuteAllCamerasButtonDisableOrAllow();
         setPositionOnFrameAll();
     }
 
@@ -77,6 +88,19 @@ public class RadarController implements Initializable {
         moveBackButton.setDisable(true);
 
         display();
+    }
+
+    public void backToMenu(ActionEvent event) {
+        LoadersUtil.loadMainMenu(event);
+    }
+
+    public void muteAllCameras(ActionEvent event) {
+        attacker.soundBreakAllCameras();
+        muteAllCamerasButton.setDisable(true);
+    }
+
+    private void setMuteAllCamerasButtonDisableOrAllow() {
+        muteAllCamerasButton.setDisable(!attacker.isSoundBreakAbilityStatus());
     }
 
     private void setButtonDisableOrAllowAll() {
