@@ -11,9 +11,7 @@ import ru.itis.nightindvoika.entites.defaultAttackEntities.Zombie;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Data
 public class GameEngine {
@@ -21,7 +19,7 @@ public class GameEngine {
     private Attacker attacker;
     private Defender defender;
 
-    private List<AttackEntity> attackEntities;
+    private Map<String, AttackEntity> attackEntities;
     private List<Camera> cameras;
     private Office office;
 
@@ -104,7 +102,7 @@ public class GameEngine {
 
     // метод меняют позиции сущностей если был проигран звук
     public void soundOnCamera(int position) {
-        for (AttackEntity entity : attackEntities) {
+        for (AttackEntity entity : attackEntities.values()) {
 
             int pathIndexOfPosition = -1;
             for (int i = 0; i < entity.getPath().length; i++) {
@@ -141,12 +139,12 @@ public class GameEngine {
     }
 
     private void loadDefaultEntities() {
-        attackEntities = new ArrayList<>(4);
+        attackEntities = new HashMap<>(4);
 
-        attackEntities.add(new WitherSkeleton());
-        attackEntities.add(new Skeleton());
-        attackEntities.add(new Zombie());
-        attackEntities.add(new Creeper());
+        attackEntities.put("witherSkeleton", new WitherSkeleton());
+        attackEntities.put("skeleton", new Skeleton());
+        attackEntities.put("zombie", new Zombie());
+        attackEntities.put("creeper", new Creeper());
     }
 
     private void loadDefaultCameras() {

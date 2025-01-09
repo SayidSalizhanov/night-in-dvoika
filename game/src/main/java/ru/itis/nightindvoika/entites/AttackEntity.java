@@ -1,6 +1,9 @@
 package ru.itis.nightindvoika.entites;
 
 import lombok.Data;
+import ru.itis.nightindvoika.util.PositionOnFrame;
+
+import java.util.Map;
 
 @Data
 public abstract class AttackEntity {
@@ -10,6 +13,7 @@ public abstract class AttackEntity {
 
     protected int[] path;
     protected int currentPathIndex;
+    protected Map<Integer, PositionOnFrame> positionsOnFrames; // 1 аргумент - позиция, 2 - координаты на фрейме
 
     private int moveCooldownInSeconds; // время между ходами
     private boolean moveAbilityStatus; // возможность двигаться в текущий момент
@@ -70,5 +74,9 @@ public abstract class AttackEntity {
 
             moveAbilityStatus = true;
         }).start();
+    }
+
+    public PositionOnFrame getCurrentPositionOnFrame() {
+        return positionsOnFrames.get(currentPosition);
     }
 }

@@ -2,16 +2,16 @@ package ru.itis.nightindvoika.entites;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 public class Office {
     private String sourcePath;
     private int position;
-    private List<AttackEntity> attackEntities;
+    private Map<String, AttackEntity> attackEntities;
     private boolean holdMaskStatus;
 
-    public Office(String sourcePath, int position, List<AttackEntity> entities) {
+    public Office(String sourcePath, int position, Map<String, AttackEntity> entities) {
         this.sourcePath = sourcePath;
         this.position = position;
         this.attackEntities = entities;

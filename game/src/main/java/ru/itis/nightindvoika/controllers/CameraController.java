@@ -65,7 +65,7 @@ public class CameraController implements Initializable {
     public void display(int position) {
         playMediaSwapCamera();
 
-        String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities(), position);
+        String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), position);
 
         cameraImageView.setImage(new Image(
                 Objects.requireNonNull(getClass().getResourceAsStream("%s/%s.png".formatted(cameras.get(position-1).getSourcePath(), fileName)))

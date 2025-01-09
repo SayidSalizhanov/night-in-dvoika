@@ -19,7 +19,12 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="defenderButton" layoutX="493.0" layoutY="551.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" text="Охранник" textAlignment="CENTER">
+      <Button fx:id="defenderButton" layoutX="479.0" layoutY="550.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" prefHeight="66.0" prefWidth="201.0" text="Охранник" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="attackerButton" layoutX="480.0" layoutY="460.0" mnemonicParsing="false" onAction="#startFromRadarByAttacker" text="Атакующий" textAlignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>

@@ -45,7 +45,7 @@ public class OfficeController implements Initializable {
 
     public void display() {
 
-        String fileName = StringCreator.createPathImage(office.getAttackEntities(), office.getPosition());
+        String fileName = StringCreator.createPathImage(office.getAttackEntities().values().stream().toList(), office.getPosition());
 
         if (office.isHoldMaskStatus()) {
             backgroundImageView.setImage(new Image(

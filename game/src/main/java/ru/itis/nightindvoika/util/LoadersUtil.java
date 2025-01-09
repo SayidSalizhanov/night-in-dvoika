@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.controllers.CameraController;
 import ru.itis.nightindvoika.controllers.OfficeController;
+import ru.itis.nightindvoika.controllers.RadarController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,6 +29,10 @@ public class LoadersUtil {
         loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/camera.fxml"));
         loaders.put("camera", loader);
         scenes.put("camera", new Scene(loader.load()));
+
+        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/attacker/radar.fxml"));
+        loaders.put("radar", loader);
+        scenes.put("radar", new Scene(loader.load()));
     }
 
     public static void loadOffice(ActionEvent event) {
@@ -58,6 +63,16 @@ public class LoadersUtil {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = scenes.get("camera");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void loadRadar(ActionEvent event) {
+        RadarController radarController = loaders.get("radar").getController();
+        radarController.display();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = scenes.get("radar");
         stage.setScene(scene);
         stage.show();
     }
