@@ -66,11 +66,20 @@ public class CameraController implements Initializable {
     public void display(int position) {
         playMediaSwapCamera();
 
-        String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), position);
+        Camera camera = cameras.get(position-1);
 
-        cameraImageView.setImage(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("%s/%s.png".formatted(cameras.get(position-1).getSourcePath(), fileName)))
-        ));
+        if (camera.isDarknessStatus()) {
+            cameraImageView.setImage(new Image(
+                    Objects.requireNonNull(getClass().getResourceAsStream("%s/dark.png".formatted(camera.getSourcePath())))
+            ));
+        }
+        else {
+            String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), position);
+
+            cameraImageView.setImage(new Image(
+                    Objects.requireNonNull(getClass().getResourceAsStream("%s/%s.png".formatted(camera.getSourcePath(), fileName)))
+            ));
+        }
 
         soundButton.setDisable(!cameras.get(position-1).isSoundPlayAbilityStatus());
 

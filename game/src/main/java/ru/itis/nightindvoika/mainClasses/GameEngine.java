@@ -45,7 +45,7 @@ public class GameEngine {
         soundBreakDefaultOneCameraCooldownInSeconds = 45;
 
         breakAllCamerasCooldownInSeconds = 180;
-        breakAllCamerasInSeconds = 10;
+        breakAllCamerasInSeconds = 30;
 
         paralysisCooldownInSeconds = 400;
         paralysisInSeconds = 15;

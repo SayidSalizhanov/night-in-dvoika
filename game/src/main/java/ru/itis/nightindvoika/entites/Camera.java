@@ -46,6 +46,8 @@ public class Camera {
     }
 
     public void activateDarknessMode(int seconds) {
+        if (darknessStatus) return; // если камера уже сломана (хотя такого произойти не должно по идее), то повторно поток для кулдауна запущен не будет
+
         darknessStatus = true;
 
         new Thread(() -> {

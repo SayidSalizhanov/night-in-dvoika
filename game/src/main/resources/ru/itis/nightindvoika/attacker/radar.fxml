@@ -99,5 +99,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button fx:id="breakAllCamerasButton" layoutX="648.0" layoutY="658.0" mnemonicParsing="false" onAction="#breakAllCameras" text="🎥">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
