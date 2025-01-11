@@ -1,6 +1,9 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +37,8 @@ public class RadarForDefenderController implements Initializable {
     @FXML
     Text radarTimeLimitText;
 
-    private PauseTransition pauseTransition;
+    private Timeline countdownTimeline;
+    private int remainingSeconds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,15 +70,26 @@ public class RadarForDefenderController implements Initializable {
     }
 
     public void backToOffice(ActionEvent event) {
-        pauseTransition.stop();
+        if (countdownTimeline.getStatus() != Animation.Status.STOPPED) countdownTimeline.stop();
         LoadersUtil.loadOffice(event);
     }
 
     private void startTimer() {
-        pauseTransition = new PauseTransition(Duration.seconds(defender.getRadarVisibleInSeconds()));
-        pauseTransition.setOnFinished(event -> {
-            backButton.fire();
-        });
-        pauseTransition.play();
+        remainingSeconds = defender.getRadarVisibleInSeconds();
+
+        countdownTimeline = new Timeline(
+            new KeyFrame(Duration.seconds(1), event -> {
+                remainingSeconds--;
+                radarTimeLimitText.setText(Integer.toString(remainingSeconds));
+
+                if (remainingSeconds <= 0) {
+                    countdownTimeline.stop();
+                    backButton.fire();
+                }
+            })
+        );
+
+        countdownTimeline.setCycleCount(remainingSeconds);
+        countdownTimeline.play();
     }
 }
