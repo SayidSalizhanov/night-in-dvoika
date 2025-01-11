@@ -2,7 +2,6 @@ package ru.itis.nightindvoika.controllers;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,10 +44,18 @@ public class RadarForDefenderController implements Initializable {
         defender = GameEngineInstance.getGameEngine().getDefender();
 
         Map<String, AttackEntity> attackEntities = GameEngineInstance.getGameEngine().getAttackEntities();
+
         witherSkeleton = attackEntities.get("witherSkeleton");
+        witherSkeletonMark.setVisible(witherSkeleton.isRadarVisible());
+
         skeleton = attackEntities.get("skeleton");
+        skeletonMark.setVisible(skeleton.isRadarVisible());
+
         zombie = attackEntities.get("zombie");
+        zombieMark.setVisible(zombie.isRadarVisible());
+
         creeper = attackEntities.get("creeper");
+        creeperMark.setVisible(creeper.isRadarVisible());
     }
 
     public void display() {

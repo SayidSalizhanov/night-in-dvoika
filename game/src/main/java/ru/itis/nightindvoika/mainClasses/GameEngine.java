@@ -39,6 +39,9 @@ public class GameEngine {
     private int radarVisibleForDefenderCooldownInSeconds; // кулдаун: охранник может увидеть сущности на радаре
     private int radarVisibleInSeconds; // время, на которое охранник может посмотреть радар
 
+    private int electricShockFromDefenderCooldownInSeconds; // кулдаун: охранник может обездвижить
+    private int electricShockFromDefenderInSeconds; // время, на которое охранник может отключить движение всем аниматроникам
+
     public GameEngine() {
         oneGameHourInSeconds = 90;
 
@@ -55,6 +58,9 @@ public class GameEngine {
 
         radarVisibleForDefenderCooldownInSeconds = 300;
         radarVisibleInSeconds = 10;
+
+        electricShockFromDefenderCooldownInSeconds = 350;
+        electricShockFromDefenderInSeconds = 30;
 
         loadDefaultEntities();
         loadDefaultCameras();
@@ -77,7 +83,9 @@ public class GameEngine {
 
         defender = new Defender(
                 radarVisibleForDefenderCooldownInSeconds,
-                radarVisibleInSeconds
+                radarVisibleInSeconds,
+                electricShockFromDefenderCooldownInSeconds,
+                electricShockFromDefenderInSeconds
         );
     }
 
@@ -99,6 +107,12 @@ public class GameEngine {
 
     public void breakAllCameras(int seconds) {
         cameras.forEach(c -> c.activateDarknessMode(seconds));
+    }
+
+    public void electricShockAttackEntities(int seconds) {
+        for (AttackEntity entity : attackEntities.values()) {
+            if (entity.isElectricShockDependence()) entity.stop(seconds);
+        }
     }
 
     public void paralyzeDefender(int seconds) {

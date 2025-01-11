@@ -1,6 +1,5 @@
 package ru.itis.nightindvoika.controllers;
 
-import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import lombok.Setter;
 import ru.itis.nightindvoika.entites.Office;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
@@ -41,6 +39,8 @@ public class OfficeController implements Initializable {
     Button menuButton;
     @FXML
     Button radarButton;
+    @FXML
+    Button electricShockButton;
 
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
@@ -63,14 +63,10 @@ public class OfficeController implements Initializable {
 
             putOnMaskButton.setText("Снять маску");
 
-            camerasButton.setVisible(false);
-            camerasButton.setDisable(true);
-
-            menuButton.setVisible(false);
-            menuButton.setDisable(true);
-
-            radarButton.setVisible(false);
-            radarButton.setDisable(true);
+            hideButton(camerasButton);
+            hideButton(menuButton);
+            hideButton(radarButton);
+            hideButton(electricShockButton);
         }
         else {
             backgroundImageView.setImage(new Image(
@@ -79,17 +75,14 @@ public class OfficeController implements Initializable {
 
             putOnMaskButton.setText("Надеть маску");
 
-            camerasButton.setVisible(true);
-            camerasButton.setDisable(false);
-
-            menuButton.setVisible(true);
-            menuButton.setDisable(false);
-
-            radarButton.setVisible(true);
-            radarButton.setDisable(false);
+            showButton(camerasButton);
+            showButton(menuButton);
+            showButton(radarButton);
+            showButton(electricShockButton);
         }
 
-        radarButton.setDisable(!defender.isRadarVisibleStatus());
+        radarButton.setDisable(!defender.isRadarVisibleAbilityStatus());
+        electricShockButton.setDisable(!defender.isElectricShockAbilityStatus());
     }
 
     public void activateRadar(ActionEvent event) {
@@ -97,6 +90,13 @@ public class OfficeController implements Initializable {
         defender.radarVisible();
 
         LoadersUtil.loadRadarForDefender(event);
+    }
+
+    public void activateElectricShock(ActionEvent event) {
+        electricShockButton.setDisable(true);
+        defender.electricShock();
+
+        display();
     }
 
     public void switchMaskMode(ActionEvent event) {
@@ -153,5 +153,15 @@ public class OfficeController implements Initializable {
         };
 
         new Thread(soundTask).start();
+    }
+
+    private void hideButton(Button button) {
+        button.setVisible(false);
+        button.setDisable(true);
+    }
+
+    private void showButton(Button button) {
+        button.setVisible(true);
+        button.setDisable(false);
     }
 }

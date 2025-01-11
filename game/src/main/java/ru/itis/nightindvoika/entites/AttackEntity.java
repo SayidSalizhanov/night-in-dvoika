@@ -19,8 +19,8 @@ public abstract class AttackEntity {
     private boolean moveAbilityStatus; // возможность двигаться в текущий момент
 
     private boolean maskDeception; // true - если надета маска, сущность вернётся к старту
-    private boolean soundLiker; // true - сущности идет на звук, false - сущность идет от звука
-    private boolean radarVisible; // true - видим на радаре охранника
+    private boolean soundLiker; // true - сущность идет на звук, false - сущность идет от звука
+    private boolean radarVisible; // true - сущность видима на радаре охранника
     private boolean electricShockDependence; // true - может быть остановлен на время охранником при применении шока
 
     public AttackEntity(int[] path, int moveCooldownInSeconds, boolean maskDeception, boolean soundLiker, boolean radarVisible, boolean electricShockDependence) {

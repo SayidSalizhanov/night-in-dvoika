@@ -34,5 +34,10 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Text>
+      <Button fx:id="electricShockButton" layoutX="31.0" layoutY="496.0" mnemonicParsing="false" onAction="#activateElectricShock" text="Электро-шок">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

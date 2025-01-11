@@ -29,7 +29,7 @@
     <Circle fx:id="skeletonMark" fill="#c4c4c4" layoutX="481.0" layoutY="87.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
     <Circle fx:id="creeperMark" fill="#0fff00" layoutX="349.0" layoutY="623.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
     <Circle fx:id="zombieMark" fill="#137922" layoutX="495.0" layoutY="185.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
-      <Text fx:id="radarTimeLimitText" fill="WHITE" layoutX="1107.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+      <Text fx:id="radarTimeLimitText" fill="WHITE" layoutX="1107.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="20.0" />
          </font>
