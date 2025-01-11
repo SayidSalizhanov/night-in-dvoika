@@ -59,7 +59,7 @@
             <Font size="10.0" />
          </font>
       </Button>
-      <Text fx:id="zombie" fill="WHITE" layoutX="244.0" layoutY="681.0" stroke="#137922" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="244.0" layoutY="681.0" stroke="#137922" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

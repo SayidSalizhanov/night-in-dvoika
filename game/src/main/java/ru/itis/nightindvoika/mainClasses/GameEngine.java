@@ -36,6 +36,9 @@ public class GameEngine {
     private int paralysisCooldownInSeconds; // кулдаун: обездвижить охранника
     private int paralysisInSeconds; // время, на которое охранник обездвижен
 
+    private int radarVisibleForDefenderCooldownInSeconds; // кулдаун: охранник может увидеть сущности на радаре
+    private int radarVisibleInSeconds; // время, на которое охранник может посмотреть радар
+
     public GameEngine() {
         oneGameHourInSeconds = 90;
 
@@ -49,6 +52,9 @@ public class GameEngine {
 
         paralysisCooldownInSeconds = 400;
         paralysisInSeconds = 15;
+
+        radarVisibleForDefenderCooldownInSeconds = 300;
+        radarVisibleInSeconds = 5;
 
         loadDefaultEntities();
         loadDefaultCameras();
@@ -69,10 +75,10 @@ public class GameEngine {
                 paralysisInSeconds
         );
 
-        // todo
-//        defender = new Defender(
-//                gameEngine
-//        );
+        defender = new Defender(
+                radarVisibleForDefenderCooldownInSeconds,
+                radarVisibleInSeconds
+        );
     }
 
     public void startGame() {

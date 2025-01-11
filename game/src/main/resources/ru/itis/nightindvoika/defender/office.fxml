@@ -19,7 +19,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="menuButton" layoutX="41.0" layoutY="19.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню">
+      <Button fx:id="menuButton" layoutX="30.0" layoutY="21.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="radarButton" layoutX="30.0" layoutY="580.0" mnemonicParsing="false" onAction="#activateRadar" text="Радар">
          <font>
             <Font size="20.0" />
          </font>

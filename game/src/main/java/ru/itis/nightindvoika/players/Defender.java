@@ -1,33 +1,31 @@
 package ru.itis.nightindvoika.players;
 
 import lombok.Data;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
 
 @Data
 public class Defender {
 
-    private GameEngine engine;
+    private int radarVisibleForDefenderCooldownInSeconds;
+    private int radarVisibleInSeconds;
+    private boolean radarVisibleStatus;
 
-    private int currentViewPosition;
-
-    public Defender(GameEngine engine) {
-        this.engine = engine;
-        this.currentViewPosition = 15;
+    public Defender(int radarVisibleForDefenderCooldownInSeconds, int radarVisibleInSeconds) {
+        this.radarVisibleForDefenderCooldownInSeconds = radarVisibleForDefenderCooldownInSeconds;
+        this.radarVisibleInSeconds = radarVisibleInSeconds;
+        this.radarVisibleStatus = true;
     }
 
-    public void displayCamera(int cameraPosition) {
-        // todo
-    }
+    public void radarVisible() {
+        radarVisibleStatus = false;
 
-    public void displayOffice() {
-        // todo
-    }
+        new Thread(() -> {
+            try {
+                Thread.sleep(radarVisibleForDefenderCooldownInSeconds * 1000L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
-    /*
-    метод использует основной класс игры, когда атакующий игрок совершает действие,
-    которое может теоретически изменить изображение на камерах или в офисе (ход, отключение света)
-    */
-    public void refresh() {
-        // todo
+            radarVisibleStatus = true;
+        }).start();
     }
 }

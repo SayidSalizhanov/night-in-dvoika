@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +11,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.Setter;
 import ru.itis.nightindvoika.entites.Office;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.StringCreator;
 
@@ -26,6 +29,7 @@ public class OfficeController implements Initializable {
     private Office office;
     @Setter
     private int nextCameraViewPosition;
+    private Defender defender;
 
     @FXML
     ImageView backgroundImageView;
@@ -35,6 +39,8 @@ public class OfficeController implements Initializable {
     Text text;
     @FXML
     Button menuButton;
+    @FXML
+    Button radarButton;
 
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
@@ -43,6 +49,7 @@ public class OfficeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         office = GameEngineInstance.getGameEngine().getOffice();
+        defender = GameEngineInstance.getGameEngine().getDefender();
     }
 
     public void display() {
@@ -58,6 +65,12 @@ public class OfficeController implements Initializable {
 
             camerasButton.setVisible(false);
             camerasButton.setDisable(true);
+
+            menuButton.setVisible(false);
+            menuButton.setDisable(true);
+
+            radarButton.setVisible(false);
+            radarButton.setDisable(true);
         }
         else {
             backgroundImageView.setImage(new Image(
@@ -68,7 +81,22 @@ public class OfficeController implements Initializable {
 
             camerasButton.setVisible(true);
             camerasButton.setDisable(false);
+
+            menuButton.setVisible(true);
+            menuButton.setDisable(false);
+
+            radarButton.setVisible(true);
+            radarButton.setDisable(false);
         }
+
+        radarButton.setDisable(!defender.isRadarVisibleStatus());
+    }
+
+    public void activateRadar(ActionEvent event) {
+        radarButton.setDisable(true);
+        defender.radarVisible();
+
+        LoadersUtil.loadRadarForDefender(event);
     }
 
     public void switchMaskMode(ActionEvent event) {

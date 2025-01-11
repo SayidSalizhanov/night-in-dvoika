@@ -6,9 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.controllers.CameraController;
-import ru.itis.nightindvoika.controllers.MainMenuController;
 import ru.itis.nightindvoika.controllers.OfficeController;
 import ru.itis.nightindvoika.controllers.RadarController;
+import ru.itis.nightindvoika.controllers.RadarForDefenderController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -34,6 +34,10 @@ public class LoadersUtil {
         loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/attacker/radar.fxml"));
         loaders.put("radar", loader);
         scenes.put("radar", new Scene(loader.load()));
+
+        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/radar.fxml"));
+        loaders.put("defenderRadar", loader);
+        scenes.put("defenderRadar", new Scene(loader.load()));
     }
 
     public static void loadMainMenu(ActionEvent event) {
@@ -43,15 +47,18 @@ public class LoadersUtil {
         stage.show();
     }
 
-    public static void loadOffice(ActionEvent event) {
-        OfficeController officeController = loaders.get("office").getController();
-        officeController.setNextCameraViewPosition(1);
-        officeController.display();
+    public static void loadRadarForDefender(ActionEvent event) {
+        RadarForDefenderController radarForDefenderController = loaders.get("defenderRadar").getController();
+        radarForDefenderController.display();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = scenes.get("office");
+        Scene scene = scenes.get("defenderRadar");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void loadOffice(ActionEvent event) {
+        loadOffice(event, 1);
     }
 
     public static void loadOffice(ActionEvent event, int nextCameraViewPosition) {
