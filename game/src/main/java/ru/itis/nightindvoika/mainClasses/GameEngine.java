@@ -54,7 +54,7 @@ public class GameEngine {
         paralysisInSeconds = 15;
 
         radarVisibleForDefenderCooldownInSeconds = 300;
-        radarVisibleInSeconds = 5;
+        radarVisibleInSeconds = 10;
 
         loadDefaultEntities();
         loadDefaultCameras();

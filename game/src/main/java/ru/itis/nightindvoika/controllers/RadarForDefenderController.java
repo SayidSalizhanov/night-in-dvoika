@@ -66,7 +66,7 @@ public class RadarForDefenderController implements Initializable {
     private void setPositionOnFrame(AttackEntity attackEntity, Circle attackEntityMark) {
         PositionOnFrame position = attackEntity.getCurrentPositionOnFrame();
         attackEntityMark.setLayoutX(position.getX());
-        attackEntityMark.setLayoutY(position.getY());
+        attackEntityMark.setLayoutY(position.getY() + 37);
     }
 
     public void backToOffice(ActionEvent event) {
