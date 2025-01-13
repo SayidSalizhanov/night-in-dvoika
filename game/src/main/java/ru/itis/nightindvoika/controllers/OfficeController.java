@@ -41,6 +41,8 @@ public class OfficeController implements Initializable {
     Button radarButton;
     @FXML
     Button electricShockButton;
+    @FXML
+    Button refreshButton;
 
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
@@ -56,33 +58,53 @@ public class OfficeController implements Initializable {
 
         String fileName = StringCreator.createPathImage(office.getAttackEntities().values().stream().toList(), office.getPosition());
 
-        if (office.isHoldMaskStatus()) {
-            backgroundImageView.setImage(new Image(
-                    Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(office.getSourcePath(), fileName)))
-            ));
-
-            putOnMaskButton.setText("Снять маску");
-
-            hideButton(camerasButton);
-            hideButton(menuButton);
-            hideButton(radarButton);
-            hideButton(electricShockButton);
-        }
-        else {
+        if (defender.isParalyzeStatus()) {
             backgroundImageView.setImage(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("%s/nomask/%s.png".formatted(office.getSourcePath(), fileName)))
             ));
 
-            putOnMaskButton.setText("Надеть маску");
+            office.setHoldMaskStatus(false);
 
-            showButton(camerasButton);
-            showButton(menuButton);
-            showButton(radarButton);
-            showButton(electricShockButton);
+            hideButton(putOnMaskButton);
+            hideButton(camerasButton);
+            hideButton(menuButton);
+            hideButton(radarButton);
+            hideButton(electricShockButton);
+
+            text.setText("Паралич");
         }
+        else {
+            text.setText(null);
 
-        radarButton.setDisable(!defender.isRadarVisibleAbilityStatus());
-        electricShockButton.setDisable(!defender.isElectricShockAbilityStatus());
+            if (office.isHoldMaskStatus()) {
+                backgroundImageView.setImage(new Image(
+                        Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(office.getSourcePath(), fileName)))
+                ));
+
+                putOnMaskButton.setText("Снять маску");
+
+                hideButton(camerasButton);
+                hideButton(menuButton);
+                hideButton(radarButton);
+                hideButton(electricShockButton);
+                showButton(putOnMaskButton);
+            } else {
+                backgroundImageView.setImage(new Image(
+                        Objects.requireNonNull(getClass().getResourceAsStream("%s/nomask/%s.png".formatted(office.getSourcePath(), fileName)))
+                ));
+
+                putOnMaskButton.setText("Надеть маску");
+
+                showButton(camerasButton);
+                showButton(menuButton);
+                showButton(radarButton);
+                showButton(electricShockButton);
+                showButton(putOnMaskButton);
+            }
+
+            radarButton.setDisable(!defender.isRadarVisibleAbilityStatus());
+            electricShockButton.setDisable(!defender.isElectricShockAbilityStatus());
+        }
     }
 
     public void activateRadar(ActionEvent event) {
@@ -114,6 +136,10 @@ public class OfficeController implements Initializable {
 
     public void backToMenu(ActionEvent event) {
         LoadersUtil.loadMainMenu(event);
+    }
+
+    public void refresh(ActionEvent event) {
+        display();
     }
 
     private void playMediaOpenCameras() {

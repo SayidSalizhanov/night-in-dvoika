@@ -116,7 +116,7 @@ public class GameEngine {
     }
 
     public void paralyzeDefender(int seconds) {
-        // todo
+        defender.paralyze(seconds);
     }
 
     // метод меняют позиции сущностей если был проигран звук

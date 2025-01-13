@@ -47,6 +47,8 @@ public class RadarController implements Initializable {
     Button muteAllCamerasButton;
     @FXML
     Button breakAllCamerasButton;
+    @FXML
+    Button paralyzeDefenderButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +70,7 @@ public class RadarController implements Initializable {
         setButtonDisableOrAllowAll();
         setMuteAllCamerasButtonDisableOrAllow();
         setBreakAllCamerasButtonDisableOrAllow();
+        setParalyzeDefenderButtonDisableOrAllow();
         setPositionOnFrameAll();
     }
 
@@ -107,12 +110,21 @@ public class RadarController implements Initializable {
         breakAllCamerasButton.setDisable(true);
     }
 
+    public void paralyzeDefender(ActionEvent event) {
+        attacker.paralyzeDefender();
+        paralyzeDefenderButton.setDisable(true);
+    }
+
     private void setMuteAllCamerasButtonDisableOrAllow() {
         muteAllCamerasButton.setDisable(!attacker.isSoundBreakAbilityStatus());
     }
 
     private void setBreakAllCamerasButtonDisableOrAllow() {
         breakAllCamerasButton.setDisable(!attacker.isSettingDarknessAbilityStatus());
+    }
+
+    private void setParalyzeDefenderButtonDisableOrAllow() {
+        paralyzeDefenderButton.setDisable(!attacker.isSettingParalysisAbilityStatus());
     }
 
     private void setButtonDisableOrAllowAll() {

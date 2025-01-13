@@ -99,7 +99,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="breakAllCamerasButton" layoutX="648.0" layoutY="658.0" mnemonicParsing="false" onAction="#breakAllCameras" text="🎥">
+      <Button fx:id="breakAllCamerasButton" layoutX="651.0" layoutY="658.0" mnemonicParsing="false" onAction="#breakAllCameras" text="🎥">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="paralyzeDefenderButton" layoutX="501.0" layoutY="658.0" mnemonicParsing="false" onAction="#paralyzeDefender" text="💀">
          <font>
             <Font size="20.0" />
          </font>

@@ -14,6 +14,8 @@ public class Defender {
     private int electricShockFromDefenderInSeconds;
     private boolean electricShockAbilityStatus; // возможность ударить током сущности
 
+    private boolean paralyzeStatus; // true - охранник парализован
+
     public Defender(int radarVisibleForDefenderCooldownInSeconds, int radarVisibleInSeconds, int electricShockFromDefenderCooldownInSeconds, int electricShockFromDefenderInSeconds) {
         this.radarVisibleForDefenderCooldownInSeconds = radarVisibleForDefenderCooldownInSeconds;
         this.radarVisibleInSeconds = radarVisibleInSeconds;
@@ -21,6 +23,7 @@ public class Defender {
         this.electricShockFromDefenderInSeconds = electricShockFromDefenderInSeconds;
         radarVisibleAbilityStatus = true;
         electricShockAbilityStatus = true;
+        paralyzeStatus = false;
     }
 
     public void radarVisible() {
@@ -49,6 +52,20 @@ public class Defender {
             }
 
             electricShockAbilityStatus = true;
+        }).start();
+    }
+
+    public void paralyze(int seconds) {
+        paralyzeStatus = true;
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(seconds * 1000L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            paralyzeStatus = false;
         }).start();
     }
 }
