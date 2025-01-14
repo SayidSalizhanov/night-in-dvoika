@@ -10,6 +10,7 @@ import ru.itis.nightindvoika.entites.defaultAttackEntities.WitherSkeleton;
 import ru.itis.nightindvoika.entites.defaultAttackEntities.Zombie;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
+import ru.itis.nightindvoika.util.Timer;
 
 import java.util.*;
 
@@ -24,6 +25,7 @@ public class GameEngine {
     private Office office;
 
     private int oneGameHourInSeconds; // время игрового часа в секундах реального времени
+    private int hoursInNight; // часов в ночи
 
     private int soundBreakByAttackerCooldownInSeconds; // кулдаун: атакующий может отключить звук на всех камерах
     private int soundBreakByAttackerInSeconds; // время, на которое атакующий может отключить звук на всех камерах
@@ -41,6 +43,8 @@ public class GameEngine {
 
     private int electricShockFromDefenderCooldownInSeconds; // кулдаун: охранник может обездвижить
     private int electricShockFromDefenderInSeconds; // время, на которое охранник может отключить движение всем аниматроникам
+
+    private final Timer timer = new Timer(hoursInNight, oneGameHourInSeconds);
 
     public GameEngine() {
         oneGameHourInSeconds = 90;
@@ -90,7 +94,7 @@ public class GameEngine {
     }
 
     public void startGame() {
-        // todo
+        timer.startTimer();
     }
 
     public void endGame() {
