@@ -15,10 +15,10 @@ public class MainMenuController {
     Button attackerButton;
 
     public void startFromOfficeByDefender(ActionEvent event) {
-        LoadersUtil.loadOffice(event);
+        LoadersUtil.loadOffice();
     }
 
     public void startFromRadarByAttacker(ActionEvent event) {
-        LoadersUtil.loadRadar(event);
+        LoadersUtil.loadRadar();
     }
 }

@@ -111,7 +111,7 @@ public class OfficeController implements Initializable {
         radarButton.setDisable(true);
         defender.radarVisible();
 
-        LoadersUtil.loadRadarForDefender(event);
+        LoadersUtil.loadRadarForDefender();
     }
 
     public void activateElectricShock(ActionEvent event) {
@@ -131,11 +131,11 @@ public class OfficeController implements Initializable {
 
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {
         playMediaOpenCameras();
-        LoadersUtil.loadCamera(event, nextCameraViewPosition);
+        LoadersUtil.loadCamera(nextCameraViewPosition);
     }
 
     public void backToMenu(ActionEvent event) {
-        LoadersUtil.loadMainMenu(event);
+        LoadersUtil.loadMainMenu();
     }
 
     public void refresh(ActionEvent event) {

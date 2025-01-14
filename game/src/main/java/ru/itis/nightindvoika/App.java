@@ -18,12 +18,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         LoadersUtil.loadFxmlLoaders();
+        LoadersUtil.setPrimaryStage(stage);
         GameEngineInstance.getGameEngine();
 
-        Scene scene = LoadersUtil.scenes.get("mainMenu");
-
-        stage.setScene(scene);
-        stage.show();
+        LoadersUtil.loadMainMenu();
     }
 
     public static void main(String[] args) {

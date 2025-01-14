@@ -89,7 +89,7 @@ public class CameraController implements Initializable {
     public void closeCameras(ActionEvent event) {
         playMediaCloseCameras();
 
-        LoadersUtil.loadOffice(event, currentViewPosition);
+        LoadersUtil.loadOffice(currentViewPosition);
     }
 
     public void playSound() {

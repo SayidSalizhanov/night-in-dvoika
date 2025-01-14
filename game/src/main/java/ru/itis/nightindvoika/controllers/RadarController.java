@@ -97,7 +97,7 @@ public class RadarController implements Initializable {
     }
 
     public void backToMenu(ActionEvent event) {
-        LoadersUtil.loadMainMenu(event);
+        LoadersUtil.loadMainMenu();
     }
 
     public void muteAllCameras(ActionEvent event) {

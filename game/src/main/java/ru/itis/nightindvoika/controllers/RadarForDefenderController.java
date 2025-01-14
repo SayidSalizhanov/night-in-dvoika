@@ -78,7 +78,7 @@ public class RadarForDefenderController implements Initializable {
 
     public void backToOffice(ActionEvent event) {
         if (countdownTimeline.getStatus() != Animation.Status.STOPPED) countdownTimeline.stop();
-        LoadersUtil.loadOffice(event);
+        LoadersUtil.loadOffice();
     }
 
     private void startTimer() {
