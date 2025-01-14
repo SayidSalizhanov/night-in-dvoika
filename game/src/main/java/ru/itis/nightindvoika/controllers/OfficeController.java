@@ -16,6 +16,7 @@ import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.StringCreator;
+import ru.itis.nightindvoika.util.Timer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +37,8 @@ public class OfficeController implements Initializable {
     @FXML
     Text text;
     @FXML
+    Text textTimer;
+    @FXML
     Button menuButton;
     @FXML
     Button radarButton;
@@ -55,6 +58,7 @@ public class OfficeController implements Initializable {
     }
 
     public void display() {
+        textTimer.setText("%d AM".formatted(Timer.currentHour));
 
         String fileName = StringCreator.createPathImage(office.getAttackEntities().values().stream().toList(), office.getPosition());
 
@@ -67,7 +71,6 @@ public class OfficeController implements Initializable {
 
             hideButton(putOnMaskButton);
             hideButton(camerasButton);
-            hideButton(menuButton);
             hideButton(radarButton);
             hideButton(electricShockButton);
 

@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.mainClasses;
 
+import javafx.application.Platform;
 import lombok.Data;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.entites.Camera;
@@ -10,6 +11,7 @@ import ru.itis.nightindvoika.entites.defaultAttackEntities.WitherSkeleton;
 import ru.itis.nightindvoika.entites.defaultAttackEntities.Zombie;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
+import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.Timer;
 
 import java.util.*;
@@ -44,10 +46,11 @@ public class GameEngine {
     private int electricShockFromDefenderCooldownInSeconds; // кулдаун: охранник может обездвижить
     private int electricShockFromDefenderInSeconds; // время, на которое охранник может отключить движение всем аниматроникам
 
-    private final Timer timer = new Timer(hoursInNight, oneGameHourInSeconds);
+    private Timer timer;
 
     public GameEngine() {
         oneGameHourInSeconds = 90;
+        hoursInNight = 6;
 
         soundBreakByAttackerCooldownInSeconds = 240;
         soundBreakByAttackerInSeconds = 30;
@@ -91,6 +94,8 @@ public class GameEngine {
                 electricShockFromDefenderCooldownInSeconds,
                 electricShockFromDefenderInSeconds
         );
+
+        timer = new Timer(hoursInNight, oneGameHourInSeconds);
     }
 
     public void startGame() {
@@ -98,7 +103,8 @@ public class GameEngine {
     }
 
     public void endGame() {
-        // todo
+        // todo что-то интересное при конце игры
+        Platform.runLater(LoadersUtil::loadMainMenu);
     }
 
     public void refresh() {

@@ -5,11 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
+import ru.itis.nightindvoika.util.Timer;
 
 import java.net.URL;
 import java.util.Map;
@@ -49,6 +51,8 @@ public class RadarController implements Initializable {
     Button breakAllCamerasButton;
     @FXML
     Button paralyzeDefenderButton;
+    @FXML
+    Text textTimer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -67,6 +71,7 @@ public class RadarController implements Initializable {
     }
 
     public void display() {
+        textTimer.setText("%d AM".formatted(Timer.currentHour));
         setButtonDisableOrAllowAll();
         setMuteAllCamerasButtonDisableOrAllow();
         setBreakAllCamerasButtonDisableOrAllow();

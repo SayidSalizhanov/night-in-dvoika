@@ -109,5 +109,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Text fx:id="textTimer" fill="WHITE" layoutX="34.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 AM">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
