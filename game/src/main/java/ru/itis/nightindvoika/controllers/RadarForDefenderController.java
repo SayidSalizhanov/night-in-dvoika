@@ -58,7 +58,7 @@ public class RadarForDefenderController implements Initializable {
         creeperMark.setVisible(creeper.isRadarVisible());
     }
 
-    public void display() {
+    public void displayPreparing() {
         setPositionOnFrameAll();
         startTimer();
     }

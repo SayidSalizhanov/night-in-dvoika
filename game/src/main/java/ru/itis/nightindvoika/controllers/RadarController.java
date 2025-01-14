@@ -70,7 +70,7 @@ public class RadarController implements Initializable {
         setOnActionMoveButtons(creeper, creeperMoveForwardButton, creeperMoveBackButton);
     }
 
-    public void display() {
+    public void displayPreparing() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
         setButtonDisableOrAllowAll();
         setMuteAllCamerasButtonDisableOrAllow();
@@ -80,7 +80,7 @@ public class RadarController implements Initializable {
     }
 
     public void refreshRadar(ActionEvent event) {
-        display();
+        displayPreparing();
     }
 
     public void moveForward(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
@@ -89,7 +89,7 @@ public class RadarController implements Initializable {
         moveForwardButton.setDisable(true);
         moveBackButton.setDisable(true);
 
-        display();
+        displayPreparing();
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
@@ -98,7 +98,7 @@ public class RadarController implements Initializable {
         moveForwardButton.setDisable(true);
         moveBackButton.setDisable(true);
 
-        display();
+        displayPreparing();
     }
 
     public void backToMenu(ActionEvent event) {

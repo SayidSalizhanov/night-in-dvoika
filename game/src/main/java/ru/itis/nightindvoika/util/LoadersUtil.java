@@ -49,7 +49,7 @@ public class LoadersUtil {
 
     public static void loadRadarForDefender() {
         RadarForDefenderController radarForDefenderController = loaders.get("defenderRadar").getController();
-        radarForDefenderController.display();
+        radarForDefenderController.displayPreparing();
 
         Scene scene = scenes.get("defenderRadar");
         primaryStage.setScene(scene);
@@ -63,7 +63,7 @@ public class LoadersUtil {
     public static void loadOffice(int nextCameraViewPosition) {
         OfficeController officeController = loaders.get("office").getController();
         officeController.setNextCameraViewPosition(nextCameraViewPosition);
-        officeController.display();
+        officeController.displayPreparing();
 
         Scene scene = scenes.get("office");
         primaryStage.setScene(scene);
@@ -72,7 +72,7 @@ public class LoadersUtil {
 
     public static void loadCamera(int nextCameraViewPosition) {
         CameraController cameraController = loaders.get("camera").getController();
-        cameraController.display(nextCameraViewPosition);
+        cameraController.displayPreparing(nextCameraViewPosition);
 
         Scene scene = scenes.get("camera");
         primaryStage.setScene(scene);
@@ -81,7 +81,7 @@ public class LoadersUtil {
 
     public static void loadRadar() {
         RadarController radarController = loaders.get("radar").getController();
-        radarController.display();
+        radarController.displayPreparing();
 
         Scene scene = scenes.get("radar");
         primaryStage.setScene(scene);

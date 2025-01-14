@@ -56,14 +56,14 @@ public class CameraController implements Initializable {
                 Button button = (Button) field.get(this);
 
                 int position = i;
-                button.setOnAction(event -> display(position));
+                button.setOnAction(event -> displayPreparing(position));
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void display(int position) {
+    public void displayPreparing(int position) {
         playMediaSwapCamera();
 
         Camera camera = cameras.get(position-1);

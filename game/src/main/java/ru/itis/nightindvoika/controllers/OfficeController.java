@@ -57,7 +57,7 @@ public class OfficeController implements Initializable {
         defender = GameEngineInstance.getGameEngine().getDefender();
     }
 
-    public void display() {
+    public void displayPreparing() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
 
         String fileName = StringCreator.createPathImage(office.getAttackEntities().values().stream().toList(), office.getPosition());
@@ -121,7 +121,7 @@ public class OfficeController implements Initializable {
         electricShockButton.setDisable(true);
         defender.electricShock();
 
-        display();
+        displayPreparing();
     }
 
     public void switchMaskMode(ActionEvent event) {
@@ -129,7 +129,7 @@ public class OfficeController implements Initializable {
         else playMediaPutOnMask();
 
         office.switchMaskMode();
-        display();
+        displayPreparing();
     }
 
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {
@@ -142,7 +142,7 @@ public class OfficeController implements Initializable {
     }
 
     public void refresh(ActionEvent event) {
-        display();
+        displayPreparing();
     }
 
     private void playMediaOpenCameras() {
