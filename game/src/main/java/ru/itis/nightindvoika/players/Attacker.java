@@ -3,6 +3,7 @@ package ru.itis.nightindvoika.players;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 
 @Data
 public class Attacker {
@@ -42,7 +43,8 @@ public class Attacker {
                 try {
                     Thread.sleep(soundBreakCooldownInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    soundBreakAbilityStatus = true;
+                    return null;
                 }
 
                 soundBreakAbilityStatus = true;
@@ -50,7 +52,10 @@ public class Attacker {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.attackerThreads.put("soundBreakAllCamerasThread", t);
     }
 
     public void setDarknessStatusOnCameras() {
@@ -63,7 +68,8 @@ public class Attacker {
                 try {
                     Thread.sleep(settingDarknessStatusCooldownInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    settingDarknessAbilityStatus = true;
+                    return null;
                 }
 
                 settingDarknessAbilityStatus = true;
@@ -71,7 +77,10 @@ public class Attacker {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.attackerThreads.put("setDarknessStatusOnCamerasThread", t);
     }
 
     public void paralyzeDefender() {
@@ -84,7 +93,8 @@ public class Attacker {
                 try {
                     Thread.sleep(settingParalysisStatusCooldownInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    settingParalysisAbilityStatus = true;
+                    return null;
                 }
 
                 settingParalysisAbilityStatus = true;
@@ -92,6 +102,9 @@ public class Attacker {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.attackerThreads.put("paralyzeDefenderThread", t);
     }
 }

@@ -3,6 +3,7 @@ package ru.itis.nightindvoika.entites;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 
 @Data
 public class Camera {
@@ -41,7 +42,8 @@ public class Camera {
                 try {
                     Thread.sleep(seconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    soundPlayAbilityStatus = true;
+                    return null;
                 }
 
                 soundPlayAbilityStatus = true;
@@ -49,7 +51,10 @@ public class Camera {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.camerasThreads.put("soundBreakThread", t);
     }
 
     public void activateDarknessMode(int seconds) {
@@ -63,7 +68,8 @@ public class Camera {
                 try {
                     Thread.sleep(seconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    darknessStatus = false;
+                    return null;
                 }
 
                 darknessStatus = false;
@@ -71,6 +77,9 @@ public class Camera {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.camerasThreads.put("activateDarknessModeThread", t);
     }
 }

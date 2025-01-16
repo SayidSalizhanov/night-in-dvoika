@@ -4,7 +4,9 @@ import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
 import java.util.Map;
@@ -79,7 +81,8 @@ public abstract class AttackEntity {
                 try {
                     Thread.sleep(seconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    moveAbilityStatus = true;
+                    return null;
                 }
 
                 moveAbilityStatus = true;
@@ -87,7 +90,10 @@ public abstract class AttackEntity {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.attackerThreads.put("stopThread", t);
     }
 
     public PositionOnFrame getCurrentPositionOnFrame() {

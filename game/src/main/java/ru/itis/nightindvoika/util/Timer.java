@@ -30,7 +30,7 @@ public class Timer {
                     try {
                         Thread.sleep(secondsInGameHour * 1000L);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException();
+                        return null; // ничего не делаем, так как interrupt может быть вызван только в конце игры
                     }
 
                     currentHour++;
@@ -41,7 +41,10 @@ public class Timer {
             }
         };
 
-        new Thread(timerTask).start();
+        Thread t = new Thread(timerTask);
+        t.start();
+
+        ThreadsUtil.timerThreads.put("startGameTimerThread", t);
     }
 
     public void startDeathTimer(AttackEntity entity, Defender defender) {
@@ -51,7 +54,7 @@ public class Timer {
                 try {
                     Thread.sleep(entityInOfficeDeathTimeInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    return null; // ничего не делаем, так как interrupt может быть вызван только в конце игры
                 }
 
                 if (defender.isHoldMaskStatus() && entity.isMaskDeception()) entity.moveToStart();
@@ -61,6 +64,9 @@ public class Timer {
             }
         };
 
-        new Thread(timerTask).start();
+        Thread t = new Thread(timerTask);
+        t.start();
+
+        ThreadsUtil.timerThreads.put("startDeathTimerThread", t);
     }
 }

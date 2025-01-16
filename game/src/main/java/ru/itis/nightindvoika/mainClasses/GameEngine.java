@@ -12,6 +12,7 @@ import ru.itis.nightindvoika.entites.defaultAttackEntities.Zombie;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
 import java.util.*;
@@ -109,6 +110,8 @@ public class GameEngine {
         // todo что-то интересное при конце игры
         Platform.runLater(LoadersUtil::loadEndGame);
         GameEngineInstance.clearDataInEngine();
+        ThreadsUtil.interruptAllThreads();
+        ThreadsUtil.clearThreadMaps();
     }
 
     public void refresh() {

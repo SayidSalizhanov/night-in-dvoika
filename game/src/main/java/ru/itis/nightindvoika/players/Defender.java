@@ -3,6 +3,7 @@ package ru.itis.nightindvoika.players;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 
 @Data
 public class Defender {
@@ -39,7 +40,8 @@ public class Defender {
                 try {
                     Thread.sleep(radarVisibleForDefenderCooldownInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    radarVisibleAbilityStatus = true;
+                    return null;
                 }
 
                 radarVisibleAbilityStatus = true;
@@ -47,7 +49,10 @@ public class Defender {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.defenderThreads.put("radarVisibleThread", t);
     }
 
     public void electricShock() {
@@ -60,7 +65,8 @@ public class Defender {
                 try {
                     Thread.sleep(electricShockFromDefenderCooldownInSeconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    electricShockAbilityStatus = true;
+                    return null;
                 }
 
                 electricShockAbilityStatus = true;
@@ -68,7 +74,10 @@ public class Defender {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.defenderThreads.put("electricShockThread", t);
     }
 
     public void paralyze(int seconds) {
@@ -80,7 +89,8 @@ public class Defender {
                 try {
                     Thread.sleep(seconds * 1000L);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    paralyzeStatus = false;
+                    return null;
                 }
 
                 paralyzeStatus = false;
@@ -88,7 +98,10 @@ public class Defender {
             }
         };
 
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.start();
+
+        ThreadsUtil.defenderThreads.put("paralyzeThread", t);
     }
 
     public void switchMaskMode() {

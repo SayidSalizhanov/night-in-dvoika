@@ -47,4 +47,12 @@ public class ThreadsUtil {
         interruptAllDefenderThreads();
         interruptAllTimerThreads();
     }
+
+    public static void clearThreadMaps() {
+        attackEntitiesThreads.clear();
+        camerasThreads.clear();
+        attackerThreads.clear();
+        defenderThreads.clear();
+        timerThreads.clear();
+    }
 }
