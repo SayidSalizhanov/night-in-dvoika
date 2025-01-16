@@ -40,8 +40,10 @@ public class LoadersUtil {
         loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/endGame.fxml"));
         loaders.put("endGame", loader);
         scenes.put("endGame", new Scene(loader.load()));
+    }
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/startGame.fxml"));
+    public static void loadFXMLLoaderStartGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/startGame.fxml"));
         loaders.put("startGame", loader);
         scenes.put("startGame", new Scene(loader.load()));
     }

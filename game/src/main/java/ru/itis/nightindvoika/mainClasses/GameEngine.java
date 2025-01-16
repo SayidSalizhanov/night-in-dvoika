@@ -2,6 +2,9 @@ package ru.itis.nightindvoika.mainClasses;
 
 import javafx.application.Platform;
 import lombok.Data;
+import ru.itis.nightindvoika.controllers.CameraController;
+import ru.itis.nightindvoika.controllers.OfficeController;
+import ru.itis.nightindvoika.controllers.RadarController;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.entites.Camera;
 import ru.itis.nightindvoika.entites.Office;
@@ -50,6 +53,7 @@ public class GameEngine {
     private int entityInOfficeDeathTimeInSeconds; // время которое сущность стоит в офисе перед нападением
 
     private Timer timer;
+    private int timeToRefreshInSeconds; // через сколько секунд сцена будет обновляться
 
     public GameEngine() {
         oneGameHourInSeconds = 90;
@@ -99,6 +103,8 @@ public class GameEngine {
         );
 
         timer = new Timer(entityInOfficeDeathTimeInSeconds, hoursInNight, oneGameHourInSeconds);
+
+        timeToRefreshInSeconds = 1;
     }
 
     public void startGame() {
@@ -110,10 +116,7 @@ public class GameEngine {
         GameEngineInstance.clearDataInEngine();
         ThreadsUtil.interruptAllThreads();
         ThreadsUtil.clearThreadMaps();
-    }
-
-    public void refresh() {
-        // todo
+        stopRefreshOnControllers();
     }
 
     public void soundBreakAllCameras(int seconds) {
@@ -195,5 +198,11 @@ public class GameEngine {
         }
 
         cameras.sort(Comparator.comparingInt(Camera::getPosition));
+    }
+
+    private void stopRefreshOnControllers() {
+        RadarController.setRefreshFlag(false);
+        OfficeController.setRefreshFlag(false);
+        CameraController.setRefreshFlag(false);
     }
 }

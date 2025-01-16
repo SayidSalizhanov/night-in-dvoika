@@ -51,13 +51,26 @@ public class OfficeController implements Initializable {
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
     private final Media putDownMaskSound = new Media(getClass().getResource("/static/sounds/office/putDownMask.mp3").toExternalForm());
 
+    @Setter
+    private static boolean refreshFlag;
+    private int timeToRefreshInSeconds;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         office = GameEngineInstance.getGameEngine().getOffice();
         defender = GameEngineInstance.getGameEngine().getDefender();
+
+        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+        refreshFlag = true;
+
+        refreshThreadStart();
     }
 
     public void displayPreparing() {
+        refreshOffice();
+    }
+
+    public void refreshOffice() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
 
         String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), office.getPosition());
@@ -110,6 +123,26 @@ public class OfficeController implements Initializable {
         }
     }
 
+    public void refreshThreadStart() {
+        // запуск потока который будет обновлять сцену
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (refreshFlag) {
+                    try {
+                        Thread.sleep(timeToRefreshInSeconds * 1000L);
+                    } catch (InterruptedException e) {
+                        return null;
+                    }
+                    refreshOffice();
+                }
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+    }
+
     public void activateRadar(ActionEvent event) {
         radarButton.setDisable(true);
         defender.radarVisible();
@@ -139,10 +172,6 @@ public class OfficeController implements Initializable {
 
     public void backToMenu(ActionEvent event) {
         LoadersUtil.loadMainMenu();
-    }
-
-    public void refresh(ActionEvent event) {
-        displayPreparing();
     }
 
     private void playMediaOpenCameras() {

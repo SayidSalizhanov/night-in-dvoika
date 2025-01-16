@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import lombok.Setter;
 import ru.itis.nightindvoika.entites.Camera;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.LoadersUtil;
@@ -43,9 +44,14 @@ public class CameraController implements Initializable {
     private final Media cameraHiSound = new Media(getClass().getResource("/static/sounds/cameras/camera/hi.mp3").toExternalForm());
     private final Media cameraHahaSound = new Media(getClass().getResource("/static/sounds/cameras/camera/haha.mp3").toExternalForm());
 
+    @Setter
+    private static boolean refreshFlag;
+    private int timeToRefreshInSeconds;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cameras = GameEngineInstance.getGameEngine().getCameras();
+        currentViewPosition = 1;
 
         // setOnAction для каждой камеры с помощью рефлексии
         for (int i = 1; i <= 14; i++) {
@@ -61,12 +67,23 @@ public class CameraController implements Initializable {
                 e.printStackTrace();
             }
         }
+
+        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+        refreshFlag = true;
+
+        refreshThreadStart();
     }
 
     public void displayPreparing(int position) {
         playMediaSwapCamera();
 
-        Camera camera = cameras.get(position-1);
+        currentViewPosition = position;
+
+        refreshCamera();
+    }
+
+    public void refreshCamera() {
+        Camera camera = cameras.get(currentViewPosition-1);
 
         if (camera.isDarknessStatus()) {
             cameraImageView.setImage(new Image(
@@ -74,16 +91,34 @@ public class CameraController implements Initializable {
             ));
         }
         else {
-            String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), position);
+            String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), currentViewPosition);
 
             cameraImageView.setImage(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("%s/%s.png".formatted(camera.getSourcePath(), fileName)))
             ));
         }
 
-        soundButton.setDisable(!cameras.get(position-1).isSoundPlayAbilityStatus());
+        soundButton.setDisable(!cameras.get(currentViewPosition-1).isSoundPlayAbilityStatus());
+    }
 
-        currentViewPosition = position;
+    public void refreshThreadStart() {
+        // запуск потока который будет обновлять сцену
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (refreshFlag) {
+                    try {
+                        Thread.sleep(timeToRefreshInSeconds * 1000L);
+                    } catch (InterruptedException e) {
+                        return null;
+                    }
+                    refreshCamera();
+                }
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void closeCameras(ActionEvent event) {

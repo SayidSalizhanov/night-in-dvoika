@@ -9,11 +9,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import lombok.Setter;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
+import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
 import java.net.URL;
@@ -41,7 +43,7 @@ public class RadarController implements Initializable {
     @FXML
     Circle witherSkeletonMark, skeletonMark, zombieMark, creeperMark;
     @FXML
-    Button refreshRadar;
+    Button refreshRadarButton;
     @FXML
     Button witherSkeletonMoveForwardButton, skeletonMoveForwardButton, zombieMoveForwardButton, creeperMoveForwardButton;
     @FXML
@@ -60,6 +62,10 @@ public class RadarController implements Initializable {
     private final Media badButtonSound = new Media(getClass().getResource("/static/sounds/radar/badbutton.mp3").toExternalForm());
     private final Media pressButtonSound = new Media(getClass().getResource("/static/sounds/error.mp3").toExternalForm());
 
+    @Setter
+    private static boolean refreshFlag;
+    private int timeToRefreshInSeconds;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Map<String, AttackEntity> attackEntities = GameEngineInstance.getGameEngine().getAttackEntities();
@@ -74,9 +80,18 @@ public class RadarController implements Initializable {
         setOnActionMoveButtons(skeleton, skeletonMoveForwardButton, skeletonMoveBackButton);
         setOnActionMoveButtons(zombie, zombieMoveForwardButton, zombieMoveBackButton);
         setOnActionMoveButtons(creeper, creeperMoveForwardButton, creeperMoveBackButton);
+
+        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+        refreshFlag = true;
+
+        refreshThreadStart();
     }
 
     public void displayPreparing() {
+        refreshRadar();
+    }
+
+    public void refreshRadar() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
         setButtonDisableOrAllowAll();
         setMuteAllCamerasButtonDisableOrAllow();
@@ -85,8 +100,24 @@ public class RadarController implements Initializable {
         setPositionOnFrameAll();
     }
 
-    public void refreshRadar(ActionEvent event) {
-        displayPreparing();
+    public void refreshThreadStart() {
+        // запуск потока который будет обновлять сцену
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (refreshFlag) {
+                    try {
+                        Thread.sleep(timeToRefreshInSeconds * 1000L);
+                    } catch (InterruptedException e) {
+                        return null;
+                    }
+                    refreshRadar();
+                }
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void moveForward(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
