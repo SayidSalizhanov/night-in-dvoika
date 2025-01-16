@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.players;
 
+import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
@@ -32,44 +33,62 @@ public class Defender {
     public void radarVisible() {
         radarVisibleAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(radarVisibleForDefenderCooldownInSeconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(radarVisibleForDefenderCooldownInSeconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            radarVisibleAbilityStatus = true;
-        }).start();
+                radarVisibleAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void electricShock() {
         GameEngineInstance.getGameEngine().electricShockAttackEntities(electricShockFromDefenderInSeconds);
         electricShockAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(electricShockFromDefenderCooldownInSeconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(electricShockFromDefenderCooldownInSeconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            electricShockAbilityStatus = true;
-        }).start();
+                electricShockAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void paralyze(int seconds) {
         paralyzeStatus = true;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(seconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(seconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            paralyzeStatus = false;
-        }).start();
+                paralyzeStatus = false;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void switchMaskMode() {

@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.entites;
 
+import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
@@ -70,18 +71,23 @@ public abstract class AttackEntity {
 
     public void stop(int seconds) {
         if (!moveAbilityStatus) return; // если сущность уже не может двигаться, то кулдаун заново не начинается
-
         moveAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(seconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(seconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            moveAbilityStatus = true;
-        }).start();
+                moveAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public PositionOnFrame getCurrentPositionOnFrame() {

@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.players;
 
+import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
@@ -35,44 +36,62 @@ public class Attacker {
         GameEngineInstance.getGameEngine().soundBreakAllCameras(soundBreakInSeconds);
         soundBreakAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(soundBreakCooldownInSeconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(soundBreakCooldownInSeconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            soundBreakAbilityStatus = true;
-        }).start();
+                soundBreakAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void setDarknessStatusOnCameras() {
         GameEngineInstance.getGameEngine().breakAllCameras(settingDarknessStatusInSeconds);
         settingDarknessAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(settingDarknessStatusCooldownInSeconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(settingDarknessStatusCooldownInSeconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            settingDarknessAbilityStatus = true;
-        }).start();
+                settingDarknessAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     public void paralyzeDefender() {
         GameEngineInstance.getGameEngine().paralyzeDefender(settingParalysisStatusInSeconds);
         settingParalysisAbilityStatus = false;
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(settingParalysisStatusCooldownInSeconds * 1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(settingParalysisStatusCooldownInSeconds * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            settingParalysisAbilityStatus = true;
-        }).start();
+                settingParalysisAbilityStatus = true;
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 }
