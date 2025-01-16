@@ -1,9 +1,12 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import ru.itis.nightindvoika.entites.AttackEntity;
@@ -53,6 +56,9 @@ public class RadarController implements Initializable {
     Button paralyzeDefenderButton;
     @FXML
     Text textTimer;
+
+    private final Media badButtonSound = new Media(getClass().getResource("/static/sounds/radar/badbutton.mp3").toExternalForm());
+    private final Media pressButtonSound = new Media(getClass().getResource("/static/sounds/error.mp3").toExternalForm());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,16 +112,19 @@ public class RadarController implements Initializable {
     }
 
     public void muteAllCameras(ActionEvent event) {
+        playMediaBadButton();
         attacker.soundBreakAllCameras();
         muteAllCamerasButton.setDisable(true);
     }
 
     public void breakAllCameras(ActionEvent event) {
+        playMediaBadButton();
         attacker.setDarknessStatusOnCameras();
         breakAllCamerasButton.setDisable(true);
     }
 
     public void paralyzeDefender(ActionEvent event) {
+        playMediaBadButton();
         attacker.paralyzeDefender();
         paralyzeDefenderButton.setDisable(true);
     }
@@ -165,5 +174,31 @@ public class RadarController implements Initializable {
     private void setOnActionMoveButtons(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
         moveForwardButton.setOnAction(event -> moveForward(attackEntity, moveForwardButton, moveBackButton));
         moveBackButton.setOnAction(event -> moveBack(attackEntity, moveForwardButton, moveBackButton));
+    }
+
+    private void playMediaBadButton() {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                MediaPlayer mediaPlayer = new MediaPlayer(badButtonSound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+    }
+
+    private void playMediaPressButton() {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                MediaPlayer mediaPlayer = new MediaPlayer(pressButtonSound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 }

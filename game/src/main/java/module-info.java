@@ -10,8 +10,10 @@ module ru.itis.firstjavafxproject {
     opens ru.itis.nightindvoika.controllers to javafx.fxml;
     opens ru.itis.nightindvoika.util to javafx.fxml;
     opens ru.itis.nightindvoika.mainClasses to javafx.fxml;
+    opens ru.itis.nightindvoika.entites to javafx.fxml;
     exports ru.itis.nightindvoika;
     exports ru.itis.nightindvoika.controllers;
     exports ru.itis.nightindvoika.util;
     exports ru.itis.nightindvoika.mainClasses;
+    exports ru.itis.nightindvoika.entites;
 }

@@ -46,6 +46,8 @@ public class GameEngine {
     private int electricShockFromDefenderCooldownInSeconds; // кулдаун: охранник может обездвижить
     private int electricShockFromDefenderInSeconds; // время, на которое охранник может отключить движение всем аниматроникам
 
+    private int entityInOfficeDeathTimeInSeconds; // время которое сущность стоит в офисе перед нападением
+
     private Timer timer;
 
     public GameEngine() {
@@ -69,14 +71,15 @@ public class GameEngine {
         electricShockFromDefenderCooldownInSeconds = 350;
         electricShockFromDefenderInSeconds = 30;
 
+        entityInOfficeDeathTimeInSeconds = 10;
+
         loadDefaultEntities();
         loadDefaultCameras();
 
         // todo
         office = new Office(
                 "/static/images/office",
-                15,
-                attackEntities
+                15
         );
 
         attacker = new Attacker(
@@ -95,16 +98,17 @@ public class GameEngine {
                 electricShockFromDefenderInSeconds
         );
 
-        timer = new Timer(hoursInNight, oneGameHourInSeconds);
+        timer = new Timer(entityInOfficeDeathTimeInSeconds, hoursInNight, oneGameHourInSeconds);
     }
 
     public void startGame() {
-        timer.startTimer();
+        timer.startGameTimer();
     }
 
     public void endGame() {
         // todo что-то интересное при конце игры
-        Platform.runLater(LoadersUtil::loadMainMenu);
+        Platform.runLater(LoadersUtil::loadEndGame);
+        GameEngineInstance.clearDataInEngine();
     }
 
     public void refresh() {

@@ -105,7 +105,7 @@ public class CameraController implements Initializable {
     private void playMediaSoundOnCamera() {
         int num = random.nextInt(3);
 
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
                 MediaPlayer player;
@@ -127,11 +127,11 @@ public class CameraController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 
     private void playMediaSwapCamera() {
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(cameraSwapSound);
@@ -140,11 +140,11 @@ public class CameraController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 
     private void playMediaCloseCameras() {
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(camerasCloseSound);
@@ -153,6 +153,6 @@ public class CameraController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 }

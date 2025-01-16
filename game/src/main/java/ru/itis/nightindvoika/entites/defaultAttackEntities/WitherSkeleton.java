@@ -14,7 +14,7 @@ public class WitherSkeleton extends AttackEntity {
     private boolean chosenSecondPath;
 
     public WitherSkeleton() {
-        super(new int[]{2,4,7,10,14,15}, 15, true, false, true, true);
+        super(new int[]{2,4,7,10,14,15}, 1, true, false, true, true);
         chosenSecondPath = false;
 
         positionsOnFrames = new HashMap<>();
@@ -36,6 +36,8 @@ public class WitherSkeleton extends AttackEntity {
             currentPathIndex++;
             currentPosition = chosenSecondPath ? secondPath[currentPathIndex] : path[currentPathIndex];
             moveCooldown();
+
+            entityInOfficeCheck();
         }
     }
 

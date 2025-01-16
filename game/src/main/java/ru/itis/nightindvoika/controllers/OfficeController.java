@@ -60,14 +60,14 @@ public class OfficeController implements Initializable {
     public void displayPreparing() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
 
-        String fileName = StringCreator.createPathImage(office.getAttackEntities().values().stream().toList(), office.getPosition());
+        String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), office.getPosition());
 
         if (defender.isParalyzeStatus()) {
             backgroundImageView.setImage(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("%s/nomask/%s.png".formatted(office.getSourcePath(), fileName)))
             ));
 
-            office.setHoldMaskStatus(false);
+            defender.setHoldMaskStatus(false);
 
             hideButton(putOnMaskButton);
             hideButton(camerasButton);
@@ -79,7 +79,7 @@ public class OfficeController implements Initializable {
         else {
             text.setText(null);
 
-            if (office.isHoldMaskStatus()) {
+            if (defender.isHoldMaskStatus()) {
                 backgroundImageView.setImage(new Image(
                         Objects.requireNonNull(getClass().getResourceAsStream("%s/mask/%s.png".formatted(office.getSourcePath(), fileName)))
                 ));
@@ -125,10 +125,10 @@ public class OfficeController implements Initializable {
     }
 
     public void switchMaskMode(ActionEvent event) {
-        if (office.isHoldMaskStatus()) playMediaPutDownMask();
+        if (defender.isHoldMaskStatus()) playMediaPutDownMask();
         else playMediaPutOnMask();
 
-        office.switchMaskMode();
+        defender.switchMaskMode();
         displayPreparing();
     }
 
@@ -146,7 +146,7 @@ public class OfficeController implements Initializable {
     }
 
     private void playMediaOpenCameras() {
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(camerasOpenSound);
@@ -155,11 +155,11 @@ public class OfficeController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 
     private void playMediaPutOnMask() {
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(putOnMaskSound);
@@ -168,11 +168,11 @@ public class OfficeController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 
     private void playMediaPutDownMask() {
-        Task<Void> soundTask = new Task<>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(putDownMaskSound);
@@ -181,7 +181,7 @@ public class OfficeController implements Initializable {
             }
         };
 
-        new Thread(soundTask).start();
+        new Thread(task).start();
     }
 
     private void hideButton(Button button) {

@@ -39,6 +39,14 @@ public class LoadersUtil {
         loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/radar.fxml"));
         loaders.put("defenderRadar", loader);
         scenes.put("defenderRadar", new Scene(loader.load()));
+
+        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/endGame.fxml"));
+        loaders.put("endGame", loader);
+        scenes.put("endGame", new Scene(loader.load()));
+
+        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/startGame.fxml"));
+        loaders.put("startGame", loader);
+        scenes.put("startGame", new Scene(loader.load()));
     }
 
     public static void loadMainMenu() {
@@ -84,6 +92,18 @@ public class LoadersUtil {
         radarController.displayPreparing();
 
         Scene scene = scenes.get("radar");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void loadEndGame() {
+        Scene scene = scenes.get("endGame");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void loadStartGame() {
+        Scene scene = scenes.get("startGame");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -16,6 +16,8 @@ public class Defender {
 
     private boolean paralyzeStatus; // true - охранник парализован
 
+    private boolean holdMaskStatus;
+
     public Defender(int radarVisibleForDefenderCooldownInSeconds, int radarVisibleInSeconds, int electricShockFromDefenderCooldownInSeconds, int electricShockFromDefenderInSeconds) {
         this.radarVisibleForDefenderCooldownInSeconds = radarVisibleForDefenderCooldownInSeconds;
         this.radarVisibleInSeconds = radarVisibleInSeconds;
@@ -24,6 +26,7 @@ public class Defender {
         radarVisibleAbilityStatus = true;
         electricShockAbilityStatus = true;
         paralyzeStatus = false;
+        holdMaskStatus = false;
     }
 
     public void radarVisible() {
@@ -67,5 +70,9 @@ public class Defender {
 
             paralyzeStatus = false;
         }).start();
+    }
+
+    public void switchMaskMode() {
+        holdMaskStatus = !holdMaskStatus;
     }
 }

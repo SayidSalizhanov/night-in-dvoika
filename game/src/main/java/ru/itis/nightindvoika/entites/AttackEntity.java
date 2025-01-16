@@ -1,7 +1,10 @@
 package ru.itis.nightindvoika.entites;
 
 import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.PositionOnFrame;
+import ru.itis.nightindvoika.util.Timer;
 
 import java.util.Map;
 
@@ -42,6 +45,8 @@ public abstract class AttackEntity {
             currentPathIndex++;
             currentPosition = path[currentPathIndex];
             moveCooldown();
+
+            entityInOfficeCheck();
         }
     }
 
@@ -64,6 +69,8 @@ public abstract class AttackEntity {
     }
 
     public void stop(int seconds) {
+        if (!moveAbilityStatus) return; // если сущность уже не может двигаться, то кулдаун заново не начинается
+
         moveAbilityStatus = false;
 
         new Thread(() -> {
@@ -79,5 +86,12 @@ public abstract class AttackEntity {
 
     public PositionOnFrame getCurrentPositionOnFrame() {
         return positionsOnFrames.get(currentPosition);
+    }
+
+    protected void entityInOfficeCheck() {
+        if (currentPosition == endPosition) {
+            GameEngine engine = GameEngineInstance.getGameEngine();
+            engine.getTimer().startDeathTimer(this, engine.getDefender());
+        }
     }
 }

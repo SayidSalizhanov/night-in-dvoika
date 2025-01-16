@@ -9,4 +9,8 @@ public class GameEngineInstance {
         }
         return gameEngine;
     }
+
+    public static void clearDataInEngine() {
+        gameEngine = null;
+    }
 }

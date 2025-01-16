@@ -19,9 +19,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         LoadersUtil.loadFxmlLoaders();
         LoadersUtil.setPrimaryStage(stage);
-        GameEngineInstance.getGameEngine().startGame();
 
-        LoadersUtil.loadMainMenu();
+        LoadersUtil.loadStartGame();
     }
 
     public static void main(String[] args) {
