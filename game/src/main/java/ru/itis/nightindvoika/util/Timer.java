@@ -36,7 +36,7 @@ public class Timer {
                     currentHour++;
                 }
 
-                GameEngineInstance.getGameEngine().endGame();
+                GameEngineInstance.getGameEngine().endGame(true);
                 return null;
             }
         };
@@ -58,7 +58,7 @@ public class Timer {
                 }
 
                 if (defender.isHoldMaskStatus() && entity.isMaskDeception()) entity.moveToStart();
-                else GameEngineInstance.getGameEngine().endGame();
+                else GameEngineInstance.getGameEngine().endGame(false);
 
                 return null;
             }

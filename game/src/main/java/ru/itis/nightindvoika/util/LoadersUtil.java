@@ -4,10 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Setter;
-import ru.itis.nightindvoika.controllers.CameraController;
-import ru.itis.nightindvoika.controllers.OfficeController;
-import ru.itis.nightindvoika.controllers.RadarController;
-import ru.itis.nightindvoika.controllers.RadarForDefenderController;
+import ru.itis.nightindvoika.controllers.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -96,7 +93,10 @@ public class LoadersUtil {
         primaryStage.show();
     }
 
-    public static void loadEndGame() {
+    public static void loadEndGame(boolean winStatus) {
+        EndGameController endGameController = loaders.get("endGame").getController();
+        endGameController.displayPreparing(winStatus);
+
         Scene scene = scenes.get("endGame");
         primaryStage.setScene(scene);
         primaryStage.show();

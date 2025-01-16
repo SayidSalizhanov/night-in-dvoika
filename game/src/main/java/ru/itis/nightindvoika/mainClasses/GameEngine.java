@@ -77,7 +77,6 @@ public class GameEngine {
         loadDefaultEntities();
         loadDefaultCameras();
 
-        // todo
         office = new Office(
                 "/static/images/office",
                 15
@@ -106,9 +105,8 @@ public class GameEngine {
         timer.startGameTimer();
     }
 
-    public void endGame() {
-        // todo что-то интересное при конце игры
-        Platform.runLater(LoadersUtil::loadEndGame);
+    public void endGame(boolean defenderWinStatus) {
+        Platform.runLater(() -> LoadersUtil.loadEndGame(defenderWinStatus));
         GameEngineInstance.clearDataInEngine();
         ThreadsUtil.interruptAllThreads();
         ThreadsUtil.clearThreadMaps();
