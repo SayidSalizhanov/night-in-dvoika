@@ -7,26 +7,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="936.0" prefWidth="1497.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.MainMenuController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1152.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="936.0" fitWidth="1498.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../static/images/Main_menu.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="465.0" layoutY="150.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="5.0" text="НОЧЬ В ДВОЙКЕ" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="605.0" layoutY="195.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="5.0" text="НОЧЬ В ДВОЙКЕ" textAlignment="CENTER">
          <font>
-            <Font size="30.0" />
+            <Font size="39.0" />
          </font>
       </Text>
-      <Button fx:id="defenderButton" layoutX="479.0" layoutY="550.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" prefHeight="66.0" prefWidth="201.0" text="Охранник" textAlignment="CENTER">
+      <Button fx:id="defenderButton" layoutX="623.0" layoutY="715.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" prefHeight="82.0" prefWidth="261.0" text="Охранник" textAlignment="CENTER">
          <font>
-            <Font size="30.0" />
+            <Font size="39.0" />
          </font>
       </Button>
-      <Button fx:id="attackerButton" layoutX="480.0" layoutY="460.0" mnemonicParsing="false" onAction="#startFromRadarByAttacker" text="Атакующий" textAlignment="CENTER">
+      <Button fx:id="attackerButton" layoutX="623.0" layoutY="598.0" mnemonicParsing="false" onAction="#startFromRadarByAttacker" text="Атакующий" textAlignment="CENTER">
          <font>
-            <Font size="30.0" />
+            <Font size="39.0" />
          </font>
       </Button>
    </children>

@@ -6,101 +6,101 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cameraPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.CameraController">
+<AnchorPane fx:id="cameraPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="936.0" prefWidth="1498.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.nightindvoika.controllers.CameraController">
    <children>
-      <ImageView fx:id="cameraImageView" fitHeight="720.0" fitWidth="1152.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cameraImageView" fitHeight="936.0" fitWidth="1498.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../static/images/cameras/camera1/pic.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="firstFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="908.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="firstFloorImageView" fitHeight="402.0" fitWidth="299.0" layoutX="1180.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../static/images/1этаж.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="secondFloorImageView" fitHeight="309.0" fitWidth="230.0" layoutX="908.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="secondFloorImageView" fitHeight="402.0" fitWidth="299.0" layoutX="1180.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../static/images/2этаж.png" />
          </image>
       </ImageView>
-      <Button fx:id="camera1" layoutX="1081.0" layoutY="416.0" mnemonicParsing="false" text="C1">
+      <Button fx:id="camera1" layoutX="1405.0" layoutY="541.0" mnemonicParsing="false" text="C1">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera2" layoutX="1039.0" layoutY="605.0" mnemonicParsing="false" text="C2">
+      <Button fx:id="camera2" layoutX="1351.0" layoutY="787.0" mnemonicParsing="false" text="C2">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera3" layoutX="1076.0" layoutY="577.0" mnemonicParsing="false" text="C3">
+      <Button fx:id="camera3" layoutX="1399.0" layoutY="750.0" mnemonicParsing="false" text="C3">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera4" layoutX="1068.0" layoutY="508.0" mnemonicParsing="false" text="C4">
+      <Button fx:id="camera4" layoutX="1388.0" layoutY="660.0" mnemonicParsing="false" text="C4">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera5" layoutX="1085.0" layoutY="484.0" mnemonicParsing="false" text="C5">
+      <Button fx:id="camera5" layoutX="1411.0" layoutY="629.0" mnemonicParsing="false" text="C5">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera6" layoutX="1045.0" layoutY="408.0" mnemonicParsing="false" text="C6">
+      <Button fx:id="camera6" layoutX="1359.0" layoutY="530.0" mnemonicParsing="false" text="C6">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera7" layoutX="1014.0" layoutY="509.0" mnemonicParsing="false" text="C7">
+      <Button fx:id="camera7" layoutX="1318.0" layoutY="662.0" mnemonicParsing="false" text="C7">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera8" layoutX="904.0" layoutY="514.0" mnemonicParsing="false" text="C8">
+      <Button fx:id="camera8" layoutX="1175.0" layoutY="668.0" mnemonicParsing="false" text="C8">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera9" layoutX="926.0" layoutY="536.0" mnemonicParsing="false" text="C9">
+      <Button fx:id="camera9" layoutX="1204.0" layoutY="697.0" mnemonicParsing="false" text="C9">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera10" layoutX="1020.0" layoutY="536.0" mnemonicParsing="false" text="C10">
+      <Button fx:id="camera10" layoutX="1326.0" layoutY="697.0" mnemonicParsing="false" text="C10">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera11" layoutX="1042.0" layoutY="119.0" mnemonicParsing="false" text="C11">
+      <Button fx:id="camera11" layoutX="1355.0" layoutY="155.0" mnemonicParsing="false" text="C11">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera14" layoutX="1013.0" layoutY="119.0" mnemonicParsing="false" text="C14">
+      <Button fx:id="camera14" layoutX="1317.0" layoutY="155.0" mnemonicParsing="false" text="C14">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera12" layoutX="1085.0" layoutY="120.0" mnemonicParsing="false" text="C12">
+      <Button fx:id="camera12" layoutX="1411.0" layoutY="156.0" mnemonicParsing="false" text="C12">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="camera13" layoutX="903.0" layoutY="112.0" mnemonicParsing="false" text="C13">
+      <Button fx:id="camera13" layoutX="1174.0" layoutY="146.0" mnemonicParsing="false" text="C13">
          <font>
-            <Font size="7.0" />
+            <Font size="9.0" />
          </font>
       </Button>
-      <Button fx:id="soundButton" layoutX="793.0" layoutY="662.0" mnemonicParsing="false" onAction="#playSound" text="Звук" textAlignment="CENTER">
+      <Button fx:id="soundButton" layoutX="1031.0" layoutY="861.0" mnemonicParsing="false" onAction="#playSound" text="Звук" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="officeButton" layoutX="30.0" layoutY="662.0" mnemonicParsing="false" onAction="#closeCameras" text="Офис" textAlignment="CENTER">
+      <Button fx:id="officeButton" layoutX="39.0" layoutY="861.0" mnemonicParsing="false" onAction="#closeCameras" text="Офис" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font size="26.0" />
          </font>
       </Button>
    </children>

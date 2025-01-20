@@ -18,14 +18,14 @@ public class WitherSkeleton extends AttackEntity {
         chosenSecondPath = false;
 
         positionsOnFrames = new HashMap<>();
-        positionsOnFrames.put(2, PositionOnFrame.create(346, 613));
-        positionsOnFrames.put(4, PositionOnFrame.create(375, 352));
-        positionsOnFrames.put(7, PositionOnFrame.create(244, 314));
-        positionsOnFrames.put(10, PositionOnFrame.create(280, 477));
-        positionsOnFrames.put(14, PositionOnFrame.create(847, 213));
-        positionsOnFrames.put(9, PositionOnFrame.create(139, 477));
-        positionsOnFrames.put(13, PositionOnFrame.create(648, 301));
-        positionsOnFrames.put(15, PositionOnFrame.create(668, 124));
+        positionsOnFrames.put(2, PositionOnFrame.create(450, 797));
+        positionsOnFrames.put(4, PositionOnFrame.create(488, 458));
+        positionsOnFrames.put(7, PositionOnFrame.create(317, 408));
+        positionsOnFrames.put(10, PositionOnFrame.create(364, 620));
+        positionsOnFrames.put(14, PositionOnFrame.create(1101, 277));
+        positionsOnFrames.put(9, PositionOnFrame.create(181, 620));
+        positionsOnFrames.put(13, PositionOnFrame.create(842, 391));
+        positionsOnFrames.put(15, PositionOnFrame.create(868, 161));
     }
 
     public void moveForward() {
