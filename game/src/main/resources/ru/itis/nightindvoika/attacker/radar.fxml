@@ -24,11 +24,6 @@
       <Circle fx:id="skeletonMark" fill="#c4c4c4" layoutX="480.0" layoutY="50.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
       <Circle fx:id="creeperMark" fill="#0fff00" layoutX="348.0" layoutY="586.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
       <Circle fx:id="zombieMark" fill="#137922" layoutX="494.0" layoutY="148.0" radius="7.0" stroke="RED" strokeType="INSIDE" />
-      <Button fx:id="refreshRadarButton" layoutX="972.0" layoutY="658.0" mnemonicParsing="false" onAction="#refreshRadar" text="Обновить" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <Text fill="WHITE" layoutX="58.0" layoutY="681.0" stroke="#666666" strokeType="OUTSIDE" text="WS" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
@@ -89,7 +84,7 @@
             <Font size="10.0" />
          </font>
       </Button>
-      <Button fx:id="menuButton" layoutX="822.0" layoutY="658.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню" textAlignment="CENTER">
+      <Button fx:id="menuButton" layoutX="1030.0" layoutY="658.0" mnemonicParsing="false" onAction="#backToMenu" text="Меню" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

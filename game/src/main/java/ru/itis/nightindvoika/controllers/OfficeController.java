@@ -44,8 +44,6 @@ public class OfficeController implements Initializable {
     Button radarButton;
     @FXML
     Button electricShockButton;
-    @FXML
-    Button refreshButton;
 
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());

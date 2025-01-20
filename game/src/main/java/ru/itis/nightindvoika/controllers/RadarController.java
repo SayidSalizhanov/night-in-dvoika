@@ -43,8 +43,6 @@ public class RadarController implements Initializable {
     @FXML
     Circle witherSkeletonMark, skeletonMark, zombieMark, creeperMark;
     @FXML
-    Button refreshRadarButton;
-    @FXML
     Button witherSkeletonMoveForwardButton, skeletonMoveForwardButton, zombieMoveForwardButton, creeperMoveForwardButton;
     @FXML
     Button witherSkeletonMoveBackButton, skeletonMoveBackButton, zombieMoveBackButton, creeperMoveBackButton;

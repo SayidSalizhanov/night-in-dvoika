@@ -43,11 +43,6 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="refreshButton" layoutX="31.0" layoutY="93.0" mnemonicParsing="false" onAction="#refreshOffice" text="Обновить">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <Text fx:id="textTimer" fill="WHITE" layoutX="1064.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 AM">
          <font>
             <Font size="20.0" />
