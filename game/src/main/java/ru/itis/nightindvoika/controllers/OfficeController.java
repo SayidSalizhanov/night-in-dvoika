@@ -48,6 +48,8 @@ public class OfficeController implements Initializable {
     private final Media camerasOpenSound = new Media(getClass().getResource("/static/sounds/office/camerasOpenV2.mp3").toExternalForm());
     private final Media putOnMaskSound = new Media(getClass().getResource("/static/sounds/office/putOnMask.mp3").toExternalForm());
     private final Media putDownMaskSound = new Media(getClass().getResource("/static/sounds/office/putDownMask.mp3").toExternalForm());
+    private final Media shockerSound = new Media(getClass().getResource("/static/sounds/office/shocker.mp3").toExternalForm());
+    private final Media openRadarSound = new Media(getClass().getResource("/static/sounds/office/openRadar.mp3").toExternalForm());
 
     @Setter
     private static boolean refreshFlag;
@@ -142,6 +144,8 @@ public class OfficeController implements Initializable {
     }
 
     public void activateRadar(ActionEvent event) {
+        playMediaOpenRadar();
+
         radarButton.setDisable(true);
         defender.radarVisible();
 
@@ -149,6 +153,8 @@ public class OfficeController implements Initializable {
     }
 
     public void activateElectricShock(ActionEvent event) {
+        playMediaShocker();
+
         electricShockButton.setDisable(true);
         defender.electricShock();
 
@@ -203,6 +209,32 @@ public class OfficeController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 MediaPlayer mediaPlayer = new MediaPlayer(putDownMaskSound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+    }
+
+    private void playMediaShocker() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                MediaPlayer mediaPlayer = new MediaPlayer(shockerSound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+    }
+
+    private void playMediaOpenRadar() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                MediaPlayer mediaPlayer = new MediaPlayer(openRadarSound);
                 mediaPlayer.play();
                 return null;
             }

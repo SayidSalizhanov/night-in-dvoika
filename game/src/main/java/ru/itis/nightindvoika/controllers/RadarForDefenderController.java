@@ -3,10 +3,13 @@ package ru.itis.nightindvoika.controllers;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -35,6 +38,8 @@ public class RadarForDefenderController implements Initializable {
     Button backButton;
     @FXML
     Text radarTimeLimitText;
+
+    private final Media closeRadarSound = new Media(getClass().getResource("/static/sounds/office/closeRadar.mp3").toExternalForm());
 
     private Timeline countdownTimeline;
     private int remainingSeconds;
@@ -77,6 +82,7 @@ public class RadarForDefenderController implements Initializable {
     }
 
     public void backToOffice(ActionEvent event) {
+        playMediaCloseRadar();
         if (countdownTimeline.getStatus() != Animation.Status.STOPPED) countdownTimeline.stop();
         LoadersUtil.loadOffice();
     }
@@ -98,5 +104,18 @@ public class RadarForDefenderController implements Initializable {
 
         countdownTimeline.setCycleCount(remainingSeconds);
         countdownTimeline.play();
+    }
+
+    private void playMediaCloseRadar() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                MediaPlayer mediaPlayer = new MediaPlayer(closeRadarSound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 }

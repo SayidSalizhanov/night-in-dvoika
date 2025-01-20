@@ -59,6 +59,7 @@ public class RadarController implements Initializable {
 
     private final Media badButtonSound = new Media(getClass().getResource("/static/sounds/radar/badbutton.mp3").toExternalForm());
     private final Media pressButtonSound = new Media(getClass().getResource("/static/sounds/error.mp3").toExternalForm());
+    private final Media schelchokSound = new Media(getClass().getResource("/static/sounds/schelchok.mp3").toExternalForm());
 
     @Setter
     private static boolean refreshFlag;
@@ -119,6 +120,7 @@ public class RadarController implements Initializable {
     }
 
     public void moveForward(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
+        playMediaPressButton();
         attackEntity.moveForward();
 
         moveForwardButton.setDisable(true);
@@ -128,6 +130,7 @@ public class RadarController implements Initializable {
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
+        playMediaPressButton();
         attackEntity.moveBack();
 
         moveForwardButton.setDisable(true);
@@ -222,7 +225,7 @@ public class RadarController implements Initializable {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                MediaPlayer mediaPlayer = new MediaPlayer(pressButtonSound);
+                MediaPlayer mediaPlayer = new MediaPlayer(schelchokSound);
                 mediaPlayer.play();
                 return null;
             }
