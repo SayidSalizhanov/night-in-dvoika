@@ -1,9 +1,10 @@
 package ru.itis.nightindvoika.util;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThreadsUtil {
+public class ThreadsUtil implements Serializable {
     public static final Map<String, Thread> attackEntitiesThreads = new HashMap<>();
     public static final Map<String, Thread> camerasThreads = new HashMap<>();
     public static final Map<String, Thread> attackerThreads = new HashMap<>();

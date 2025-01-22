@@ -18,10 +18,11 @@ import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Data
-public class GameEngine {
+public class GameEngine implements Serializable {
 
     private Attacker attacker;
     private Defender defender;
@@ -204,5 +205,12 @@ public class GameEngine {
         RadarController.setRefreshFlag(false);
         OfficeController.setRefreshFlag(false);
         CameraController.setRefreshFlag(false);
+    }
+
+    public void updateFromGameData(GameData gameData) {
+        attacker = gameData.attacker;
+        defender = gameData.defender;
+        attackEntities = gameData.attackEntities;
+        cameras = gameData.cameras;
     }
 }

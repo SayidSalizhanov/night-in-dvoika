@@ -9,10 +9,11 @@ import ru.itis.nightindvoika.util.PositionOnFrame;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Data
-public abstract class AttackEntity {
+public abstract class AttackEntity implements Serializable {
     protected int startPosition;
     protected int endPosition;
     protected int currentPosition;

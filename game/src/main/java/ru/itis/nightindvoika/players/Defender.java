@@ -5,8 +5,10 @@ import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
+import java.io.Serializable;
+
 @Data
-public class Defender {
+public class Defender implements Serializable {
 
     private int radarVisibleForDefenderCooldownInSeconds;
     private int radarVisibleInSeconds;

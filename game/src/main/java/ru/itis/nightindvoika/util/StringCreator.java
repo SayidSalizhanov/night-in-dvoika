@@ -2,10 +2,11 @@ package ru.itis.nightindvoika.util;
 
 import ru.itis.nightindvoika.entites.AttackEntity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringCreator {
+public class StringCreator implements Serializable {
 
     public static String createPathImage(List<AttackEntity> attackEntities, int position) {
         StringBuilder imageName = new StringBuilder("pic");

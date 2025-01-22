@@ -6,8 +6,10 @@ import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 
+import java.io.Serializable;
+
 @Data
-public class Timer {
+public class Timer implements Serializable {
 
     private int entityInOfficeDeathTimeInSeconds; // время которое сущность будет назодится в оффисе прежде
 

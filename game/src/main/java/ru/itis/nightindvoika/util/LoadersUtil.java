@@ -7,10 +7,11 @@ import lombok.Setter;
 import ru.itis.nightindvoika.controllers.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoadersUtil {
+public class LoadersUtil implements Serializable {
     public static final Map<String, FXMLLoader> loaders = new HashMap<>();
     public static final Map<String, Scene> scenes = new HashMap<>();
     @Setter

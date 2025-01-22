@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <name>NightInDvoika</name>
     <modules>
-        <module>net</module>
         <module>game</module>
     </modules>
 

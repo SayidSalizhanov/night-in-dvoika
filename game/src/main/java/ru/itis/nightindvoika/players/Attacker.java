@@ -5,8 +5,10 @@ import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
+import java.io.Serializable;
+
 @Data
-public class Attacker {
+public class Attacker implements Serializable {
 
     private int soundBreakCooldownInSeconds; // кулдаун: у охранника отключится возможность звука
     private int soundBreakInSeconds; // время, на которое у охранника отключится возможность звука

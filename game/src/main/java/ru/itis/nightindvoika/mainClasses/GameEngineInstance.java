@@ -1,6 +1,8 @@
 package ru.itis.nightindvoika.mainClasses;
 
-public class GameEngineInstance {
+import java.io.Serializable;
+
+public class GameEngineInstance implements Serializable {
     private static GameEngine gameEngine;
 
     public static GameEngine getGameEngine() {

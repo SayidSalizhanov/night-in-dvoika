@@ -5,8 +5,10 @@ import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
+import java.io.Serializable;
+
 @Data
-public class Camera {
+public class Camera implements Serializable {
 
     private String sourcePath;
     private int position;
