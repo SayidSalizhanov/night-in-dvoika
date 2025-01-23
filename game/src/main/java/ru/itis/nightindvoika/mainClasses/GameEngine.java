@@ -24,6 +24,8 @@ import java.util.*;
 @Data
 public class GameEngine implements Serializable {
 
+    private boolean update; // исключительно для сокетов
+
     private Attacker attacker;
     private Defender defender;
 
@@ -207,10 +209,10 @@ public class GameEngine implements Serializable {
         CameraController.setRefreshFlag(false);
     }
 
-    public void updateFromGameData(GameData gameData) {
-        attacker = gameData.attacker;
-        defender = gameData.defender;
-        attackEntities = gameData.attackEntities;
-        cameras = gameData.cameras;
+    public synchronized void updateFromGameData(GameData gameData) {
+        attacker = gameData.getAttacker();
+        defender = gameData.getDefender();
+        attackEntities = gameData.getAttackEntities();
+        cameras = gameData.getCameras();
     }
 }

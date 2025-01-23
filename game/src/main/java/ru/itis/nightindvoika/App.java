@@ -1,19 +1,15 @@
 package ru.itis.nightindvoika;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.LoadersUtil;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class App extends Application {
+    private static final GameEngine gameEngine = GameEngineInstance.getGameEngine();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -25,5 +21,9 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static GameEngine getEngine() {
+        return gameEngine;
     }
 }

@@ -21,9 +21,10 @@ public class Server {
 
     public void start() {
         System.out.println("Server starting...");
+        gameData.setUpdate(true);
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            while (true) {
+            while (!serverSocket.isClosed()) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connected: " + clientSocket.getInetAddress());
 
@@ -36,9 +37,9 @@ public class Server {
         }
     }
 
-    public synchronized void broadcast(GameData data) {
+    public synchronized void broadcast() {
         for (ClientHandler client : clients) {
-            client.sendGameData(data);
+            client.sendGameData(gameData);
         }
     }
 }

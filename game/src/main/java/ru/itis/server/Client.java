@@ -13,21 +13,20 @@ import java.net.Socket;
 public class Client {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 12345;
-    private GameEngine gameEngine;
+    private static GameEngine gameEngine;
 
     public Client() {
-        this.gameEngine = GameEngineInstance.getGameEngine();
         start();
     }
 
     public static void main(String[] args) {
         new Thread(() -> {
-            new Client();
-        }).start();
-
-        new Thread(() -> {
             App.main(new String[]{});
         }).start();
+
+        gameEngine = App.getEngine();
+
+        new Client();
     }
 
     public void start() {
@@ -38,20 +37,33 @@ public class Client {
             // Отправка текущего состояния GameEngine
             new Thread(() -> {
                 try {
-                    while (true) {
-                        out.writeObject(gameEngine);
-                        out.flush();
-                        Thread.sleep(1000); // Отправляем данные каждые 1 секунду
+                    while (socket.isConnected()) {
+
+                        System.out.println(gameEngine.getDefender().isParalyzeStatus());
+                        synchronized (gameEngine) {
+                            out.writeObject(gameEngine);
+                            out.flush();
+                            out.reset();
+                        }
+                        Thread.sleep(1000); // Отправляем данные каждую секунду
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }).start();
 
-            while (true) {
+            // прием data от сервера
+            while (socket.isConnected()) {
                 GameData data = (GameData) in.readObject();
-                System.out.println("Received GameData update from server.");
-                gameEngine.updateFromGameData(data);
+
+                if (data != null && data.isUpdate()) {
+
+                    System.out.println("----------");
+                    System.out.println("Received GameData update from server.");
+                    System.out.println("----------");
+
+                    gameEngine.updateFromGameData(data);
+                }
             }
 
         } catch (IOException | ClassNotFoundException e) {
