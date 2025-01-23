@@ -28,11 +28,7 @@ public class ClientHandler implements Runnable {
                 GameEngine engine = (GameEngine) in.readObject();
 
                 System.out.println("----------");
-
                 System.out.println("Received GameEngine from client.");
-                System.out.println(engine.getDefender().isParalyzeStatus());
-                if (server.getGameData().getAttacker() != null) System.out.println(server.getGameData().getDefender().isParalyzeStatus());
-
                 System.out.println("----------");
 
                 synchronized (server.getGameData()) {
@@ -56,6 +52,7 @@ public class ClientHandler implements Runnable {
         try {
             out.writeObject(data);
             out.flush();
+            out.reset();
         } catch (IOException e) {
             e.printStackTrace();
         }

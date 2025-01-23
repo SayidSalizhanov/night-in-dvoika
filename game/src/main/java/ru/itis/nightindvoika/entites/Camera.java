@@ -38,6 +38,8 @@ public class Camera implements Serializable {
 
         soundPlayAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -49,6 +51,9 @@ public class Camera implements Serializable {
                 }
 
                 soundPlayAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -64,6 +69,8 @@ public class Camera implements Serializable {
 
         darknessStatus = true;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -75,6 +82,9 @@ public class Camera implements Serializable {
                 }
 
                 darknessStatus = false;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };

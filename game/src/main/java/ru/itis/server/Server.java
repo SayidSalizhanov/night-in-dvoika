@@ -21,7 +21,6 @@ public class Server {
 
     public void start() {
         System.out.println("Server starting...");
-        gameData.setUpdate(true);
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (!serverSocket.isClosed()) {

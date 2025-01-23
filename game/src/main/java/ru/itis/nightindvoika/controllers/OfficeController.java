@@ -135,6 +135,8 @@ public class OfficeController implements Initializable {
                         return null;
                     }
                     refreshOffice();
+
+                    System.out.println(defender.isParalyzeStatus() + " from controller");
                 }
                 return null;
             }

@@ -39,6 +39,8 @@ public class Attacker implements Serializable {
         GameEngineInstance.getGameEngine().soundBreakAllCameras(soundBreakInSeconds);
         soundBreakAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -50,6 +52,9 @@ public class Attacker implements Serializable {
                 }
 
                 soundBreakAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -64,6 +69,8 @@ public class Attacker implements Serializable {
         GameEngineInstance.getGameEngine().breakAllCameras(settingDarknessStatusInSeconds);
         settingDarknessAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -75,6 +82,9 @@ public class Attacker implements Serializable {
                 }
 
                 settingDarknessAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -89,6 +99,8 @@ public class Attacker implements Serializable {
         GameEngineInstance.getGameEngine().paralyzeDefender(settingParalysisStatusInSeconds);
         settingParalysisAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -100,6 +112,9 @@ public class Attacker implements Serializable {
                 }
 
                 settingParalysisAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };

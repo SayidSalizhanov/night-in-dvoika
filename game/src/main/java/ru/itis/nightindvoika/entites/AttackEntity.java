@@ -76,6 +76,8 @@ public abstract class AttackEntity implements Serializable {
         if (!moveAbilityStatus) return; // если сущность уже не может двигаться, то кулдаун заново не начинается
         moveAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -87,6 +89,9 @@ public abstract class AttackEntity implements Serializable {
                 }
 
                 moveAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };

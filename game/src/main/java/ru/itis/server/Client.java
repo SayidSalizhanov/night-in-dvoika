@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.jar.JarOutputStream;
 
 public class Client {
     private static final String SERVER_ADDRESS = "localhost";
@@ -39,13 +40,15 @@ public class Client {
                 try {
                     while (socket.isConnected()) {
 
-                        System.out.println(gameEngine.getDefender().isParalyzeStatus());
-                        synchronized (gameEngine) {
-                            out.writeObject(gameEngine);
-                            out.flush();
-                            out.reset();
+                        if (gameEngine.isUpdate()) { // если ничего нового, то и посылать серверу ничего не будем
+                            synchronized (gameEngine) {
+                                out.writeObject(gameEngine);
+                                out.flush();
+                                out.reset();
+                                gameEngine.setUpdate(false);
+                            }
                         }
-                        Thread.sleep(1000); // Отправляем данные каждую секунду
+                        Thread.sleep(1000); // интервал - секунда
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
@@ -56,14 +59,11 @@ public class Client {
             while (socket.isConnected()) {
                 GameData data = (GameData) in.readObject();
 
-                if (data != null && data.isUpdate()) {
+                System.out.println("----------");
+                System.out.println("Received GameData from server.");
+                System.out.println("----------");
 
-                    System.out.println("----------");
-                    System.out.println("Received GameData update from server.");
-                    System.out.println("----------");
-
-                    gameEngine.updateFromGameData(data);
-                }
+                gameEngine.updateFromGameData(data);
             }
 
         } catch (IOException | ClassNotFoundException e) {

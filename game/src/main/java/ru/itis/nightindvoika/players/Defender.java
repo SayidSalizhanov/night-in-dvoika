@@ -36,6 +36,8 @@ public class Defender implements Serializable {
     public void radarVisible() {
         radarVisibleAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -47,6 +49,9 @@ public class Defender implements Serializable {
                 }
 
                 radarVisibleAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -61,6 +66,8 @@ public class Defender implements Serializable {
         GameEngineInstance.getGameEngine().electricShockAttackEntities(electricShockFromDefenderInSeconds);
         electricShockAbilityStatus = false;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -72,6 +79,9 @@ public class Defender implements Serializable {
                 }
 
                 electricShockAbilityStatus = true;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -85,6 +95,8 @@ public class Defender implements Serializable {
     public void paralyze(int seconds) {
         paralyzeStatus = true;
 
+        GameEngineInstance.getGameEngine().setUpdate(true);
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -96,6 +108,9 @@ public class Defender implements Serializable {
                 }
 
                 paralyzeStatus = false;
+
+                GameEngineInstance.getGameEngine().setUpdate(true);
+
                 return null;
             }
         };
@@ -108,5 +123,7 @@ public class Defender implements Serializable {
 
     public void switchMaskMode() {
         holdMaskStatus = !holdMaskStatus;
+
+        GameEngineInstance.getGameEngine().setUpdate(true);
     }
 }
