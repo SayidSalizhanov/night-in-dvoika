@@ -159,6 +159,8 @@ public class RadarController implements Initializable {
         playMediaBadButton();
         attacker.paralyzeDefender();
         paralyzeDefenderButton.setDisable(true);
+
+        GameEngineInstance.getGameEngine().setUpdate(true);
     }
 
     private void setMuteAllCamerasButtonDisableOrAllow() {

@@ -95,8 +95,6 @@ public class Defender implements Serializable {
     public void paralyze(int seconds) {
         paralyzeStatus = true;
 
-        GameEngineInstance.getGameEngine().setUpdate(true);
-
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -108,8 +106,6 @@ public class Defender implements Serializable {
                 }
 
                 paralyzeStatus = false;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
 
                 return null;
             }
