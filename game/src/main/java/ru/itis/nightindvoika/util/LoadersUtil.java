@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Setter;
 import ru.itis.nightindvoika.controllers.*;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,51 +13,60 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoadersUtil implements Serializable {
-    public static final Map<String, FXMLLoader> loaders = new HashMap<>();
-    public static final Map<String, Scene> scenes = new HashMap<>();
     @Setter
-    public static Stage primaryStage;
+    public GameEngine gameEngine;
+    @Setter
+    public Stage primaryStage;
 
-    public static void loadFxmlLoaders() throws IOException {
-        FXMLLoader loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/main_menu.fxml"));
+    public final Map<String, FXMLLoader> loaders = new HashMap<>();
+    public final Map<String, Scene> scenes = new HashMap<>();
+
+    public void loadFxmlLoaders() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/main_menu.fxml"));
         loaders.put("mainMenu", loader);
         scenes.put("mainMenu", new Scene(loader.load()));
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/office.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/defender/office.fxml"));
         loaders.put("office", loader);
         scenes.put("office", new Scene(loader.load()));
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/camera.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/defender/camera.fxml"));
         loaders.put("camera", loader);
         scenes.put("camera", new Scene(loader.load()));
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/attacker/radar.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/attacker/radar.fxml"));
         loaders.put("radar", loader);
         scenes.put("radar", new Scene(loader.load()));
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/defender/radar.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/defender/radar.fxml"));
         loaders.put("defenderRadar", loader);
         scenes.put("defenderRadar", new Scene(loader.load()));
 
-        loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/endGame.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/endGame.fxml"));
         loaders.put("endGame", loader);
         scenes.put("endGame", new Scene(loader.load()));
     }
 
-    public static void loadFXMLLoaderStartGame() throws IOException {
-        FXMLLoader loader = new FXMLLoader(LoadersUtil.class.getResource("/ru/itis/nightindvoika/startGame.fxml"));
+    public void loadFXMLLoaderStartGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/startGame.fxml"));
         loaders.put("startGame", loader);
         scenes.put("startGame", new Scene(loader.load()));
     }
 
-    public static void loadMainMenu() {
+    public void loadMainMenu() {
+        MainMenuController mainMenuController = loaders.get("mainMenu").getController();
+        mainMenuController.setLoadersUtil(this);
+        mainMenuController.setGameEngine(gameEngine);
+
         Scene scene = scenes.get("mainMenu");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public static void loadRadarForDefender() {
+    public void loadRadarForDefender() {
         RadarForDefenderController radarForDefenderController = loaders.get("defenderRadar").getController();
+        radarForDefenderController.setGameEngine(gameEngine);
+        radarForDefenderController.setLoadersUtil(this);
         radarForDefenderController.displayPreparing();
 
         Scene scene = scenes.get("defenderRadar");
@@ -64,12 +74,14 @@ public class LoadersUtil implements Serializable {
         primaryStage.show();
     }
 
-    public static void loadOffice() {
+    public void loadOffice() {
         loadOffice(1);
     }
 
-    public static void loadOffice(int nextCameraViewPosition) {
+    public void loadOffice(int nextCameraViewPosition) {
         OfficeController officeController = loaders.get("office").getController();
+        officeController.setGameEngine(gameEngine);
+        officeController.setLoadersUtil(this);
         officeController.setNextCameraViewPosition(nextCameraViewPosition);
         officeController.displayPreparing();
 
@@ -78,8 +90,10 @@ public class LoadersUtil implements Serializable {
         primaryStage.show();
     }
 
-    public static void loadCamera(int nextCameraViewPosition) {
+    public void loadCamera(int nextCameraViewPosition) {
         CameraController cameraController = loaders.get("camera").getController();
+        cameraController.setGameEngine(gameEngine);
+        cameraController.setLoadersUtil(this);
         cameraController.displayPreparing(nextCameraViewPosition);
 
         Scene scene = scenes.get("camera");
@@ -87,8 +101,10 @@ public class LoadersUtil implements Serializable {
         primaryStage.show();
     }
 
-    public static void loadRadar() {
+    public void loadRadar() {
         RadarController radarController = loaders.get("radar").getController();
+        radarController.setGameEngine(gameEngine);
+        radarController.setLoadersUtil(this);
         radarController.displayPreparing();
 
         Scene scene = scenes.get("radar");
@@ -96,8 +112,10 @@ public class LoadersUtil implements Serializable {
         primaryStage.show();
     }
 
-    public static void loadEndGame(boolean winStatus) {
+    public void loadEndGame(boolean winStatus) {
         EndGameController endGameController = loaders.get("endGame").getController();
+        endGameController.setLoadersUtil(this);
+        endGameController.setGameEngine(gameEngine);
         endGameController.displayPreparing(winStatus);
 
         Scene scene = scenes.get("endGame");
@@ -105,7 +123,11 @@ public class LoadersUtil implements Serializable {
         primaryStage.show();
     }
 
-    public static void loadStartGame() {
+    public void loadStartGame() {
+        StartGameController startGameController = loaders.get("startGame").getController();
+        startGameController.setLoadersUtil(this);
+        startGameController.setGameEngine(gameEngine);
+
         Scene scene = scenes.get("startGame");
         primaryStage.setScene(scene);
         primaryStage.show();

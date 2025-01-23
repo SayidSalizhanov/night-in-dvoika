@@ -7,9 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.util.LoadersUtil;
 
+@Data
 public class EndGameController {
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
+
     @FXML
     Button menuButton;
     @FXML
@@ -33,7 +39,7 @@ public class EndGameController {
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();
         }
-        LoadersUtil.loadStartGame();
+        loadersUtil.loadStartGame();
     }
 
     private void playMediaEndGame(Media media) {

@@ -3,13 +3,13 @@ package ru.itis.nightindvoika.util;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.entites.AttackEntity;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.players.Defender;
 
-import java.io.Serializable;
-
 @Data
-public class Timer implements Serializable {
+public class Timer {
+    private GameEngine gameEngine;
+    private ThreadsUtil threadsUtil;
 
     private int entityInOfficeDeathTimeInSeconds; // время которое сущность будет назодится в оффисе прежде
 
@@ -17,10 +17,11 @@ public class Timer implements Serializable {
     private int secondsInGameHour;
     public static int currentHour;
 
-    public Timer(int entityInOfficeDeathTimeInSeconds, int hoursInNight, int secondsInGameHour) {
+    public Timer(int entityInOfficeDeathTimeInSeconds, int hoursInNight, int secondsInGameHour, ThreadsUtil threadsUtil) {
         this.entityInOfficeDeathTimeInSeconds = entityInOfficeDeathTimeInSeconds;
         this.hoursInNight = hoursInNight;
         this.secondsInGameHour = secondsInGameHour;
+        this.threadsUtil = threadsUtil;
         currentHour = 0;
     }
 
@@ -38,7 +39,7 @@ public class Timer implements Serializable {
                     currentHour++;
                 }
 
-                GameEngineInstance.getGameEngine().endGame(true);
+                gameEngine.endGame(true);
                 return null;
             }
         };
@@ -46,7 +47,7 @@ public class Timer implements Serializable {
         Thread t = new Thread(timerTask);
         t.start();
 
-        ThreadsUtil.timerThreads.put("startGameTimerThread", t);
+        threadsUtil.timerThreads.put("startGameTimerThread", t);
     }
 
     public void startDeathTimer(AttackEntity entity, Defender defender) {
@@ -60,7 +61,7 @@ public class Timer implements Serializable {
                 }
 
                 if (defender.isHoldMaskStatus() && entity.isMaskDeception()) entity.moveToStart();
-                else GameEngineInstance.getGameEngine().endGame(false);
+                else gameEngine.endGame(false);
 
                 return null;
             }
@@ -69,6 +70,6 @@ public class Timer implements Serializable {
         Thread t = new Thread(timerTask);
         t.start();
 
-        ThreadsUtil.timerThreads.put("startDeathTimerThread", t);
+        threadsUtil.timerThreads.put("startDeathTimerThread", t);
     }
 }

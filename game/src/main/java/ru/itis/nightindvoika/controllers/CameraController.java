@@ -9,8 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import lombok.Data;
 import lombok.Setter;
 import ru.itis.nightindvoika.entites.Camera;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.RandomSingleton;
@@ -20,7 +22,11 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
+@Data
 public class CameraController implements Initializable {
+
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
 
     private final Random random = RandomSingleton.getInstance();
 
@@ -45,12 +51,18 @@ public class CameraController implements Initializable {
     private final Media cameraHahaSound = new Media(getClass().getResource("/static/sounds/cameras/camera/haha.mp3").toExternalForm());
 
     @Setter
-    private static boolean refreshFlag;
+    private static boolean refreshFlag; // todo убрать static
     private int timeToRefreshInSeconds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cameras = GameEngineInstance.getGameEngine().getCameras();
+        //
+    }
+
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+
+        cameras = gameEngine.getCameras();
         currentViewPosition = 1;
 
         // setOnAction для каждой камеры с помощью рефлексии
@@ -68,7 +80,7 @@ public class CameraController implements Initializable {
             }
         }
 
-        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+        timeToRefreshInSeconds = gameEngine.getTimeToRefreshInSeconds();
         refreshFlag = true;
 
         refreshThreadStart();
@@ -91,7 +103,7 @@ public class CameraController implements Initializable {
             ));
         }
         else {
-            String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), currentViewPosition);
+            String fileName = StringCreator.createPathImage(gameEngine.getAttackEntities().values().stream().toList(), currentViewPosition);
 
             cameraImageView.setImage(new Image(
                     Objects.requireNonNull(getClass().getResourceAsStream("%s/%s.png".formatted(camera.getSourcePath(), fileName)))
@@ -124,7 +136,7 @@ public class CameraController implements Initializable {
     public void closeCameras(ActionEvent event) {
         playMediaCloseCameras();
 
-        LoadersUtil.loadOffice(currentViewPosition);
+        loadersUtil.loadOffice(currentViewPosition);
     }
 
     public void playSound() {

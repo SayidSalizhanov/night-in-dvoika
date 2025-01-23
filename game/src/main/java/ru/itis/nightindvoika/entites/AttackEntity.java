@@ -14,6 +14,9 @@ import java.util.Map;
 
 @Data
 public abstract class AttackEntity implements Serializable {
+    protected GameEngine gameEngine;
+    protected transient ThreadsUtil threadsUtil;
+
     protected int startPosition;
     protected int endPosition;
     protected int currentPosition;
@@ -76,8 +79,6 @@ public abstract class AttackEntity implements Serializable {
         if (!moveAbilityStatus) return; // если сущность уже не может двигаться, то кулдаун заново не начинается
         moveAbilityStatus = false;
 
-        GameEngineInstance.getGameEngine().setUpdate(true);
-
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -90,8 +91,6 @@ public abstract class AttackEntity implements Serializable {
 
                 moveAbilityStatus = true;
 
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -99,7 +98,7 @@ public abstract class AttackEntity implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.attackerThreads.put("stopThread", t);
+        threadsUtil.attackerThreads.put("stopThread", t);
     }
 
     public PositionOnFrame getCurrentPositionOnFrame() {
@@ -108,8 +107,7 @@ public abstract class AttackEntity implements Serializable {
 
     protected void entityInOfficeCheck() {
         if (currentPosition == endPosition) {
-            GameEngine engine = GameEngineInstance.getGameEngine();
-            engine.getTimer().startDeathTimer(this, engine.getDefender());
+            gameEngine.getTimer().startDeathTimer(this, gameEngine.getDefender());
         }
     }
 }

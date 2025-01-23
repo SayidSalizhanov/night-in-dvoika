@@ -1,7 +1,8 @@
 package ru.itis.nightindvoika.mainClasses;
 
 import javafx.application.Platform;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import ru.itis.nightindvoika.controllers.CameraController;
 import ru.itis.nightindvoika.controllers.OfficeController;
 import ru.itis.nightindvoika.controllers.RadarController;
@@ -21,8 +22,12 @@ import ru.itis.nightindvoika.util.Timer;
 import java.io.Serializable;
 import java.util.*;
 
-@Data
+//@Data
+@Setter
+@Getter
 public class GameEngine implements Serializable {
+    private transient LoadersUtil loadersUtil;
+    private transient ThreadsUtil threadsUtil;
 
     private boolean update; // исключительно для сокетов
 
@@ -55,7 +60,7 @@ public class GameEngine implements Serializable {
 
     private int entityInOfficeDeathTimeInSeconds; // время которое сущность стоит в офисе перед нападением
 
-    private Timer timer;
+    private transient Timer timer;
     private int timeToRefreshInSeconds; // через сколько секунд сцена будет обновляться
 
     public GameEngine() {
@@ -81,6 +86,10 @@ public class GameEngine implements Serializable {
 
         entityInOfficeDeathTimeInSeconds = 10;
 
+        timeToRefreshInSeconds = 1;
+    }
+
+    public void setEntitiesAndUtils() {
         loadDefaultEntities();
         loadDefaultCameras();
 
@@ -97,6 +106,8 @@ public class GameEngine implements Serializable {
                 paralysisCooldownInSeconds,
                 paralysisInSeconds
         );
+        attacker.setGameEngine(this);
+        attacker.setThreadsUtil(threadsUtil);
 
         defender = new Defender(
                 radarVisibleForDefenderCooldownInSeconds,
@@ -104,10 +115,11 @@ public class GameEngine implements Serializable {
                 electricShockFromDefenderCooldownInSeconds,
                 electricShockFromDefenderInSeconds
         );
+        defender.setGameEngine(this);
+        defender.setThreadsUtil(threadsUtil);
 
-        timer = new Timer(entityInOfficeDeathTimeInSeconds, hoursInNight, oneGameHourInSeconds);
-
-        timeToRefreshInSeconds = 1;
+        timer = new Timer(entityInOfficeDeathTimeInSeconds, hoursInNight, oneGameHourInSeconds, threadsUtil);
+        timer.setGameEngine(this);
     }
 
     public void startGame() {
@@ -115,10 +127,10 @@ public class GameEngine implements Serializable {
     }
 
     public void endGame(boolean defenderWinStatus) {
-        Platform.runLater(() -> LoadersUtil.loadEndGame(defenderWinStatus));
+        Platform.runLater(() -> loadersUtil.loadEndGame(defenderWinStatus));
         GameEngineInstance.clearDataInEngine();
-        ThreadsUtil.interruptAllThreads();
-        ThreadsUtil.clearThreadMaps();
+        threadsUtil.interruptAllThreads();
+        threadsUtil.clearThreadMaps();
         stopRefreshOnControllers();
     }
 
@@ -181,23 +193,41 @@ public class GameEngine implements Serializable {
     private void loadDefaultEntities() {
         attackEntities = new HashMap<>(4);
 
-        attackEntities.put("witherSkeleton", new WitherSkeleton());
-        attackEntities.put("skeleton", new Skeleton());
-        attackEntities.put("zombie", new Zombie());
-        attackEntities.put("creeper", new Creeper());
+        WitherSkeleton witherSkeleton = new WitherSkeleton();
+        witherSkeleton.setGameEngine(this);
+        witherSkeleton.setThreadsUtil(threadsUtil);
+
+        Skeleton skeleton = new Skeleton();
+        skeleton.setGameEngine(this);
+        skeleton.setThreadsUtil(threadsUtil);
+
+        Zombie zombie = new Zombie();
+        zombie.setGameEngine(this);
+        zombie.setThreadsUtil(threadsUtil);
+
+        Creeper creeper = new Creeper();
+        creeper.setGameEngine(this);
+        creeper.setThreadsUtil(threadsUtil);
+
+        attackEntities.put("witherSkeleton", witherSkeleton);
+        attackEntities.put("skeleton", skeleton);
+        attackEntities.put("zombie", zombie);
+        attackEntities.put("creeper", creeper);
     }
 
     private void loadDefaultCameras() {
         cameras = new ArrayList<>(14);
 
         for (int i = 1; i <= 14; i++) {
-            cameras.add(
-                    new Camera(
-                            "/static/images/cameras/camera%d".formatted(i),
-                            i,
-                            soundBreakDefaultOneCameraCooldownInSeconds
-                    )
+            Camera camera = new Camera(
+                    "/static/images/cameras/camera%d".formatted(i),
+                    i,
+                    soundBreakDefaultOneCameraCooldownInSeconds
             );
+            camera.setGameEngine(this);
+            camera.setThreadsUtil(threadsUtil);
+
+            cameras.add(camera);
         }
 
         cameras.sort(Comparator.comparingInt(Camera::getPosition));

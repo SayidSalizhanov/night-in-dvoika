@@ -1,5 +1,7 @@
 package ru.itis.server;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import ru.itis.nightindvoika.App;
 import ru.itis.nightindvoika.mainClasses.GameData;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
@@ -12,22 +14,32 @@ import java.net.Socket;
 import java.util.jar.JarOutputStream;
 
 public class Client {
+//    private static final String SERVER_ADDRESS = "26.232.203.43";
     private static final String SERVER_ADDRESS = "localhost";
-    private static final int SERVER_PORT = 12345;
-    private static GameEngine gameEngine;
+    private static final int SERVER_PORT = 443;
+    private GameEngine gameEngine;
 
-    public Client() {
+    public Client(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+        System.out.println(gameEngine);
         start();
     }
 
     public static void main(String[] args) {
+        GameEngine gameEngine = new GameEngine();
+        App app = new App(gameEngine);
+
         new Thread(() -> {
-            App.main(new String[]{});
+            Platform.startup(() -> {
+                try {
+                    app.start(new Stage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }).start();
 
-        gameEngine = App.getEngine();
-
-        new Client();
+        new Client(gameEngine);
     }
 
     public void start() {

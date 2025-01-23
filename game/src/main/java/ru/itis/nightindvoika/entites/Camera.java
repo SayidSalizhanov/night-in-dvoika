@@ -2,6 +2,7 @@ package ru.itis.nightindvoika.entites;
 
 import javafx.concurrent.Task;
 import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
@@ -9,6 +10,8 @@ import java.io.Serializable;
 
 @Data
 public class Camera implements Serializable {
+    private GameEngine gameEngine;
+    private transient ThreadsUtil threadsUtil;
 
     private String sourcePath;
     private int position;
@@ -28,7 +31,7 @@ public class Camera implements Serializable {
     }
 
     public void playSound() {
-        GameEngineInstance.getGameEngine().soundOnCamera(position);
+        gameEngine.soundOnCamera(position);
         soundBreak(playSoundCooldownInSeconds);
     }
 
@@ -37,8 +40,6 @@ public class Camera implements Serializable {
         if (!soundPlayAbilityStatus) return; // если у камеры уже нет возможности вопроизводить звук, то новый поток не запускается
 
         soundPlayAbilityStatus = false;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -51,9 +52,6 @@ public class Camera implements Serializable {
                 }
 
                 soundPlayAbilityStatus = true;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -61,15 +59,13 @@ public class Camera implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.camerasThreads.put("soundBreakThread", t);
+        threadsUtil.camerasThreads.put("soundBreakThread", t);
     }
 
     public void activateDarknessMode(int seconds) {
         if (darknessStatus) return; // если камера уже сломана (хотя такого произойти не должно по идее), то повторно поток для кулдауна запущен не будет
 
         darknessStatus = true;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -82,9 +78,6 @@ public class Camera implements Serializable {
                 }
 
                 darknessStatus = false;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -92,6 +85,6 @@ public class Camera implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.camerasThreads.put("activateDarknessModeThread", t);
+        threadsUtil.camerasThreads.put("activateDarknessModeThread", t);
     }
 }

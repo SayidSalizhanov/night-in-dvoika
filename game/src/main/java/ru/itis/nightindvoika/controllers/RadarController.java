@@ -9,8 +9,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import lombok.Data;
 import lombok.Setter;
 import ru.itis.nightindvoika.entites.AttackEntity;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.util.LoadersUtil;
@@ -22,7 +24,10 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+@Data
 public class RadarController implements Initializable {
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
 
     /*
     Данный контроллер будет основан на конкретных сущностях, а не на мапе сущностей,
@@ -62,25 +67,31 @@ public class RadarController implements Initializable {
     private final Media schelchokSound = new Media(getClass().getResource("/static/sounds/schelchok.mp3").toExternalForm());
 
     @Setter
-    private static boolean refreshFlag;
+    private static boolean refreshFlag; // todo убрать статик
     private int timeToRefreshInSeconds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Map<String, AttackEntity> attackEntities = GameEngineInstance.getGameEngine().getAttackEntities();
+        //
+    }
+
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+
+        Map<String, AttackEntity> attackEntities = gameEngine.getAttackEntities();
         witherSkeleton = attackEntities.get("witherSkeleton");
         skeleton = attackEntities.get("skeleton");
         zombie = attackEntities.get("zombie");
         creeper = attackEntities.get("creeper");
 
-        attacker = GameEngineInstance.getGameEngine().getAttacker();
+        attacker = gameEngine.getAttacker();
 
         setOnActionMoveButtons(witherSkeleton, witherSkeletonMoveForwardButton, witherSkeletonMoveBackButton);
         setOnActionMoveButtons(skeleton, skeletonMoveForwardButton, skeletonMoveBackButton);
         setOnActionMoveButtons(zombie, zombieMoveForwardButton, zombieMoveBackButton);
         setOnActionMoveButtons(creeper, creeperMoveForwardButton, creeperMoveBackButton);
 
-        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+        timeToRefreshInSeconds = gameEngine.getTimeToRefreshInSeconds();
         refreshFlag = true;
 
         refreshThreadStart();
@@ -127,6 +138,8 @@ public class RadarController implements Initializable {
         moveBackButton.setDisable(true);
 
         displayPreparing();
+
+        gameEngine.setUpdate(true);
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
@@ -137,22 +150,28 @@ public class RadarController implements Initializable {
         moveBackButton.setDisable(true);
 
         displayPreparing();
+
+        gameEngine.setUpdate(true);
     }
 
     public void backToMenu(ActionEvent event) {
-        LoadersUtil.loadMainMenu();
+        loadersUtil.loadMainMenu();
     }
 
     public void muteAllCameras(ActionEvent event) {
         playMediaBadButton();
         attacker.soundBreakAllCameras();
         muteAllCamerasButton.setDisable(true);
+
+        gameEngine.setUpdate(true);
     }
 
     public void breakAllCameras(ActionEvent event) {
         playMediaBadButton();
         attacker.setDarknessStatusOnCameras();
         breakAllCamerasButton.setDisable(true);
+
+        gameEngine.setUpdate(true);
     }
 
     public void paralyzeDefender(ActionEvent event) {
@@ -160,7 +179,7 @@ public class RadarController implements Initializable {
         attacker.paralyzeDefender();
         paralyzeDefenderButton.setDisable(true);
 
-        GameEngineInstance.getGameEngine().setUpdate(true);
+        gameEngine.setUpdate(true);
     }
 
     private void setMuteAllCamerasButtonDisableOrAllow() {

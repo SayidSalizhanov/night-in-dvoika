@@ -13,7 +13,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import lombok.Data;
 import ru.itis.nightindvoika.entites.AttackEntity;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
@@ -23,7 +25,10 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+@Data
 public class RadarForDefenderController implements Initializable {
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
 
     private Defender defender;
 
@@ -46,9 +51,15 @@ public class RadarForDefenderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        defender = GameEngineInstance.getGameEngine().getDefender();
+        //
+    }
 
-        Map<String, AttackEntity> attackEntities = GameEngineInstance.getGameEngine().getAttackEntities();
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+
+        defender = gameEngine.getDefender();
+
+        Map<String, AttackEntity> attackEntities = gameEngine.getAttackEntities();
 
         witherSkeleton = attackEntities.get("witherSkeleton");
         witherSkeletonMark.setVisible(witherSkeleton.isRadarVisible());
@@ -84,7 +95,7 @@ public class RadarForDefenderController implements Initializable {
     public void backToOffice(ActionEvent event) {
         playMediaCloseRadar();
         if (countdownTimeline.getStatus() != Animation.Status.STOPPED) countdownTimeline.stop();
-        LoadersUtil.loadOffice();
+        loadersUtil.loadOffice();
     }
 
     private void startTimer() {

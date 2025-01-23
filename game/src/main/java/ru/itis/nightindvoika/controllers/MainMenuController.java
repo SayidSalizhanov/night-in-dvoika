@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.util.LoadersUtil;
 
 @Data
 public class MainMenuController {
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
 
     @FXML
     Button defenderButton;
@@ -15,10 +18,10 @@ public class MainMenuController {
     Button attackerButton;
 
     public void startFromOfficeByDefender(ActionEvent event) {
-        LoadersUtil.loadOffice();
+        loadersUtil.loadOffice();
     }
 
     public void startFromRadarByAttacker(ActionEvent event) {
-        LoadersUtil.loadRadar();
+        loadersUtil.loadRadar();
     }
 }

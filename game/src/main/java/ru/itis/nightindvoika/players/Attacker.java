@@ -2,6 +2,7 @@ package ru.itis.nightindvoika.players;
 
 import javafx.concurrent.Task;
 import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
@@ -9,6 +10,8 @@ import java.io.Serializable;
 
 @Data
 public class Attacker implements Serializable {
+    private GameEngine gameEngine;
+    private transient ThreadsUtil threadsUtil;
 
     private int soundBreakCooldownInSeconds; // кулдаун: у охранника отключится возможность звука
     private int soundBreakInSeconds; // время, на которое у охранника отключится возможность звука
@@ -36,10 +39,8 @@ public class Attacker implements Serializable {
     }
 
     public void soundBreakAllCameras() {
-        GameEngineInstance.getGameEngine().soundBreakAllCameras(soundBreakInSeconds);
+        gameEngine.soundBreakAllCameras(soundBreakInSeconds);
         soundBreakAbilityStatus = false;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -52,9 +53,6 @@ public class Attacker implements Serializable {
                 }
 
                 soundBreakAbilityStatus = true;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -62,14 +60,12 @@ public class Attacker implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.attackerThreads.put("soundBreakAllCamerasThread", t);
+        threadsUtil.attackerThreads.put("soundBreakAllCamerasThread", t);
     }
 
     public void setDarknessStatusOnCameras() {
-        GameEngineInstance.getGameEngine().breakAllCameras(settingDarknessStatusInSeconds);
+        gameEngine.breakAllCameras(settingDarknessStatusInSeconds);
         settingDarknessAbilityStatus = false;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -82,9 +78,6 @@ public class Attacker implements Serializable {
                 }
 
                 settingDarknessAbilityStatus = true;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -92,11 +85,11 @@ public class Attacker implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.attackerThreads.put("setDarknessStatusOnCamerasThread", t);
+        threadsUtil.attackerThreads.put("setDarknessStatusOnCamerasThread", t);
     }
 
     public void paralyzeDefender() {
-        GameEngineInstance.getGameEngine().paralyzeDefender(settingParalysisStatusInSeconds);
+        gameEngine.paralyzeDefender(settingParalysisStatusInSeconds);
         settingParalysisAbilityStatus = false;
 
         Task<Void> task = new Task<Void>() {
@@ -118,6 +111,6 @@ public class Attacker implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.attackerThreads.put("paralyzeDefenderThread", t);
+        threadsUtil.attackerThreads.put("paralyzeDefenderThread", t);
     }
 }

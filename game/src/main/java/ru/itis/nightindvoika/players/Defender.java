@@ -2,6 +2,7 @@ package ru.itis.nightindvoika.players;
 
 import javafx.concurrent.Task;
 import lombok.Data;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
@@ -9,6 +10,8 @@ import java.io.Serializable;
 
 @Data
 public class Defender implements Serializable {
+    private GameEngine gameEngine;
+    private transient ThreadsUtil threadsUtil;
 
     private int radarVisibleForDefenderCooldownInSeconds;
     private int radarVisibleInSeconds;
@@ -36,8 +39,6 @@ public class Defender implements Serializable {
     public void radarVisible() {
         radarVisibleAbilityStatus = false;
 
-        GameEngineInstance.getGameEngine().setUpdate(true);
-
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -49,9 +50,6 @@ public class Defender implements Serializable {
                 }
 
                 radarVisibleAbilityStatus = true;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -59,14 +57,12 @@ public class Defender implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.defenderThreads.put("radarVisibleThread", t);
+        threadsUtil.defenderThreads.put("radarVisibleThread", t);
     }
 
     public void electricShock() {
-        GameEngineInstance.getGameEngine().electricShockAttackEntities(electricShockFromDefenderInSeconds);
+        gameEngine.electricShockAttackEntities(electricShockFromDefenderInSeconds);
         electricShockAbilityStatus = false;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -79,9 +75,6 @@ public class Defender implements Serializable {
                 }
 
                 electricShockAbilityStatus = true;
-
-                GameEngineInstance.getGameEngine().setUpdate(true);
-
                 return null;
             }
         };
@@ -89,7 +82,7 @@ public class Defender implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.defenderThreads.put("electricShockThread", t);
+        threadsUtil.defenderThreads.put("electricShockThread", t);
     }
 
     public void paralyze(int seconds) {
@@ -114,12 +107,10 @@ public class Defender implements Serializable {
         Thread t = new Thread(task);
         t.start();
 
-        ThreadsUtil.defenderThreads.put("paralyzeThread", t);
+        threadsUtil.defenderThreads.put("paralyzeThread", t);
     }
 
     public void switchMaskMode() {
         holdMaskStatus = !holdMaskStatus;
-
-        GameEngineInstance.getGameEngine().setUpdate(true);
     }
 }

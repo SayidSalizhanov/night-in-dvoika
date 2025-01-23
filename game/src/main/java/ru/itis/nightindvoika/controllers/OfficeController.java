@@ -10,8 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import lombok.Data;
 import lombok.Setter;
 import ru.itis.nightindvoika.entites.Office;
+import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
@@ -23,7 +25,10 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+@Data
 public class OfficeController implements Initializable {
+    private GameEngine gameEngine;
+    private LoadersUtil loadersUtil;
 
     private Office office;
     @Setter
@@ -52,15 +57,21 @@ public class OfficeController implements Initializable {
     private final Media openRadarSound = new Media(getClass().getResource("/static/sounds/office/openRadar.mp3").toExternalForm());
 
     @Setter
-    private static boolean refreshFlag;
+    private static boolean refreshFlag; // todo убрать статик
     private int timeToRefreshInSeconds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        office = GameEngineInstance.getGameEngine().getOffice();
-        defender = GameEngineInstance.getGameEngine().getDefender();
+        //
+    }
 
-        timeToRefreshInSeconds = GameEngineInstance.getGameEngine().getTimeToRefreshInSeconds();
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+
+        office = gameEngine.getOffice();
+        defender = gameEngine.getDefender();
+
+        timeToRefreshInSeconds = gameEngine.getTimeToRefreshInSeconds();
         refreshFlag = true;
 
         refreshThreadStart();
@@ -73,7 +84,7 @@ public class OfficeController implements Initializable {
     public void refreshOffice() {
         textTimer.setText("%d AM".formatted(Timer.currentHour));
 
-        String fileName = StringCreator.createPathImage(GameEngineInstance.getGameEngine().getAttackEntities().values().stream().toList(), office.getPosition());
+        String fileName = StringCreator.createPathImage(gameEngine.getAttackEntities().values().stream().toList(), office.getPosition());
 
         if (defender.isParalyzeStatus()) {
             backgroundImageView.setImage(new Image(
@@ -149,7 +160,7 @@ public class OfficeController implements Initializable {
         radarButton.setDisable(true);
         defender.radarVisible();
 
-        LoadersUtil.loadRadarForDefender();
+        loadersUtil.loadRadarForDefender();
     }
 
     public void activateElectricShock(ActionEvent event) {
@@ -171,11 +182,11 @@ public class OfficeController implements Initializable {
 
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {
         playMediaOpenCameras();
-        LoadersUtil.loadCamera(nextCameraViewPosition);
+        loadersUtil.loadCamera(nextCameraViewPosition);
     }
 
     public void backToMenu(ActionEvent event) {
-        LoadersUtil.loadMainMenu();
+        loadersUtil.loadMainMenu();
     }
 
     private void playMediaOpenCameras() {
