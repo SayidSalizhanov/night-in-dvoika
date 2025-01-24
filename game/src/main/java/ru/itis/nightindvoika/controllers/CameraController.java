@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lombok.Data;
 import lombok.Setter;
+import ru.itis.nightindvoika.action.defender.PlaySoundAction;
 import ru.itis.nightindvoika.entites.Camera;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
@@ -124,7 +126,7 @@ public class CameraController implements Initializable {
                     } catch (InterruptedException e) {
                         return null;
                     }
-                    refreshCamera();
+                    Platform.runLater(() -> refreshCamera());
                 }
                 return null;
             }
@@ -147,6 +149,10 @@ public class CameraController implements Initializable {
         currentCamera.playSound();
 
         soundButton.setDisable(true);
+
+        PlaySoundAction action = new PlaySoundAction();
+        action.setPosition(currentViewPosition);
+        gameEngine.getActionQueue().add(action);
     }
 
     private void playMediaSoundOnCamera() {

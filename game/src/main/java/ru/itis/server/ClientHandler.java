@@ -1,20 +1,26 @@
 package ru.itis.server;
 
+import lombok.Getter;
 import ru.itis.nightindvoika.action.Action;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.UUID;
 
 public class ClientHandler implements Runnable {
     private final Socket socket;
     private final Server server;
     private ObjectOutputStream out;
 
+    @Getter
+    private UUID uuid; // нужен для того, чтобы не пересылать изменения клиенту, от которого эти изменения и пришли
+
     public ClientHandler(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
+        uuid = UUID.randomUUID();
     }
 
     @Override
@@ -30,7 +36,7 @@ public class ClientHandler implements Runnable {
                 System.out.println("Received Action from client.");
                 System.out.println("----------");
 
-                server.broadcast(action);
+                server.broadcast(action, uuid);
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Client disconnected: " + socket.getInetAddress());

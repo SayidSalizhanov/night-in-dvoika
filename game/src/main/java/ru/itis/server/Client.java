@@ -20,9 +20,11 @@ public class Client {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 443;
     private final GameEngine gameEngine;
+    private final App app;
 
-    public Client(GameEngine gameEngine) {
+    public Client(GameEngine gameEngine, App app) {
         this.gameEngine = gameEngine;
+        this.app = app;
         start();
     }
 
@@ -40,7 +42,7 @@ public class Client {
             });
         }).start();
 
-        new Client(gameEngine);
+        new Client(gameEngine, app);
     }
 
     public void start() {
@@ -69,9 +71,7 @@ public class Client {
                 System.out.println("Received action from server.");
                 System.out.println("----------");
 
-                Platform.runLater(() -> {
-                        action.doSomeAction(gameEngine);
-                });
+                app.doSomeAction(action);
             }
 
         } catch (IOException | ClassNotFoundException e) {

@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Server {
     private static final int PORT = 443;
@@ -36,9 +37,10 @@ public class Server {
         }
     }
 
-    public synchronized void broadcast(Action action) {
+    public synchronized void broadcast(Action action, UUID uuid) {
         for (ClientHandler client : clients) {
-            client.sendGameData(action);
+            if (!client.getUuid().equals(uuid))
+                client.sendGameData(action);
         }
     }
 }

@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +13,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import lombok.Data;
 import lombok.Setter;
+import ru.itis.nightindvoika.action.defender.ElectricShockAction;
+import ru.itis.nightindvoika.action.defender.SwitchMaskModeAction;
 import ru.itis.nightindvoika.entites.Office;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.StringCreator;
@@ -145,7 +147,7 @@ public class OfficeController implements Initializable {
                     } catch (InterruptedException e) {
                         return null;
                     }
-                    refreshOffice();
+                    Platform.runLater(() -> refreshOffice());
                 }
                 return null;
             }
@@ -170,6 +172,8 @@ public class OfficeController implements Initializable {
         defender.electricShock();
 
         displayPreparing();
+
+        gameEngine.getActionQueue().add(new ElectricShockAction());
     }
 
     public void switchMaskMode(ActionEvent event) {
@@ -178,6 +182,8 @@ public class OfficeController implements Initializable {
 
         defender.switchMaskMode();
         displayPreparing();
+
+        gameEngine.getActionQueue().add(new SwitchMaskModeAction());
     }
 
     public void openCameras(ActionEvent event) throws IOException, InterruptedException {

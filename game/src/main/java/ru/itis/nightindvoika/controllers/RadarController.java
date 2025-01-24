@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.controllers;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,7 +125,7 @@ public class RadarController implements Initializable {
                     } catch (InterruptedException e) {
                         return null;
                     }
-                    refreshRadar();
+                    Platform.runLater(() -> refreshRadar());
                 }
                 return null;
             }
