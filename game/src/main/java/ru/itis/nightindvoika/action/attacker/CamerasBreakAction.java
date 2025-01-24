@@ -1,9 +1,9 @@
 package ru.itis.nightindvoika.action.attacker;
 
-import ru.itis.nightindvoika.action.Action;
+import ru.itis.nightindvoika.action.GameProcessAction;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 
-public class CamerasBreakAction implements Action {
+public class CamerasBreakAction implements GameProcessAction {
     @Override
     public void doSomeAction(GameEngine gameEngine) {
         gameEngine.breakAllCameras(gameEngine.getBreakAllCamerasInSeconds());

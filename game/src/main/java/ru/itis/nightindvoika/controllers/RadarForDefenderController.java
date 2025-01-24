@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 @Data
-public class RadarForDefenderController implements Initializable {
+public class RadarForDefenderController implements Initializable, Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 

@@ -21,6 +21,8 @@ public class LoadersUtil implements Serializable {
     public final Map<String, FXMLLoader> loaders = new HashMap<>();
     public final Map<String, Scene> scenes = new HashMap<>();
 
+    public final Map<String, Controller> controllers = new HashMap<>();
+
     public void loadFxmlLoaders() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/itis/nightindvoika/main_menu.fxml"));
         loaders.put("mainMenu", loader);
@@ -58,6 +60,8 @@ public class LoadersUtil implements Serializable {
         mainMenuController.setLoadersUtil(this);
         mainMenuController.setGameEngine(gameEngine);
 
+        controllers.put("MainMenuController", mainMenuController);
+
         Scene scene = scenes.get("mainMenu");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -68,6 +72,8 @@ public class LoadersUtil implements Serializable {
         radarForDefenderController.setGameEngine(gameEngine);
         radarForDefenderController.setLoadersUtil(this);
         radarForDefenderController.displayPreparing();
+
+        controllers.put("RadarForDefenderController", radarForDefenderController);
 
         Scene scene = scenes.get("defenderRadar");
         primaryStage.setScene(scene);
@@ -85,6 +91,8 @@ public class LoadersUtil implements Serializable {
         officeController.setNextCameraViewPosition(nextCameraViewPosition);
         officeController.displayPreparing();
 
+        controllers.put("OfficeController", officeController);
+
         Scene scene = scenes.get("office");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -95,6 +103,8 @@ public class LoadersUtil implements Serializable {
         cameraController.setGameEngine(gameEngine);
         cameraController.setLoadersUtil(this);
         cameraController.displayPreparing(nextCameraViewPosition);
+
+        controllers.put("CameraController", cameraController);
 
         Scene scene = scenes.get("camera");
         primaryStage.setScene(scene);
@@ -107,6 +117,8 @@ public class LoadersUtil implements Serializable {
         radarController.setLoadersUtil(this);
         radarController.displayPreparing();
 
+        controllers.put("RadarController", radarController);
+
         Scene scene = scenes.get("radar");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -118,6 +130,8 @@ public class LoadersUtil implements Serializable {
         endGameController.setGameEngine(gameEngine);
         endGameController.displayPreparing(winStatus);
 
+        controllers.put("EndGameController", endGameController);
+
         Scene scene = scenes.get("endGame");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -127,6 +141,8 @@ public class LoadersUtil implements Serializable {
         StartGameController startGameController = loaders.get("startGame").getController();
         startGameController.setLoadersUtil(this);
         startGameController.setGameEngine(gameEngine);
+
+        controllers.put("StartGameController", startGameController);
 
         Scene scene = scenes.get("startGame");
         primaryStage.setScene(scene);

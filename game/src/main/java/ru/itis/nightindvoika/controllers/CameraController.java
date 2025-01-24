@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.*;
 
 @Data
-public class CameraController implements Initializable {
+public class CameraController implements Initializable, Controller {
 
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;

@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 @Data
-public class RadarController implements Initializable {
+public class RadarController implements Initializable, Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 

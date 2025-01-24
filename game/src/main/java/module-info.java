@@ -23,4 +23,6 @@ module ru.itis.firstjavafxproject {
     exports ru.itis.nightindvoika.players;
     exports ru.itis.server;
     exports ru.itis.nightindvoika.action;
+    exports ru.itis.nightindvoika.action.main;
+    opens ru.itis.nightindvoika.action.main to javafx.fxml;
 }

@@ -19,15 +19,20 @@
             <Font size="39.0" />
          </font>
       </Text>
-      <Button fx:id="defenderButton" layoutX="623.0" layoutY="715.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" prefHeight="82.0" prefWidth="261.0" text="Охранник" textAlignment="CENTER">
+      <Button fx:id="defenderButton" disable="true" layoutX="623.0" layoutY="715.0" mnemonicParsing="false" onAction="#startFromOfficeByDefender" prefHeight="82.0" prefWidth="261.0" text="Охранник" textAlignment="CENTER">
          <font>
             <Font size="39.0" />
          </font>
       </Button>
-      <Button fx:id="attackerButton" layoutX="623.0" layoutY="598.0" mnemonicParsing="false" onAction="#startFromRadarByAttacker" text="Атакующий" textAlignment="CENTER">
+      <Button fx:id="attackerButton" disable="true" layoutX="623.0" layoutY="598.0" mnemonicParsing="false" onAction="#startFromRadarByAttacker" text="Атакующий" textAlignment="CENTER">
          <font>
             <Font size="39.0" />
          </font>
       </Button>
+      <Text fx:id="infoText" fill="WHITE" layoutY="472.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="3.0" text="Игра начнется, когда кнопки станут активными" textAlignment="CENTER" wrappingWidth="1498.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

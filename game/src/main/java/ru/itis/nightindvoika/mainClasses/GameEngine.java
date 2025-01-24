@@ -4,9 +4,6 @@ import javafx.application.Platform;
 import lombok.Getter;
 import lombok.Setter;
 import ru.itis.nightindvoika.action.Action;
-import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
-import ru.itis.nightindvoika.action.attacker.DefenderParalyzeAction;
-import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.controllers.CameraController;
 import ru.itis.nightindvoika.controllers.OfficeController;
 import ru.itis.nightindvoika.controllers.RadarController;
@@ -32,8 +29,6 @@ import java.util.*;
 public class GameEngine implements Serializable {
     private transient LoadersUtil loadersUtil;
     private transient ThreadsUtil threadsUtil;
-
-    private boolean update; // исключительно для сокетов
 
     private transient Queue<Action> actionQueue = new ArrayDeque<>(); // очередь действий
 
@@ -70,7 +65,7 @@ public class GameEngine implements Serializable {
     private int timeToRefreshInSeconds; // через сколько секунд сцена будет обновляться
 
     public GameEngine() {
-        oneGameHourInSeconds = 90;
+        oneGameHourInSeconds = 3;
         hoursInNight = 6;
 
         soundBreakByAttackerCooldownInSeconds = 240;
@@ -134,7 +129,7 @@ public class GameEngine implements Serializable {
 
     public void endGame(boolean defenderWinStatus) {
         Platform.runLater(() -> loadersUtil.loadEndGame(defenderWinStatus));
-        GameEngineInstance.clearDataInEngine();
+        updateEngineData();
         threadsUtil.interruptAllThreads();
         threadsUtil.clearThreadMaps();
         stopRefreshOnControllers();
@@ -247,5 +242,33 @@ public class GameEngine implements Serializable {
         RadarController.setRefreshFlag(false);
         OfficeController.setRefreshFlag(false);
         CameraController.setRefreshFlag(false);
+    }
+
+    private void updateEngineData() {
+        loadDefaultEntities();
+        Timer.currentHour = 0;
+        updateCameras();
+        updateAttacker();
+        updateDefender();
+    }
+
+    private void updateCameras() {
+        for (Camera camera : cameras) {
+            camera.setDarknessStatus(false);
+            camera.setSoundPlayAbilityStatus(true);
+        }
+    }
+
+    private void updateDefender() {
+        defender.setRadarVisibleAbilityStatus(true);
+        defender.setElectricShockAbilityStatus(true);
+        defender.setParalyzeStatus(false);
+        defender.setHoldMaskStatus(false);
+    }
+
+    private void updateAttacker() {
+        attacker.setSoundBreakAbilityStatus(true);
+        attacker.setSettingDarknessAbilityStatus(true);
+        attacker.setSettingParalysisAbilityStatus(true);
     }
 }

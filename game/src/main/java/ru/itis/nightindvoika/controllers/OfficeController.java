@@ -28,7 +28,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Data
-public class OfficeController implements Initializable {
+public class OfficeController implements Initializable, Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 

@@ -1,13 +1,13 @@
 package ru.itis.nightindvoika.action.attacker;
 
 import lombok.Setter;
-import ru.itis.nightindvoika.action.Action;
+import ru.itis.nightindvoika.action.GameProcessAction;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.enums.AttackEntityEnum;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 
 @Setter
-public class AttackEntityMoveAction implements Action {
+public class AttackEntityMoveAction implements GameProcessAction {
     private String attackEntityKey;
     private AttackEntityEnum attackEntityEnum;
 

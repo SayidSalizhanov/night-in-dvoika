@@ -15,7 +15,7 @@ public class Attacker implements Serializable {
 
     private int soundBreakCooldownInSeconds; // кулдаун: у охранника отключится возможность звука
     private int soundBreakInSeconds; // время, на которое у охранника отключится возможность звука
-    private boolean soundBreakAbilityStatus; // возможность сломасть отключение звука
+    private boolean soundBreakAbilityStatus; // возможность отключить звуки на камерах
 
     private int settingDarknessStatusCooldownInSeconds; // кулдаун: можно наложить статус темноты на камеры
     private int settingDarknessStatusInSeconds; // время, на которое можно наложить статус темноты на камеры

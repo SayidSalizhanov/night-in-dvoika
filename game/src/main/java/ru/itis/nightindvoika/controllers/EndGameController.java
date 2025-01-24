@@ -8,11 +8,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import lombok.Data;
+import ru.itis.nightindvoika.action.main.EndGameAction;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.util.LoadersUtil;
 
 @Data
-public class EndGameController {
+public class EndGameController implements Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 
@@ -40,6 +41,8 @@ public class EndGameController {
             mediaPlayer.stop();
         }
         loadersUtil.loadStartGame();
+
+        gameEngine.getActionQueue().add(new EndGameAction());
     }
 
     private void playMediaEndGame(Media media) {
