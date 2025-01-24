@@ -1,6 +1,8 @@
 package ru.itis.nightindvoika.enums;
 
-public enum AttackEntityEnum {
+import java.io.Serializable;
+
+public enum AttackEntityEnum implements Serializable {
     FORWARD,
     BACK,
     TO_START

@@ -33,7 +33,7 @@ public class ClientHandler implements Runnable {
                 Action action = (Action) in.readObject();
 
                 System.out.println("----------");
-                System.out.println("Received Action from client.");
+                System.out.println("Received action from client.");
                 System.out.println("----------");
 
                 server.broadcast(action, uuid);

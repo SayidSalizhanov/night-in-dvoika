@@ -25,7 +25,6 @@ import ru.itis.nightindvoika.util.Timer;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 //@Data
 @Setter
@@ -220,10 +219,10 @@ public class GameEngine implements Serializable {
         creeper.setGameEngine(this);
         creeper.setThreadsUtil(threadsUtil);
 
-        attackEntities.put("witherSkeleton", witherSkeleton);
-        attackEntities.put("skeleton", skeleton);
-        attackEntities.put("zombie", zombie);
-        attackEntities.put("creeper", creeper);
+        attackEntities.put(witherSkeleton.getKey(), witherSkeleton);
+        attackEntities.put(skeleton.getKey(), skeleton);
+        attackEntities.put(zombie.getKey(), zombie);
+        attackEntities.put(creeper.getKey(), creeper);
     }
 
     private void loadDefaultCameras() {

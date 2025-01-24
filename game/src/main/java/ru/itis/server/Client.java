@@ -4,16 +4,12 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.App;
 import ru.itis.nightindvoika.action.Action;
-import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
-import ru.itis.nightindvoika.mainClasses.GameData;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.jar.JarOutputStream;
 
 public class Client {
 //    private static final String SERVER_ADDRESS = "26.232.203.43";

@@ -12,10 +12,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import lombok.Data;
 import lombok.Setter;
+import ru.itis.nightindvoika.action.attacker.AttackEntityMoveAction;
 import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
 import ru.itis.nightindvoika.action.attacker.DefenderParalyzeAction;
 import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.entites.AttackEntity;
+import ru.itis.nightindvoika.enums.AttackEntityEnum;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Attacker;
@@ -143,7 +145,10 @@ public class RadarController implements Initializable {
 
         displayPreparing();
 
-//        gameEngine.getActionQueue().add(new AttackEntityMoveAction());
+        AttackEntityMoveAction action = new AttackEntityMoveAction();
+        action.setAttackEntityKey(attackEntity.getKey());
+        action.setAttackEntityEnum(AttackEntityEnum.FORWARD);
+        gameEngine.getActionQueue().add(action);
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
@@ -155,7 +160,10 @@ public class RadarController implements Initializable {
 
         displayPreparing();
 
-        gameEngine.setUpdate(true);
+        AttackEntityMoveAction action = new AttackEntityMoveAction();
+        action.setAttackEntityKey(attackEntity.getKey());
+        action.setAttackEntityEnum(AttackEntityEnum.BACK);
+        gameEngine.getActionQueue().add(action);
     }
 
     public void backToMenu(ActionEvent event) {
