@@ -13,6 +13,7 @@ module ru.itis.firstjavafxproject {
     opens ru.itis.nightindvoika.entites to javafx.fxml;
     opens ru.itis.nightindvoika.players to javafx.fxml;
     opens ru.itis.server to javafx.fxml;
+    opens ru.itis.nightindvoika.action to javafx.fxml;
 
     exports ru.itis.nightindvoika;
     exports ru.itis.nightindvoika.controllers;
@@ -21,4 +22,5 @@ module ru.itis.firstjavafxproject {
     exports ru.itis.nightindvoika.entites;
     exports ru.itis.nightindvoika.players;
     exports ru.itis.server;
+    exports ru.itis.nightindvoika.action;
 }

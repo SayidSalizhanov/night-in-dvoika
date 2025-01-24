@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Creeper extends AttackEntity {
     public Creeper() {
-        super(new int[]{2,4,3,11,14,15}, 25, false, true, false, false);
+        super("creeper", new int[]{2,4,3,11,14,15}, 25, false, true, false, false);
 
         positionsOnFrames = new HashMap<>();
         positionsOnFrames.put(2, PositionOnFrame.create(452, 762));

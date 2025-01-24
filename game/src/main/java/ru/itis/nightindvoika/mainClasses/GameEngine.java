@@ -3,6 +3,10 @@ package ru.itis.nightindvoika.mainClasses;
 import javafx.application.Platform;
 import lombok.Getter;
 import lombok.Setter;
+import ru.itis.nightindvoika.action.Action;
+import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
+import ru.itis.nightindvoika.action.attacker.DefenderParalyzeAction;
+import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.controllers.CameraController;
 import ru.itis.nightindvoika.controllers.OfficeController;
 import ru.itis.nightindvoika.controllers.RadarController;
@@ -21,6 +25,7 @@ import ru.itis.nightindvoika.util.Timer;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 //@Data
 @Setter
@@ -30,6 +35,8 @@ public class GameEngine implements Serializable {
     private transient ThreadsUtil threadsUtil;
 
     private boolean update; // исключительно для сокетов
+
+    private transient Queue<Action> actionQueue = new ArrayDeque<>(); // очередь действий
 
     private Attacker attacker;
     private Defender defender;
@@ -150,6 +157,10 @@ public class GameEngine implements Serializable {
 
     public void paralyzeDefender(int seconds) {
         defender.paralyze(seconds);
+
+        if (!loadersUtil.primaryStage.getScene().equals(loadersUtil.scenes.get("radar"))) {
+            loadersUtil.loadOffice();
+        }
     }
 
     // метод меняют позиции сущностей если был проигран звук
@@ -237,12 +248,5 @@ public class GameEngine implements Serializable {
         RadarController.setRefreshFlag(false);
         OfficeController.setRefreshFlag(false);
         CameraController.setRefreshFlag(false);
-    }
-
-    public synchronized void updateFromGameData(GameData gameData) {
-        attacker = gameData.getAttacker();
-        defender = gameData.getDefender();
-        attackEntities = gameData.getAttackEntities();
-        cameras = gameData.getCameras();
     }
 }

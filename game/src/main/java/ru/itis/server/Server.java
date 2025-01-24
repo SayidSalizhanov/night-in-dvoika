@@ -1,7 +1,6 @@
 package ru.itis.server;
 
-import lombok.Getter;
-import ru.itis.nightindvoika.mainClasses.GameData;
+import ru.itis.nightindvoika.action.Action;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -15,8 +14,6 @@ public class Server {
     private static final String HOST = "localhost";
 //    private static final String HOST = "26.232.203.43";
     private final List<ClientHandler> clients = new ArrayList<>();
-    @Getter
-    private final GameData gameData = new GameData();
 
     public static void main(String[] args) {
         new Server().start();
@@ -39,9 +36,9 @@ public class Server {
         }
     }
 
-    public synchronized void broadcast() {
+    public synchronized void broadcast(Action action) {
         for (ClientHandler client : clients) {
-            client.sendGameData(gameData);
+            client.sendGameData(action);
         }
     }
 }

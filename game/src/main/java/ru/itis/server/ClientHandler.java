@@ -1,7 +1,6 @@
 package ru.itis.server;
 
-import ru.itis.nightindvoika.mainClasses.GameData;
-import ru.itis.nightindvoika.mainClasses.GameEngine;
+import ru.itis.nightindvoika.action.Action;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,7 +9,7 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
     private final Socket socket;
-    private final Server server; // Ссылка на сервер
+    private final Server server;
     private ObjectOutputStream out;
 
     public ClientHandler(Socket socket, Server server) {
@@ -25,17 +24,13 @@ public class ClientHandler implements Runnable {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
             while (socket.isConnected()) {
-                GameEngine engine = (GameEngine) in.readObject();
+                Action action = (Action) in.readObject();
 
                 System.out.println("----------");
-                System.out.println("Received GameEngine from client.");
+                System.out.println("Received Action from client.");
                 System.out.println("----------");
 
-                synchronized (server.getGameData()) {
-                    server.getGameData().updateFromGameEngine(engine);
-                }
-
-                server.broadcast();
+                server.broadcast(action);
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Client disconnected: " + socket.getInetAddress());
@@ -48,9 +43,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void sendGameData(GameData data) {
+    public void sendGameData(Action action) {
         try {
-            out.writeObject(data);
+            out.writeObject(action);
             out.flush();
             out.reset();
         } catch (IOException e) {

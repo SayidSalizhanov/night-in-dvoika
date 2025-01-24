@@ -3,6 +3,8 @@ package ru.itis.server;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import ru.itis.nightindvoika.App;
+import ru.itis.nightindvoika.action.Action;
+import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
 import ru.itis.nightindvoika.mainClasses.GameData;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
@@ -17,11 +19,10 @@ public class Client {
 //    private static final String SERVER_ADDRESS = "26.232.203.43";
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 443;
-    private GameEngine gameEngine;
+    private final GameEngine gameEngine;
 
     public Client(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        System.out.println(gameEngine);
         start();
     }
 
@@ -47,35 +48,30 @@ public class Client {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            // Отправка текущего состояния GameEngine
             new Thread(() -> {
                 try {
                     while (socket.isConnected()) {
-
-                        if (gameEngine.isUpdate()) { // если ничего нового, то и посылать серверу ничего не будем
-                            synchronized (gameEngine) {
-                                out.writeObject(gameEngine);
-                                out.flush();
-                                out.reset();
-                                gameEngine.setUpdate(false);
-                            }
+                        if (!gameEngine.getActionQueue().isEmpty()) {
+                            out.writeObject(gameEngine.getActionQueue().poll());
+                            out.flush();
+                            out.reset();
                         }
-                        Thread.sleep(1000); // интервал - секунда
                     }
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }).start();
 
-            // прием data от сервера
             while (socket.isConnected()) {
-                GameData data = (GameData) in.readObject();
+                Action action = (Action) in.readObject();
 
                 System.out.println("----------");
-                System.out.println("Received GameData from server.");
+                System.out.println("Received action from server.");
                 System.out.println("----------");
 
-                gameEngine.updateFromGameData(data);
+                Platform.runLater(() -> {
+                        action.doSomeAction(gameEngine);
+                });
             }
 
         } catch (IOException | ClassNotFoundException e) {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Zombie extends AttackEntity {
     public Zombie() {
-        super(new int[]{1,5,6,12,11,14,15}, 20, false, true, true, true);
+        super("zombie", new int[]{1,5,6,12,11,14,15}, 20, false, true, true, true);
 
         positionsOnFrames = new HashMap<>();
         positionsOnFrames.put(1, PositionOnFrame.create(642, 192));

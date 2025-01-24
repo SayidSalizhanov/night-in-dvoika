@@ -11,6 +11,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import lombok.Data;
 import lombok.Setter;
+import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
+import ru.itis.nightindvoika.action.attacker.DefenderParalyzeAction;
+import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
@@ -139,7 +142,7 @@ public class RadarController implements Initializable {
 
         displayPreparing();
 
-        gameEngine.setUpdate(true);
+//        gameEngine.getActionQueue().add(new AttackEntityMoveAction());
     }
 
     public void moveBack(AttackEntity attackEntity, Button moveForwardButton, Button moveBackButton) {
@@ -163,7 +166,7 @@ public class RadarController implements Initializable {
         attacker.soundBreakAllCameras();
         muteAllCamerasButton.setDisable(true);
 
-        gameEngine.setUpdate(true);
+        gameEngine.getActionQueue().add(new SoundBreakAction());
     }
 
     public void breakAllCameras(ActionEvent event) {
@@ -171,7 +174,7 @@ public class RadarController implements Initializable {
         attacker.setDarknessStatusOnCameras();
         breakAllCamerasButton.setDisable(true);
 
-        gameEngine.setUpdate(true);
+        gameEngine.getActionQueue().add(new CamerasBreakAction());
     }
 
     public void paralyzeDefender(ActionEvent event) {
@@ -179,7 +182,7 @@ public class RadarController implements Initializable {
         attacker.paralyzeDefender();
         paralyzeDefenderButton.setDisable(true);
 
-        gameEngine.setUpdate(true);
+        gameEngine.getActionQueue().add(new DefenderParalyzeAction());
     }
 
     private void setMuteAllCamerasButtonDisableOrAllow() {

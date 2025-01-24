@@ -11,7 +11,7 @@ public class Skeleton extends AttackEntity {
     private final Random random = RandomSingleton.getInstance();
 
     public Skeleton() {
-        super(new int[]{1,5,7,14,13,15}, 20, true, false, true, true);
+        super("skeleton", new int[]{1,5,7,14,13,15}, 20, true, false, true, true);
 
         positionsOnFrames = new HashMap<>();
         positionsOnFrames.put(1, PositionOnFrame.create(624, 65));

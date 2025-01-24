@@ -17,6 +17,8 @@ public abstract class AttackEntity implements Serializable {
     protected GameEngine gameEngine;
     protected transient ThreadsUtil threadsUtil;
 
+    protected String key;
+
     protected int startPosition;
     protected int endPosition;
     protected int currentPosition;
@@ -33,7 +35,8 @@ public abstract class AttackEntity implements Serializable {
     private boolean radarVisible; // true - сущность видима на радаре охранника
     private boolean electricShockDependence; // true - может быть остановлен на время охранником при применении шока
 
-    public AttackEntity(int[] path, int moveCooldownInSeconds, boolean maskDeception, boolean soundLiker, boolean radarVisible, boolean electricShockDependence) {
+    public AttackEntity(String key, int[] path, int moveCooldownInSeconds, boolean maskDeception, boolean soundLiker, boolean radarVisible, boolean electricShockDependence) {
+        this.key = key;
         this.startPosition = path[0];
         this.endPosition = path[path.length-1];
         this.path = path;
