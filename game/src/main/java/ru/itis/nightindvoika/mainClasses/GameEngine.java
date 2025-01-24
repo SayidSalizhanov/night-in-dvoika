@@ -271,4 +271,34 @@ public class GameEngine implements Serializable {
         attacker.setSettingDarknessAbilityStatus(true);
         attacker.setSettingParalysisAbilityStatus(true);
     }
+
+    public void fastGameParameters() {
+        oneGameHourInSeconds = 45; // default 90
+        hoursInNight = 6; // default 6
+
+        soundBreakByAttackerCooldownInSeconds = 120; // default 240
+        soundBreakByAttackerInSeconds = 15; // default 30
+
+        soundBreakDefaultOneCameraCooldownInSeconds = 20; // default 40
+
+        breakAllCamerasCooldownInSeconds = 90; // default 180
+        breakAllCamerasInSeconds = 15; // default 30
+
+        paralysisCooldownInSeconds = 200; // default 400
+        paralysisInSeconds = 8; // default 15
+
+        radarVisibleForDefenderCooldownInSeconds = 150; // default 300
+        radarVisibleInSeconds = 5; // default 10
+
+        electricShockFromDefenderCooldownInSeconds = 175; // default 350
+        electricShockFromDefenderInSeconds = 15; // default 30
+
+        entityInOfficeDeathTimeInSeconds = 5; // default 10
+    }
+
+    public void fastEntities() {
+        for (AttackEntity entity : attackEntities.values()) {
+            entity.setMoveCooldownInSeconds(entity.getMoveCooldownInSeconds() / 2);
+        }
+    }
 }
