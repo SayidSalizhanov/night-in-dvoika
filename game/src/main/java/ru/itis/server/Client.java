@@ -12,8 +12,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client {
-//    private static final String SERVER_ADDRESS = "26.232.203.43";
-    private static final String SERVER_ADDRESS = "localhost";
+    private static final String SERVER_ADDRESS = "26.232.203.43";
+//    private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 443;
     private final GameEngine gameEngine;
     private final App app;
