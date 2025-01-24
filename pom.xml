@@ -11,6 +11,7 @@
     <name>NightInDvoika</name>
     <modules>
         <module>game</module>
+        <module>game</module>
     </modules>
 
     <properties>

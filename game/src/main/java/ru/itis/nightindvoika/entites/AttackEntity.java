@@ -3,11 +3,8 @@ package ru.itis.nightindvoika.entites;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
-import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
 import ru.itis.nightindvoika.util.ThreadsUtil;
-import ru.itis.nightindvoika.util.Timer;
 
 import java.io.Serializable;
 import java.util.Map;

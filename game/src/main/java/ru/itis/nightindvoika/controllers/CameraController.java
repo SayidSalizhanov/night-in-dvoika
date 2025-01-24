@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,11 +19,10 @@ import ru.itis.nightindvoika.util.RandomSingleton;
 import ru.itis.nightindvoika.util.StringCreator;
 
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.*;
 
 @Data
-public class CameraController implements Initializable, Controller {
+public class CameraController implements Controller {
 
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
@@ -54,11 +52,6 @@ public class CameraController implements Initializable, Controller {
     @Setter
     private static boolean refreshFlag; // todo убрать static
     private int timeToRefreshInSeconds;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //
-    }
 
     public void setGameEngine(GameEngine gameEngine) {
         this.gameEngine = gameEngine;

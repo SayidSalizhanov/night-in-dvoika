@@ -2,8 +2,6 @@ package ru.itis.server;
 
 import ru.itis.nightindvoika.action.Action;
 import ru.itis.nightindvoika.action.main.StartGameAction;
-import ru.itis.nightindvoika.action.main.StartGameAvailableAction;
-import ru.itis.nightindvoika.action.main.StartGameNotAvailableAction;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -36,26 +34,11 @@ public class Server {
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
                 clients.add(clientHandler);
                 new Thread(clientHandler).start();
-
-//                checkStartGameAvailable();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-//    public synchronized void checkStartGameAvailable() {
-//        if (clients.size() >= 2) {
-//            new Thread(() -> {
-//                try {
-//                    Thread.sleep(2000); // Задержка в 2 секунды, чтобы все стримы у новых клиентов успели инициализироваться
-//                    broadcastStartGameAvailable();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }).start();
-//        }
-//    }
 
     public synchronized void broadcast(Action action, UUID uuid) {
         for (ClientHandler client : clients) {
@@ -63,20 +46,6 @@ public class Server {
                 client.sendGameAction(action);
         }
     }
-
-//    public synchronized void broadcastStartGameAvailable() {
-//        for (ClientHandler client : clients) {
-//            client.sendGameAction(new StartGameAvailableAction());
-//        }
-//    }
-
-//    public synchronized void disconnectClient(ClientHandler clientHandler) {
-//        clients.remove(clientHandler);
-//
-//        if (clients.size() < 2) {
-//            clients.getFirst().sendGameAction(new StartGameNotAvailableAction());
-//        }
-//    }
 
     public synchronized void handleStartGameAction() {
         countOfReadyPlayers++;
@@ -87,7 +56,7 @@ public class Server {
             // таймер - начало игры
             new Thread(() -> {
                 try {
-                    Thread.sleep(6000);
+                    Thread.sleep(5000);
                     for (ClientHandler client : clients) {
                         client.sendGameAction(new StartGameAction());
                     }

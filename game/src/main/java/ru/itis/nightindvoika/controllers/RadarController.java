@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -19,19 +18,15 @@ import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.enums.AttackEntityEnum;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Attacker;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
-import ru.itis.nightindvoika.util.ThreadsUtil;
 import ru.itis.nightindvoika.util.Timer;
 
-import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 @Data
-public class RadarController implements Initializable, Controller {
+public class RadarController implements Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 
@@ -73,13 +68,8 @@ public class RadarController implements Initializable, Controller {
     private final Media schelchokSound = new Media(getClass().getResource("/static/sounds/schelchok.mp3").toExternalForm());
 
     @Setter
-    private static boolean refreshFlag; // todo убрать статик
+    private static boolean refreshFlag;
     private int timeToRefreshInSeconds;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //
-    }
 
     public void setGameEngine(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -265,5 +255,10 @@ public class RadarController implements Initializable, Controller {
         };
 
         new Thread(task).start();
+    }
+
+    public void hideMenuButton() {
+        menuButton.setVisible(false);
+        menuButton.setDisable(true);
     }
 }

@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -16,17 +15,14 @@ import javafx.util.Duration;
 import lombok.Data;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.players.Defender;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.PositionOnFrame;
 
-import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 @Data
-public class RadarForDefenderController implements Initializable, Controller {
+public class RadarForDefenderController implements Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 
@@ -48,11 +44,6 @@ public class RadarForDefenderController implements Initializable, Controller {
 
     private Timeline countdownTimeline;
     private int remainingSeconds;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //
-    }
 
     public void setGameEngine(GameEngine gameEngine) {
         this.gameEngine = gameEngine;

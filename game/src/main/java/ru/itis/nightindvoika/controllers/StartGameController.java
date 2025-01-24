@@ -20,17 +20,8 @@ public class StartGameController implements Controller {
 
     public void startGame(ActionEvent event) throws IOException {
         gameEngine.getActionQueue().add(new StartGameAction());
-//        disableStartButton();
 
         loadersUtil.loadFxmlLoaders();
         loadersUtil.loadMainMenu();
-    }
-
-    public void enableStartButton() {
-        startButton.setDisable(false);
-    }
-
-    public void disableStartButton() {
-        startButton.setDisable(true);
     }
 }

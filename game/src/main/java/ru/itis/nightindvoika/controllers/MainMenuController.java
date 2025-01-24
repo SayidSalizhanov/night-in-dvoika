@@ -25,6 +25,20 @@ public class MainMenuController implements Controller {
         infoText.setVisible(false);
         defenderButton.setDisable(false);
         attackerButton.setDisable(false);
+
+        // через 10 секунд кнопки возврата в меню закроются
+        new Thread(() -> {
+            try {
+                Thread.sleep(10000);
+
+                OfficeController officeController = ((OfficeController) loadersUtil.controllers.get("OfficeController"));
+                RadarController radarController = ((RadarController) loadersUtil.controllers.get("RadarController"));
+                if (officeController != null) officeController.hideMenuButton();
+                if (radarController != null) radarController.hideMenuButton();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     public void startFromOfficeByDefender(ActionEvent event) {

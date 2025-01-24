@@ -89,17 +89,17 @@
             <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="muteAllCamerasButton" layoutX="749.0" layoutY="855.0" mnemonicParsing="false" onAction="#muteAllCameras" text="🔇">
+      <Button fx:id="muteAllCamerasButton" layoutX="911.0" layoutY="855.0" mnemonicParsing="false" onAction="#muteAllCameras" text="🔇">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="breakAllCamerasButton" layoutX="846.0" layoutY="855.0" mnemonicParsing="false" onAction="#breakAllCameras" text="🎥">
+      <Button fx:id="breakAllCamerasButton" layoutX="1008.0" layoutY="855.0" mnemonicParsing="false" onAction="#breakAllCameras" text="🎥">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="paralyzeDefenderButton" layoutX="651.0" layoutY="855.0" mnemonicParsing="false" onAction="#paralyzeDefender" text="💀">
+      <Button fx:id="paralyzeDefenderButton" layoutX="813.0" layoutY="855.0" mnemonicParsing="false" onAction="#paralyzeDefender" text="💀">
          <font>
             <Font size="26.0" />
          </font>

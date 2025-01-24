@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,12 +22,10 @@ import ru.itis.nightindvoika.util.StringCreator;
 import ru.itis.nightindvoika.util.Timer;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 @Data
-public class OfficeController implements Initializable, Controller {
+public class OfficeController implements Controller {
     private GameEngine gameEngine;
     private LoadersUtil loadersUtil;
 
@@ -59,13 +56,8 @@ public class OfficeController implements Initializable, Controller {
     private final Media openRadarSound = new Media(getClass().getResource("/static/sounds/office/openRadar.mp3").toExternalForm());
 
     @Setter
-    private static boolean refreshFlag; // todo убрать статик
+    private static boolean refreshFlag;
     private int timeToRefreshInSeconds;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //
-    }
 
     public void setGameEngine(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -113,7 +105,6 @@ public class OfficeController implements Initializable, Controller {
                 putOnMaskButton.setText("Снять маску");
 
                 hideButton(camerasButton);
-                hideButton(menuButton);
                 hideButton(radarButton);
                 hideButton(electricShockButton);
                 showButton(putOnMaskButton);
@@ -125,7 +116,6 @@ public class OfficeController implements Initializable, Controller {
                 putOnMaskButton.setText("Надеть маску");
 
                 showButton(camerasButton);
-                showButton(menuButton);
                 showButton(radarButton);
                 showButton(electricShockButton);
                 showButton(putOnMaskButton);
@@ -268,5 +258,9 @@ public class OfficeController implements Initializable, Controller {
     private void showButton(Button button) {
         button.setVisible(true);
         button.setDisable(false);
+    }
+
+    public void hideMenuButton() {
+        hideButton(menuButton);
     }
 }

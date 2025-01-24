@@ -1,6 +1,5 @@
 package ru.itis.nightindvoika.action.defender;
 
-import ru.itis.nightindvoika.action.Action;
 import ru.itis.nightindvoika.action.GameProcessAction;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 

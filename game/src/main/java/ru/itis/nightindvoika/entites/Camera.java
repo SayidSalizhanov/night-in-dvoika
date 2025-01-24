@@ -3,7 +3,6 @@ package ru.itis.nightindvoika.entites;
 import javafx.concurrent.Task;
 import lombok.Data;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.ThreadsUtil;
 
 import java.io.Serializable;

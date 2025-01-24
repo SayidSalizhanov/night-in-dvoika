@@ -2,7 +2,6 @@ package ru.itis.server;
 
 import lombok.Getter;
 import ru.itis.nightindvoika.action.Action;
-import ru.itis.nightindvoika.action.main.EndGameAction;
 import ru.itis.nightindvoika.action.main.StartGameAction;
 
 import java.io.IOException;
@@ -47,7 +46,6 @@ public class ClientHandler implements Runnable {
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Client disconnected: " + socket.getInetAddress());
-//            server.disconnectClient(this);
         } finally {
             try {
                 socket.close();
