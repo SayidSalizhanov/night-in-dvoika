@@ -5,5 +5,6 @@ import java.io.Serializable;
 public enum AttackEntityEnum implements Serializable {
     FORWARD,
     BACK,
-    TO_START
+    WITHER_SKELETON_FIRST_PATH,
+    WITHER_SKELETON_SECOND_PATH
 }

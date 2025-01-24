@@ -16,6 +16,7 @@ import ru.itis.nightindvoika.action.attacker.CamerasBreakAction;
 import ru.itis.nightindvoika.action.attacker.DefenderParalyzeAction;
 import ru.itis.nightindvoika.action.attacker.SoundBreakAction;
 import ru.itis.nightindvoika.entites.AttackEntity;
+import ru.itis.nightindvoika.entites.defaultAttackEntities.WitherSkeleton;
 import ru.itis.nightindvoika.enums.AttackEntityEnum;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
 import ru.itis.nightindvoika.players.Attacker;
@@ -137,7 +138,21 @@ public class RadarController implements Controller {
 
         AttackEntityMoveAction action = new AttackEntityMoveAction();
         action.setAttackEntityKey(attackEntity.getKey());
-        action.setAttackEntityEnum(AttackEntityEnum.FORWARD);
+
+        // логика перемещения ws чутка сложнее )))
+        if (attackEntity instanceof WitherSkeleton ws) {
+            if (ws.getCurrentPosition() > 7) {
+                if (ws.isChosenSecondPath()) {
+                    action.setAttackEntityEnum(AttackEntityEnum.WITHER_SKELETON_SECOND_PATH);
+                } else {
+                    action.setAttackEntityEnum(AttackEntityEnum.WITHER_SKELETON_FIRST_PATH);
+                }
+            } else {
+                action.setAttackEntityEnum(AttackEntityEnum.FORWARD);
+            }
+        } else {
+            action.setAttackEntityEnum(AttackEntityEnum.FORWARD);
+        }
         gameEngine.getActionQueue().add(action);
     }
 

@@ -1,5 +1,6 @@
 package ru.itis.nightindvoika.entites.defaultAttackEntities;
 
+import lombok.Getter;
 import ru.itis.nightindvoika.entites.AttackEntity;
 import ru.itis.nightindvoika.util.PositionOnFrame;
 import ru.itis.nightindvoika.util.RandomSingleton;
@@ -7,6 +8,7 @@ import ru.itis.nightindvoika.util.RandomSingleton;
 import java.util.HashMap;
 import java.util.Random;
 
+@Getter
 public class WitherSkeleton extends AttackEntity {
     private final Random random = RandomSingleton.getInstance();
 
@@ -33,6 +35,18 @@ public class WitherSkeleton extends AttackEntity {
             if (currentPosition == 7) {
                 chosenSecondPath = random.nextBoolean();
             }
+            currentPathIndex++;
+            currentPosition = chosenSecondPath ? secondPath[currentPathIndex] : path[currentPathIndex];
+            moveCooldown();
+
+            entityInOfficeCheck();
+        }
+    }
+
+    public void moveForward(boolean chosenSecondPath) {
+        this.chosenSecondPath = chosenSecondPath;
+
+        if (currentPosition < endPosition) {
             currentPathIndex++;
             currentPosition = chosenSecondPath ? secondPath[currentPathIndex] : path[currentPathIndex];
             moveCooldown();
