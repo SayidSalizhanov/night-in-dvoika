@@ -65,7 +65,7 @@ public class GameEngine implements Serializable {
     private int timeToRefreshInSeconds; // через сколько секунд сцена будет обновляться
 
     public GameEngine() {
-        oneGameHourInSeconds = 3;
+        oneGameHourInSeconds = 10;
         hoursInNight = 6;
 
         soundBreakByAttackerCooldownInSeconds = 240;
@@ -87,7 +87,7 @@ public class GameEngine implements Serializable {
 
         entityInOfficeDeathTimeInSeconds = 10;
 
-        timeToRefreshInSeconds = 1;
+        timeToRefreshInSeconds = 700; // время в миллисекундах
     }
 
     public void setEntitiesAndUtils() {

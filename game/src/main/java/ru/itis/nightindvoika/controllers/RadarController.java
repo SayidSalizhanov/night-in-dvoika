@@ -123,7 +123,7 @@ public class RadarController implements Initializable, Controller {
             protected Void call() throws Exception {
                 while (refreshFlag) {
                     try {
-                        Thread.sleep(timeToRefreshInSeconds * 1000L);
+                        Thread.sleep(timeToRefreshInSeconds);
                     } catch (InterruptedException e) {
                         return null;
                     }

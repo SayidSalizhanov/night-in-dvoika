@@ -15,7 +15,6 @@ import lombok.Setter;
 import ru.itis.nightindvoika.action.defender.PlaySoundAction;
 import ru.itis.nightindvoika.entites.Camera;
 import ru.itis.nightindvoika.mainClasses.GameEngine;
-import ru.itis.nightindvoika.mainClasses.GameEngineInstance;
 import ru.itis.nightindvoika.util.LoadersUtil;
 import ru.itis.nightindvoika.util.RandomSingleton;
 import ru.itis.nightindvoika.util.StringCreator;
@@ -122,7 +121,7 @@ public class CameraController implements Initializable, Controller {
             protected Void call() throws Exception {
                 while (refreshFlag) {
                     try {
-                        Thread.sleep(timeToRefreshInSeconds * 1000L);
+                        Thread.sleep(timeToRefreshInSeconds);
                     } catch (InterruptedException e) {
                         return null;
                     }
