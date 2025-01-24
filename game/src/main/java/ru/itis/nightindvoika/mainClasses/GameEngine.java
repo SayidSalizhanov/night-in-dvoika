@@ -65,29 +65,29 @@ public class GameEngine implements Serializable {
     private int timeToRefreshInSeconds; // через сколько секунд сцена будет обновляться
 
     public GameEngine() {
-        oneGameHourInSeconds = 90;
-        hoursInNight = 6;
+        oneGameHourInSeconds = 90; // default 90
+        hoursInNight = 6; // default 6
 
-        soundBreakByAttackerCooldownInSeconds = 240;
-        soundBreakByAttackerInSeconds = 30;
+        soundBreakByAttackerCooldownInSeconds = 240; // default 240
+        soundBreakByAttackerInSeconds = 30; // default 30
 
-        soundBreakDefaultOneCameraCooldownInSeconds = 45;
+        soundBreakDefaultOneCameraCooldownInSeconds = 40; // default 40
 
-        breakAllCamerasCooldownInSeconds = 180;
-        breakAllCamerasInSeconds = 30;
+        breakAllCamerasCooldownInSeconds = 180; // default 180
+        breakAllCamerasInSeconds = 30; // default 30
 
-        paralysisCooldownInSeconds = 400;
-        paralysisInSeconds = 15;
+        paralysisCooldownInSeconds = 400; // default 400
+        paralysisInSeconds = 15; // default 15
 
-        radarVisibleForDefenderCooldownInSeconds = 300;
-        radarVisibleInSeconds = 10;
+        radarVisibleForDefenderCooldownInSeconds = 300; // default 300
+        radarVisibleInSeconds = 10; // default 10
 
-        electricShockFromDefenderCooldownInSeconds = 350;
-        electricShockFromDefenderInSeconds = 30;
+        electricShockFromDefenderCooldownInSeconds = 350; // default 350
+        electricShockFromDefenderInSeconds = 30; // default 30
 
-        entityInOfficeDeathTimeInSeconds = 10;
+        entityInOfficeDeathTimeInSeconds = 10; // default 10
 
-        timeToRefreshInSeconds = 700; // время в миллисекундах
+        timeToRefreshInSeconds = 700; // время в миллисекундах для обновления сцены (сцена обновляется каждые 0.7 секунд)
     }
 
     public void setEntitiesAndUtils() {
