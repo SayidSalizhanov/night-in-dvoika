@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable {
                 Action action = (Action) in.readObject();
 
                 System.out.println("----------");
-                System.out.println("Received action from client.");
+                System.out.printf("Received action from client: %s%n", action.getClass().getSimpleName());
                 System.out.println("----------");
 
                 if (action instanceof StartGameAction) {

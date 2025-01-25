@@ -29,9 +29,7 @@ public class App extends Application {
         this.gameEngine.setLoadersUtil(loadersUtil);
         loadersUtil.setGameEngine(gameEngine);
 
-//        this.gameEngine.fastGameParameters();
         this.gameEngine.setEntitiesAndUtils();
-//        this.gameEngine.fastEntities();
     }
 
     @Override

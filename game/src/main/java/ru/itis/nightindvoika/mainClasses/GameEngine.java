@@ -276,22 +276,22 @@ public class GameEngine implements Serializable {
         oneGameHourInSeconds = 45; // default 90
         hoursInNight = 6; // default 6
 
-        soundBreakByAttackerCooldownInSeconds = 120; // default 240
-        soundBreakByAttackerInSeconds = 15; // default 30
+        soundBreakByAttackerCooldownInSeconds = 30; // default 240
+        soundBreakByAttackerInSeconds = 10; // default 30
 
         soundBreakDefaultOneCameraCooldownInSeconds = 20; // default 40
 
-        breakAllCamerasCooldownInSeconds = 90; // default 180
-        breakAllCamerasInSeconds = 15; // default 30
+        breakAllCamerasCooldownInSeconds = 40; // default 180
+        breakAllCamerasInSeconds = 10; // default 30
 
-        paralysisCooldownInSeconds = 200; // default 400
+        paralysisCooldownInSeconds = 100; // default 400
         paralysisInSeconds = 8; // default 15
 
-        radarVisibleForDefenderCooldownInSeconds = 150; // default 300
+        radarVisibleForDefenderCooldownInSeconds = 100; // default 300
         radarVisibleInSeconds = 5; // default 10
 
-        electricShockFromDefenderCooldownInSeconds = 175; // default 350
-        electricShockFromDefenderInSeconds = 15; // default 30
+        electricShockFromDefenderCooldownInSeconds = 100; // default 350
+        electricShockFromDefenderInSeconds = 10; // default 30
 
         entityInOfficeDeathTimeInSeconds = 5; // default 10
     }

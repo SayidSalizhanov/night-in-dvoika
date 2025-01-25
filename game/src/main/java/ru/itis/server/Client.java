@@ -64,7 +64,7 @@ public class Client {
                 Action action = (Action) in.readObject();
 
                 System.out.println("----------");
-                System.out.println("Received action from server.");
+                System.out.printf("Received action from server: %s%n", action.getClass().getSimpleName());
                 System.out.println("----------");
 
                 app.doSomeAction(action);
